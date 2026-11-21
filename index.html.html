@@ -1,0 +1,3100 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="carmine">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Flash420 — MPSI • Révisions &amp; Colles</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --surface-2: #eef1f7;
+    --text: #161922;
+    --text-muted: #5e6678;
+    --border: #dde2ec;
+    --accent: #9b111e;
+    --accent-hover: #7d0d18;
+    --accent-soft: rgba(155, 17, 30, 0.10);
+    --accent-text: #ffffff;
+    --danger: #dc2626;
+    --warn: #d97706;
+    --success: #16a34a;
+    --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    --radius: 18px;
+  }
+
+  [data-theme="light"] {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface-2: #edf1f8;
+    --text: #141824;
+    --text-muted: #5a6375;
+    --border: #dce2ee;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-soft: rgba(37, 99, 235, 0.10);
+    --accent-text: #ffffff;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0f1117;
+    --surface: #181c26;
+    --surface-2: #222836;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #2c3446;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --accent-soft: rgba(96, 165, 250, 0.14);
+    --accent-text: #0b1120;
+    --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  [data-theme="carmine"] {
+    --bg: #14090c;
+    --surface: #1f0e13;
+    --surface-2: #2c141b;
+    --text: #fdf2f4;
+    --text-muted: #d6a6b0;
+    --border: #461d28;
+    --accent: #b81d33;
+    --accent-hover: #991629;
+    --accent-soft: rgba(184, 29, 51, 0.22);
+    --accent-text: #ffffff;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="rose"] {
+    --bg: #160a10;
+    --surface: #231019;
+    --surface-2: #321624;
+    --text: #fff1f6;
+    --text-muted: #e3a7be;
+    --border: #522139;
+    --accent: #ec4899;
+    --accent-hover: #db2777;
+    --accent-soft: rgba(236, 72, 153, 0.20);
+    --accent-text: #ffffff;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="bleu"] {
+    --bg: #08111e;
+    --surface: #0f1d32;
+    --surface-2: #162a47;
+    --text: #eff6ff;
+    --text-muted: #9ec0eb;
+    --border: #233f68;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --accent-soft: rgba(56, 189, 248, 0.18);
+    --accent-text: #071322;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="vert"] {
+    --bg: #081510;
+    --surface: #0f221a;
+    --surface-2: #163125;
+    --text: #ecfdf5;
+    --text-muted: #9ad7bc;
+    --border: #214a38;
+    --accent: #22c55e;
+    --accent-hover: #16a34a;
+    --accent-soft: rgba(34, 197, 94, 0.18);
+    --accent-text: #071a10;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .logo-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: var(--accent);
+    color: var(--accent-text);
+    object-fit: cover;
+    padding: 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px var(--accent-soft);
+    flex-shrink: 0;
+  }
+
+  .brand-title {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .theme-switcher {
+    display: flex;
+    gap: 4px;
+    background: var(--surface-2);
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    max-width: 62vw;
+    scrollbar-width: none;
+  }
+
+  .theme-switcher::-webkit-scrollbar {
+    display: none;
+  }
+
+  .theme-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .theme-btn.active {
+    background: var(--accent);
+    color: var(--accent-text);
+  }
+
+  main {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px 16px 96px;
+    flex: 1;
+  }
+
+  /* Barre de fil d'Ariane + retour épurée */
+  .top-crumb-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 9px 13px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .breadcrumb span.active-crumb {
+    color: var(--text);
+  }
+
+  .back-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 6px 11px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    flex-shrink: 0;
+  }
+
+  /* Stats bar (affichée uniquement dans les matières à répétition 5x : Maths, Physique, SI) */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+
+  .stat-val {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  select, input[type="text"], textarea {
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 13px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  select:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .view-section {
+    display: none;
+  }
+
+  .view-section.active {
+    display: block;
+  }
+
+  /* Hero & Cartes de menu épurées */
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+  }
+
+  .hero-kicker {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 5px 11px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 10px;
+  }
+
+  .hero-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 18px;
+  }
+
+  .rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .rule-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .rule-badge {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rule-badge.fail {
+    background: rgba(220, 38, 38, 0.16);
+    color: #ef4444;
+  }
+
+  .rule-badge.mid {
+    background: rgba(217, 119, 6, 0.16);
+    color: #f59e0b;
+  }
+
+  .rule-badge.ok {
+    background: rgba(22, 163, 74, 0.16);
+    color: #22c55e;
+  }
+
+  .rule-text {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .rule-text strong {
+    display: block;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .rule-text span {
+    color: var(--text-muted);
+  }
+
+  .science-note {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  /* Tuiles de menu */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .menu-grid.two-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 520px) {
+    .menu-grid.two-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .menu-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: left;
+    color: var(--text);
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.14s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .menu-tile:hover {
+    border-color: var(--accent);
+  }
+
+  .menu-tile:active {
+    transform: scale(0.985);
+  }
+
+  .menu-tile.highlight {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+
+  .menu-tile-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 3px;
+  }
+
+  .menu-tile-sub {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .menu-tile-badge {
+    font-size: 11.5px;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cooldown-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .cooldown-timer {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 10px 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-stage {
+    perspective: 1200px;
+    margin-bottom: 14px;
+  }
+
+  .flashcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-height: 285px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .flashcard:active {
+    transform: scale(0.992);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .box-badge {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .card-side-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .card-body {
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 600;
+    white-space: pre-line;
+    word-break: break-word;
+    margin: auto 0;
+  }
+
+  .card-body.verso-text {
+    font-weight: 500;
+    font-size: 15.5px;
+    background: var(--surface-2);
+    padding: 14px;
+    border-radius: 13px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .card-hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+  }
+
+  .rating-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .anglais-rating-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: transform 0.12s ease, opacity 0.15s ease, background 0.15s ease;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-text);
+    width: 100%;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-secondary {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .deck-subtab.active {
+    background: var(--accent);
+    color: var(--accent-text);
+    border-color: var(--accent);
+  }
+
+  .btn-rate-fail {
+    background: rgba(220, 38, 38, 0.14);
+    color: #ef4444;
+    border: 1px solid rgba(220, 38, 38, 0.35);
+  }
+
+  .btn-rate-mid {
+    background: rgba(217, 119, 6, 0.14);
+    color: #f59e0b;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+
+  .btn-rate-ok {
+    background: rgba(22, 163, 74, 0.15);
+    color: #22c55e;
+    border: 1px solid rgba(22, 163, 74, 0.38);
+  }
+
+  .btn small {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .box-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .box-card h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+
+  .deck-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .deck-item-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .deck-item-sub {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    white-space: pre-line;
+  }
+
+  .icon-del {
+    border: none;
+    background: rgba(220, 38, 38, 0.12);
+    color: #ef4444;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .toast {
+    position: fixed;
+    top: 68px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-16px);
+    background: var(--accent);
+    color: var(--accent-text);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 60;
+    box-shadow: var(--shadow);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  footer.credits {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 12px 16px 86px;
+  }
+
+  /* Barre du bas : visible uniquement dans une matière (Maths / Physique / SI) */
+  nav.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+    z-index: 40;
+  }
+
+  nav.bottom-nav.visible {
+    display: grid;
+  }
+
+  .nav-item {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 2px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  .nav-item.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .nav-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand" id="brand-home-link" title="Retour à l'accueil">
+    <img src="data:image/jpeg;base64,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" alt="Chambre 420" class="logo-badge" />
+    <div>
+      <div class="brand-title">Flash420</div>
+      <div class="brand-sub">MPSI • Révisions &amp; Colles</div>
+    </div>
+  </div>
+  <div class="theme-switcher" role="group" aria-label="Thèmes">
+    <button class="theme-btn active" data-set-theme="carmine">Carmin</button>
+    <button class="theme-btn" data-set-theme="rose">Rose</button>
+    <button class="theme-btn" data-set-theme="bleu">Bleu</button>
+    <button class="theme-btn" data-set-theme="vert">Vert</button>
+    <button class="theme-btn" data-set-theme="dark">Sombre</button>
+    <button class="theme-btn" data-set-theme="light">Clair</button>
+  </div>
+</header>
+
+<div id="toast" class="toast"></div>
+
+<main>
+  <!-- Fil d'Ariane + bouton retour (masqué sur la page d'accueil pure) -->
+  <div class="top-crumb-bar" id="top-crumb-bar" style="display:none;">
+    <div class="breadcrumb" id="breadcrumb-trail"></div>
+    <button class="back-btn" id="btn-go-back" type="button">← Retour</button>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 1. ACCUEIL ÉPURÉ (Message de bienvenue + bouton Commencer) -->
+  <!-- ========================================================= -->
+  <section id="view-home" class="view-section active">
+    <div class="science-note" style="margin-bottom:12px;">
+      <strong>Actualité :</strong> DS à suivre : <strong>Physique-Chimie</strong>
+    </div>
+    <div class="hero-card">
+      <span class="hero-kicker">Espace MPSI • Chambre 420</span>
+      <h1 class="hero-title">Bienvenue sur Flash420</h1>
+      <p class="hero-desc">
+        Ton espace d'entraînement actif pour ancrer durablement tes définitions, formules, théorèmes et listes de vocabulaire en MPSI. Essaie toujours de retrouver la réponse de tête avant de retourner la carte, puis évalue honnêtement ta maîtrise :
+      </p>
+
+      <div class="rules-list">
+        <div class="rule-item">
+          <span class="rule-badge fail">Raté</span>
+          <div class="rule-text">
+            <strong>J+1 • 0/5 (Maths, Physique, SI)</strong>
+            <span>Tu n'as pas su répondre : la fiche repart à 0/5 et revient dès demain pour être consolidée rapidement.</span>
+          </div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-badge mid">J'hésite</span>
+          <div class="rule-text">
+            <strong>J+2</strong>
+            <span>Réponse fragile ou hésitante : tu la reverras dans 2 jours sans monter de palier, le temps que l'automatisme se fixe.</span>
+          </div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-badge ok">Réussi</span>
+          <div class="rule-text">
+            <strong>+1/5 • J+3 → J+7 → J+15 → J+30 → Acquise (5/5)</strong>
+            <span>Bonne réponse ! Tu gagnes +1/5 et l'intervalle s'allonge à chaque validation jusqu'à l'acquisition complète (5/5).</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="science-note">
+        <strong>Pourquoi la répétition espacée fonctionne ?</strong><br />
+        Réactiver une notion juste avant de l'oublier (courbe d'Ebbinghaus) multiplie la rétention à long terme sans y passer des heures. Fais ta session <strong>tous les soirs avant de dormir</strong> : le sommeil consolide naturellement la mémoire et permet au cycle (J+1, J+2, J+3, J+7…) de s'enchaîner de façon optimale. Après une série complète, une <strong>pause de 2 heures</strong> laisse au cerveau le temps d'ancrer les notions avant la session suivante.
+      </div>
+
+      <button class="btn btn-primary" id="btn-home-commencer" style="font-size:15.5px; padding:15px;">
+        Commencer →
+      </button>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 2. MENU PRINCIPAL (Flashcards)                            -->
+  <!-- ========================================================= -->
+  <section id="view-main-menu" class="view-section">
+    <div class="hero-card" style="padding:18px 20px;">
+      <span class="hero-kicker">Menu principal</span>
+      <h2 class="hero-title" style="font-size:20px; margin-bottom:6px;">Que veux-tu travailler ?</h2>
+      <p class="hero-desc" style="margin-bottom:14px;">
+        Choisis un mode d'entraînement (d'autres outils arriveront prochainement).
+      </p>
+      <div class="menu-grid">
+        <button class="menu-tile highlight" id="btn-open-flashcards" type="button">
+          <div>
+            <div class="menu-tile-title">Flashcards</div>
+            <div class="menu-tile-sub">Maths, Physique, Chimie, SI, Anglais, Espagnol &amp; Mélange général</div>
+          </div>
+          <span class="menu-tile-badge">Ouvrir →</span>
+        </button>
+
+        <button class="menu-tile" id="btn-open-exercises" type="button">
+          <div>
+            <div class="menu-tile-title">Exercices</div>
+            <div class="menu-tile-sub">SI, Physique, Chimie &amp; Maths</div>
+          </div>
+          <span class="menu-tile-badge">Ouvrir →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 2B. SOUS-MENU EXERCICES (SI, Physique, Chimie, Maths)     -->
+  <!-- ========================================================= -->
+  <section id="view-exercises" class="view-section">
+    <div class="hero-card" style="padding:18px 20px;">
+      <span class="hero-kicker">Menu principal • Exercices</span>
+      <h2 class="hero-title" style="font-size:20px; margin-bottom:6px;">Exercices par matière</h2>
+      <p class="hero-desc" style="margin-bottom:14px;">
+        Choisis une matière pour ajouter ou travailler tes exercices.
+      </p>
+      <div class="menu-grid two-cols">
+        <button class="menu-tile" data-select-exercise="si" type="button">
+          <div>
+            <div class="menu-tile-title">SI</div>
+            <div class="menu-tile-sub">Sciences de l'Ingénieur</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-exo-si">0 exo</span>
+        </button>
+
+        <button class="menu-tile" data-select-exercise="physique" type="button">
+          <div>
+            <div class="menu-tile-title">Physique</div>
+            <div class="menu-tile-sub">Exercices &amp; méthodes</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-exo-physique">0 exo</span>
+        </button>
+
+        <button class="menu-tile" data-select-exercise="chimie" type="button">
+          <div>
+            <div class="menu-tile-title">Chimie</div>
+            <div class="menu-tile-sub">Exercices &amp; réactions</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-exo-chimie">0 exo</span>
+        </button>
+
+        <button class="menu-tile" data-select-exercise="maths" type="button">
+          <div>
+            <div class="menu-tile-title">Maths</div>
+            <div class="menu-tile-sub">Exercices d'entraînement</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-exo-maths">0 exo</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 2C. ESPACE EXERCICES D'UNE MATIÈRE                        -->
+  <!-- ========================================================= -->
+  <section id="view-exercise-subject" class="view-section">
+    <div class="hero-card" style="padding:18px 20px; margin-bottom:12px;">
+      <span class="hero-kicker" id="exo-subject-kicker">Exercices</span>
+      <h2 class="hero-title" id="exo-subject-title" style="font-size:20px; margin-bottom:6px;">Exercices</h2>
+      <p class="hero-desc" style="margin-bottom:14px;">
+        Mêmes sous-catégories de chapitres que dans Flashcards. Sélectionne un chapitre ou ajoute un exercice.
+      </p>
+
+      <div class="filter-row">
+        <select id="exo-chapter-filter" aria-label="Filtrer les exercices par chapitre">
+          <option value="ALL">Tous les chapitres</option>
+        </select>
+      </div>
+
+      <div id="exo-chapters-pills" class="menu-grid" style="margin-bottom:14px;"></div>
+
+      <div id="exo-list" style="margin-bottom:16px;"></div>
+
+      <div class="box-card" style="margin-bottom:0; background:var(--surface-2);">
+        <h3 style="font-size:15px;">Ajouter un exercice</h3>
+        <div class="form-group">
+          <label for="exo-chapter">Chapitre / Sous-catégorie</label>
+          <input type="text" id="exo-chapter" list="exo-chapter-suggestions" placeholder="Choisis ou saisis un chapitre..." />
+          <datalist id="exo-chapter-suggestions"></datalist>
+        </div>
+        <div class="form-group">
+          <label for="exo-prompt">Énoncé de l'exercice</label>
+          <textarea id="exo-prompt" rows="3" placeholder="Écris l'énoncé ou la question de l'exercice..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exo-solution">Corrigé / Indication</label>
+          <textarea id="exo-solution" rows="3" placeholder="Méthode, étapes clés ou solution..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="btn-add-exo" type="button">Ajouter l'exercice</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 3. SOUS-MENU FLASHCARDS (Matières + Mélange général)       -->
+  <!-- ========================================================= -->
+  <section id="view-subjects" class="view-section">
+    <div class="hero-card" style="padding:18px 20px; margin-bottom:12px;">
+      <span class="hero-kicker">Flashcards • Matières</span>
+      <h2 class="hero-title" style="font-size:20px; margin-bottom:6px;">Choisis une matière</h2>
+      <p class="hero-desc" style="margin-bottom:14px;">
+        Le suivi 5/5 (<em>À réviser, Total fiches, Acquises 5/5</em>) s'active en Maths, Physique, Chimie et SI.
+      </p>
+
+      <div class="menu-grid two-cols" style="margin-bottom:12px;">
+        <button class="menu-tile" data-select-subject="maths" type="button">
+          <div>
+            <div class="menu-tile-title">Maths</div>
+            <div class="menu-tile-sub">13 chapitres • Suivi 5/5 &amp; mélange</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-count-maths">73 fiches</span>
+        </button>
+
+        <button class="menu-tile" data-select-subject="physique" type="button">
+          <div>
+            <div class="menu-tile-title">Physique</div>
+            <div class="menu-tile-sub">Suivi 5/5 • Ajoute ou importe tes fiches</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-count-physique">0 fiche</span>
+        </button>
+
+        <button class="menu-tile" data-select-subject="chimie" type="button">
+          <div>
+            <div class="menu-tile-title">Chimie</div>
+            <div class="menu-tile-sub">Suivi 5/5 • Ajoute ou importe tes fiches</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-count-chimie">0 fiche</span>
+        </button>
+
+        <button class="menu-tile" data-select-subject="si" type="button">
+          <div>
+            <div class="menu-tile-title">SI</div>
+            <div class="menu-tile-sub">Sciences de l'Ingénieur • Suivi 5/5</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-count-si">0 fiche</span>
+        </button>
+
+        <button class="menu-tile" data-select-subject="anglais" type="button">
+          <div>
+            <div class="menu-tile-title">Anglais</div>
+            <div class="menu-tile-sub">Colles • Vocabulaire Colle n°5</div>
+          </div>
+          <span class="menu-tile-badge">134 mots</span>
+        </button>
+
+        <button class="menu-tile" data-select-subject="espagnol" type="button">
+          <div>
+            <div class="menu-tile-title">Espagnol</div>
+            <div class="menu-tile-sub">Vocabulaire &amp; expressions</div>
+          </div>
+          <span class="menu-tile-badge" id="badge-count-espagnol">0 fiche</span>
+        </button>
+      </div>
+
+      <!-- Option Mélange de tout (20 ou 30 questions, tout sauf Espagnol) -->
+      <div class="box-card" style="margin-bottom:0; background:var(--surface-2);">
+        <h3 style="margin-bottom:6px; font-size:15.5px;">Mélange général (hors Espagnol)</h3>
+        <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 12px;">
+          Pioche aléatoirement dans toutes les matières disponibles (Maths, Physique, SI, Anglais, Français) <strong>sans Espagnol</strong>.
+        </p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <button class="btn btn-primary" id="btn-mix-20" type="button">Mélange 20 questions</button>
+          <button class="btn btn-secondary" id="btn-mix-30" type="button">Mélange 30 questions</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 4. SOUS-MENU MATHS (Chapitres sans numéro + Mélanger tout) -->
+  <!-- ========================================================= -->
+  <section id="view-maths-chapters" class="view-section">
+    <div class="hero-card" style="padding:18px 20px;">
+      <span class="hero-kicker" id="subject-chapters-kicker">Flashcards • Maths</span>
+      <h2 class="hero-title" id="subject-chapters-title" style="font-size:20px; margin-bottom:6px;">Chapitres de Maths</h2>
+      <p class="hero-desc" id="subject-chapters-desc" style="margin-bottom:14px;">
+        Sélectionne un chapitre précis ou mélange toutes les cartes de Maths.
+      </p>
+
+      <button class="menu-tile highlight" id="btn-maths-shuffle-all" data-shuffle-subj="maths" type="button" style="width:100%; margin-bottom:14px;">
+        <div>
+          <div class="menu-tile-title" id="btn-subject-shuffle-all-title">Mélanger toutes les cartes en Maths</div>
+          <div class="menu-tile-sub" id="btn-subject-shuffle-all-sub">Tirage aléatoire parmi tous les chapitres de Maths</div>
+        </div>
+        <span class="menu-tile-badge">Tout mélanger →</span>
+      </button>
+
+      <div class="menu-grid" id="maths-chapters-list"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 5. SOUS-MENU ANGLAIS -> COLLES -> VOCABULAIRE COLLE N°5    -->
+  <!-- ========================================================= -->
+  <section id="view-anglais-menu" class="view-section">
+    <div class="hero-card" style="padding:18px 20px;">
+      <span class="hero-kicker">Flashcards • Anglais</span>
+      <h2 class="hero-title" style="font-size:20px; margin-bottom:6px;">Colles d'Anglais</h2>
+      <p class="hero-desc" style="margin-bottom:14px;">
+        Vocabulaire de la semaine de colle (1 flashcard par mot, priorisation des mots ratés).
+      </p>
+      <div class="menu-grid">
+        <button class="menu-tile highlight" id="btn-open-colle-5" type="button">
+          <div>
+            <div class="menu-tile-title">Vocabulaire Colle n°5</div>
+            <div class="menu-tile-sub">Employment (p. 245), Work &amp; Word Partners (p. 246)</div>
+          </div>
+          <span class="menu-tile-badge">134 cartes →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 6. WORKSPACE MATIÈRE AVEC RÉPÉTITION 5x (Maths / Phys / SI) -->
+  <!-- ========================================================= -->
+  <section id="view-srs-workspace" class="view-section">
+    <!-- Barre de stats 5/5 (affichée uniquement dans Maths, Physique, SI) -->
+    <div class="stats-bar" id="srs-stats-bar">
+      <div class="stat-card">
+        <div class="stat-val" id="stat-due">0</div>
+        <div class="stat-lbl">À réviser</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-total">0</div>
+        <div class="stat-lbl">Total fiches</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-mastered">0</div>
+        <div class="stat-lbl">Acquises (5/5)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-streak">0</div>
+        <div class="stat-lbl">Série session</div>
+      </div>
+    </div>
+
+    <!-- Sous-onglet RÉVISER -->
+    <div id="srs-tab-study" class="srs-subpanel">
+      <div class="filter-row" style="align-items:center;">
+        <select id="chapter-filter" aria-label="Filtrer par chapitre" style="flex:1; min-width:200px;">
+          <option value="ALL">Tous les chapitres</option>
+        </select>
+        <button class="btn btn-secondary" id="btn-shuffle-now" type="button" style="padding:11px 13px; font-size:13px;">
+          Mélanger
+        </button>
+      </div>
+
+      <div id="cooldown-container" class="cooldown-box" style="display:none;">
+        <div style="font-size:34px;">⏳</div>
+        <h3 style="margin:6px 0;">Pause de consolidation (2h)</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin:0 0 8px;">
+          Session terminée ! Prochaine session débloquée dans :
+        </p>
+        <div id="cooldown-timer" class="cooldown-timer">02:00:00</div>
+        <div id="cooldown-summary" style="display:none; margin: 12px 0;"></div>
+        <p style="color:var(--text-muted); font-size:12px; margin:0 0 14px;">
+          Le délai de 2 heures (et une révision le soir avant de dormir) favorise l'ancrage mémoriel entre deux séries.
+        </p>
+        <button class="btn btn-secondary" id="btn-bypass-cooldown" style="width:100%;">
+          Forcer une révision anticipée
+        </button>
+      </div>
+
+      <div id="empty-due-container" class="cooldown-box" style="display:none;">
+        <div style="font-size:36px;">🎯</div>
+        <h3 style="margin:6px 0;" id="empty-due-title">Toutes les cartes du jour sont à jour !</h3>
+        <div id="empty-summary" style="display:none; margin: 12px 0;"></div>
+        <p style="color:var(--text-muted); font-size:14px; margin:0 0 14px;" id="empty-due-desc">
+          Aucune fiche due dans cette sélection pour le moment.
+        </p>
+        <button class="btn btn-primary" id="btn-practice-all">
+          Réviser tout le paquet en mode libre
+        </button>
+      </div>
+
+      <div id="study-card-container" style="display:none;">
+        <div class="card-stage">
+          <div class="flashcard" id="flashcard">
+            <div class="card-meta">
+              <span class="pill" id="card-chapter">Chapitre</span>
+              <span class="box-badge" id="card-box">Boîte 0/5</span>
+            </div>
+
+            <div>
+              <div class="card-side-label" id="card-side-label">RECTO • QUESTION</div>
+              <div class="card-body" id="card-content"></div>
+            </div>
+
+            <div class="card-hint" id="card-hint">Appuie sur la carte pour afficher le verso</div>
+          </div>
+        </div>
+
+        <div id="reveal-wrap">
+          <button class="btn btn-primary" id="btn-reveal">Afficher la réponse</button>
+        </div>
+
+        <div id="rating-wrap" class="rating-grid" style="display:none;">
+          <button class="btn btn-rate-fail" data-rate="fail">
+            <span>Raté</span>
+            <small>J+1 (0/5)</small>
+          </button>
+          <button class="btn btn-rate-mid" data-rate="mid">
+            <span>J'hésite</span>
+            <small>J+2</small>
+          </button>
+          <button class="btn btn-rate-ok" data-rate="ok">
+            <span>Réussi</span>
+            <small id="next-ok-label">+1/5 (J+3)</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sous-onglet PAQUET -->
+    <div id="srs-tab-deck" class="srs-subpanel" style="display:none;">
+      <div class="filter-row" style="gap:6px;">
+        <button class="btn btn-secondary deck-subtab active" data-deck-filter="active" style="flex:1; padding:10px; font-size:13px;">En cours (&lt; 5/5)</button>
+        <button class="btn btn-secondary deck-subtab" data-deck-filter="acquired" style="flex:1; padding:10px; font-size:13px;">Bloc Acquises (5/5)</button>
+        <button class="btn btn-secondary deck-subtab" data-deck-filter="all" style="flex:1; padding:10px; font-size:13px;">Toutes</button>
+      </div>
+      <div id="acquired-banner" class="science-note" style="display:none; margin-bottom:12px;">
+        <strong>Bloc des cartes acquises (5/5) :</strong> ces fiches sont définitivement validées et ne reviennent plus dans tes sessions de révision quotidiennes. Tu peux toutefois les réintégrer si tu souhaites les retravailler.
+      </div>
+      <div class="filter-row">
+        <input type="text" id="deck-search" placeholder="Rechercher une formule, un théorème, un chapitre..." />
+      </div>
+      <div id="deck-list"></div>
+    </div>
+
+    <!-- Sous-onglet AJOUTER -->
+    <div id="srs-tab-add" class="srs-subpanel" style="display:none;">
+      <div class="box-card">
+        <h3 id="add-card-heading">Nouvelle fiche manuelle</h3>
+        <div class="form-group">
+          <label for="add-chapter">Chapitre</label>
+          <input type="text" id="add-chapter" list="chapter-suggestions" placeholder="Ex : Nombres complexes" />
+          <datalist id="chapter-suggestions"></datalist>
+        </div>
+        <div class="form-group">
+          <label for="add-recto">Recto (Question / Énoncé)</label>
+          <textarea id="add-recto" rows="3" placeholder="Ex : Formule d'Euler pour $\cos(	heta)$ ?"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-verso">Verso (Réponse / Démonstration)</label>
+          <textarea id="add-verso" rows="4" placeholder="Ex : $\cos(	heta) = \dfrac{e^{i	heta} + e^{-i	heta}}{2}$"></textarea>
+        </div>
+        <button class="btn btn-primary" id="btn-add-card">Ajouter la fiche au paquet</button>
+      </div>
+    </div>
+
+    <!-- Sous-onglet IMPORT / EXPORT JSON -->
+    <div id="srs-tab-import" class="srs-subpanel" style="display:none;">
+      <div class="box-card">
+        <h3>Importer un lot JSON</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+          Colle ici un tableau JSON <code>[{"chapter":"...","recto":"...","verso":"..."}]</code> pour ajouter de nouvelles fiches dans cette matière.
+        </p>
+        <div class="form-group">
+          <textarea id="import-json-text" rows="6" placeholder='[
+  {
+    "chapter": "Titre du chapitre",
+    "recto": "...",
+    "verso": "..."
+  }
+]'></textarea>
+        </div>
+        <button class="btn btn-primary" id="btn-import-json">Importer les fiches</button>
+      </div>
+
+      <div class="box-card">
+        <h3>Sauvegarde &amp; Export</h3>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="btn-export-json" style="flex:1;">Exporter JSON</button>
+          <button class="btn btn-secondary" id="btn-reset-default" style="flex:1;">Recharger fiches par défaut</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 7. FLASHCARDS ANGLAIS -> VOCABULAIRE COLLE N°5            -->
+  <!-- ========================================================= -->
+  <section id="view-anglais-quiz" class="view-section">
+    <div class="hero-card" style="padding:15px 18px; margin-bottom:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+        <div>
+          <span class="hero-kicker" style="margin-bottom:5px;">Anglais › Colles</span>
+          <h2 style="margin:0; font-size:18.5px; font-weight:800;">Vocabulaire Colle n°5</h2>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+            134 mots • Les mots ratés reviennent en tête du quiz suivant
+          </div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-secondary" id="btn-ang-new-quiz" style="padding:8px 11px; font-size:12px;">Nouveau quiz</button>
+          <button class="icon-del" id="btn-ang-reset" style="padding:8px 11px;">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <select id="ang-sub-filter" aria-label="Filtrer par sous-partie de la Colle n°5">
+        <option value="ALL">Vocabulaire Colle n°5 — Tout (134 cartes)</option>
+        <option value="Employment (p. 245)">Employment uniquement (p. 245)</option>
+        <option value="Work (p. 246)">Work uniquement (p. 246)</option>
+        <option value="Word Partners (p. 246)">Word Partners — pavé bleu (p. 246)</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted); font-weight:700; margin-bottom:6px;">
+        <span id="ang-progress-text">Quiz n°1 • Carte 1 / 25</span>
+        <span id="ang-priority-text">Session équilibrée</span>
+      </div>
+      <div style="height:7px; background:var(--surface-2); border-radius:999px; overflow:hidden; border:1px solid var(--border);">
+        <div id="ang-progress-bar" style="height:100%; width:0%; background:var(--accent); transition:width 0.2s ease;"></div>
+      </div>
+    </div>
+
+    <div id="ang-card-stage">
+      <div class="card-stage">
+        <div class="flashcard" id="ang-flashcard">
+          <div class="card-meta">
+            <span class="pill" id="ang-card-sub">Employment (p. 245)</span>
+            <span class="box-badge" id="ang-card-state">Nouveau</span>
+          </div>
+
+          <div style="text-align:center;">
+            <div class="card-side-label">ANGLAIS • MOT / EXPRESSION</div>
+            <div class="card-body" id="ang-front-word" style="font-size:22px; font-weight:800;"></div>
+            <div id="ang-phonetic" style="font-size:13px; color:var(--text-muted); margin-top:4px;"></div>
+
+            <div id="ang-back-box" style="display:none; margin-top:16px; padding-top:14px; border-top:1px dashed var(--border);">
+              <div class="card-side-label" style="margin-bottom:4px;">FRANÇAIS</div>
+              <div id="ang-back-word" style="font-size:17px; font-weight:700; color:var(--accent);"></div>
+            </div>
+          </div>
+
+          <div class="card-hint" id="ang-card-hint">Appuie sur la carte pour voir la traduction</div>
+        </div>
+      </div>
+
+      <div id="ang-reveal-wrap">
+        <button class="btn btn-primary" id="btn-ang-reveal">Afficher la traduction</button>
+      </div>
+
+      <div id="ang-rating-wrap" class="anglais-rating-grid" style="display:none;">
+        <button class="btn btn-rate-fail" id="btn-ang-fail">
+          <span>Raté</span>
+          <small>Revient en priorité au quiz suivant</small>
+        </button>
+        <button class="btn btn-rate-ok" id="btn-ang-ok">
+          <span>Réussi</span>
+          <small>Espacé (revient moins souvent)</small>
+        </button>
+      </div>
+    </div>
+
+    <div id="ang-quiz-done" class="cooldown-box" style="display:none;">
+      <div style="font-size:34px;">✅</div>
+      <h3 id="ang-done-title" style="margin:6px 0;">Quiz n°1 terminé !</h3>
+      <p id="ang-done-desc" style="color:var(--text-muted); font-size:14px; margin:0 0 14px;"></p>
+      <button class="btn btn-primary" id="btn-ang-next-quiz">Lancer le quiz suivant</button>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 8. ESPAGNOL (Sans système 5x)                             -->
+  <!-- ========================================================= -->
+  <section id="view-espagnol-workspace" class="view-section">
+    <div class="hero-card" style="padding:18px 20px;">
+      <span class="hero-kicker">Flashcards • Espagnol</span>
+      <h2 class="hero-title" style="font-size:19px; margin-bottom:6px;">Espagnol</h2>
+      <p class="hero-desc" style="margin-bottom:14px;">
+        Mode libre sans système de répétition 5x (et exclu du mélange général). Ajoute tes cartes ci-dessous.
+      </p>
+
+      <div id="esp-study-area" style="margin-bottom:16px;"></div>
+
+      <div class="box-card" style="margin-bottom:0; background:var(--surface-2);">
+        <h3 style="font-size:15px;">Ajouter une carte d'Espagnol</h3>
+        <div class="form-group">
+          <input type="text" id="esp-recto" placeholder="Mot / expression en espagnol" />
+        </div>
+        <div class="form-group">
+          <input type="text" id="esp-verso" placeholder="Traduction en français" />
+        </div>
+        <button class="btn btn-primary" id="btn-add-espagnol" type="button">Ajouter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- 9. MÉLANGE GÉNÉRAL (20 ou 30 questions, tout sauf Espagnol) -->
+  <!-- ========================================================= -->
+  <section id="view-mix-quiz" class="view-section">
+    <div class="hero-card" style="padding:15px 18px; margin-bottom:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+        <div>
+          <span class="hero-kicker" style="margin-bottom:4px;">Mélange général • Hors Espagnol</span>
+          <h2 id="mix-title" style="margin:0; font-size:18px; font-weight:800;">Série mélangée (20 questions)</h2>
+        </div>
+        <span class="box-badge" id="mix-counter">1 / 20</span>
+      </div>
+    </div>
+
+    <div id="mix-stage">
+      <div class="card-stage">
+        <div class="flashcard" id="mix-flashcard">
+          <div class="card-meta">
+            <span class="pill" id="mix-card-subject">Maths</span>
+            <span class="box-badge" id="mix-card-sub">Chapitre</span>
+          </div>
+
+          <div>
+            <div class="card-side-label" id="mix-side-label">QUESTION</div>
+            <div class="card-body" id="mix-card-content"></div>
+          </div>
+
+          <div class="card-hint" id="mix-card-hint">Appuie sur la carte pour voir la réponse</div>
+        </div>
+      </div>
+
+      <div id="mix-reveal-wrap">
+        <button class="btn btn-primary" id="btn-mix-reveal" type="button">Afficher la réponse</button>
+      </div>
+
+      <div id="mix-next-wrap" class="anglais-rating-grid" style="display:none;">
+        <button class="btn btn-rate-fail" id="btn-mix-fail" type="button">
+          <span>À revoir</span>
+          <small>Question suivante</small>
+        </button>
+        <button class="btn btn-rate-ok" id="btn-mix-ok" type="button">
+          <span>Supris / Validé</span>
+          <small>Question suivante</small>
+        </button>
+      </div>
+    </div>
+
+    <div id="mix-done-box" class="cooldown-box" style="display:none;">
+      <div style="font-size:34px;">🎯</div>
+      <h3 style="margin:6px 0;">Mélange terminé !</h3>
+      <p id="mix-done-summary" style="color:var(--text-muted); font-size:14px; margin:0 0 14px;"></p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <button class="btn btn-primary" id="btn-mix-replay-20" type="button">Relancer 20 questions</button>
+        <button class="btn btn-secondary" id="btn-mix-replay-30" type="button">Relancer 30 questions</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="credits">
+  Flash420 • Conçu pour la MPSI • Crédits : <strong>Glen, Colin, Camille, Raphaël, chambre 420</strong>
+</footer>
+
+<!-- Barre du bas (uniquement affichée dans Maths, Physique ou SI) -->
+<nav class="bottom-nav" id="srs-bottom-nav">
+  <button class="nav-item active" data-srstab="study">
+    <span class="nav-icon">🧠</span>
+    <span>Réviser</span>
+  </button>
+  <button class="nav-item" data-srstab="deck">
+    <span class="nav-icon">📚</span>
+    <span>Paquet</span>
+  </button>
+  <button class="nav-item" data-srstab="add">
+    <span class="nav-icon">➕</span>
+    <span>Ajouter</span>
+  </button>
+  <button class="nav-item" data-srstab="import">
+    <span class="nav-icon">📥</span>
+    <span>Import/Export</span>
+  </button>
+</nav>
+
+<script>
+const STORAGE_KEY = "flashlab_mpsi_cards_v13";
+const THEME_KEY = "flashlab_mpsi_theme";
+const COOLDOWN_PREFIX = "flashlab_mpsi_cooldown_";
+const COOLDOWN_MS = 2 * 60 * 60 * 1000;
+const LEITNER_INTERVALS_DAYS = [3, 7, 15, 30, 60];
+const SESSION_SUMMARY_PREFIX = "flashlab_mpsi_summary_";
+
+
+const SUBJECT_CHAPTERS = {
+  "maths": [
+    "Logique et rédaction",
+    "Calcul algébrique dans R",
+    "Sommes et produits",
+    "Trigonométrie",
+    "Nombres complexes",
+    "Généralités sur les fonctions",
+    "Formulaires dérivées primitives usuelles",
+    "Fonctions usuelles",
+    "Primitives, intégrales",
+    "Équations différentielles",
+    "Ensembles",
+    "Applications",
+    "Structures algébriques"
+  ],
+  "physique": [
+    "Optique géométrique",
+    "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss",
+    "Lois générales de l’électrocinétique dans le cadre de l’ARQS",
+    "Circuit linéaire en régime continu : étude des résistors et des générateurs",
+    "Circuit du 1er ordre en régime transitoire",
+    "Oscillateurs électriques en régime transitoire (circuits du 2nd ordre) & Analogie électro-mécanique"
+  ],
+  "chimie": [
+    "Description d’un système physico-chimique",
+    "Transformation chimique",
+    "Évolution temporelle d’un système chimique",
+    "Structure des entités chimiques"
+  ],
+  "si": []
+};
+
+function remapLegacyMathsChapter(c) {
+  if ((c.subject || "maths") !== "maths") return c.chapter;
+  const r = c.recto || "";
+  const old = c.chapter || "";
+  if (SUBJECT_CHAPTERS.maths.includes(old)) return old;
+  if (old === "Nombres complexes") return "Nombres complexes";
+  if (old === "Analyse — Équations différentielles") return "Équations différentielles";
+  if (old === "Algèbre — Lois de composition & Groupes") return "Structures algébriques";
+  if (old === "Algèbre — Sommes & Binôme") return "Sommes et produits";
+  if (old === "Ensembles & Applications") {
+    if (r.includes("f : E") || r.toLowerCase().includes("restriction") || r.includes("f|_A")) return "Applications";
+    return "Ensembles";
+  }
+  if (old === "Fonctions usuelles & Trigonométrie") {
+    if ((r.includes("\\cos") || r.includes("\\sin") || r.includes("\\tan") || r.includes("radians") || r.includes("duplication") || r.includes("angle moitié") || r.includes("Schéma redoutable")) &&
+        !(r.includes("\\arcsin") || r.includes("\\arccos") || r.includes("\\arctan") || r.includes("\\cosh"))) {
+      return "Trigonométrie";
+    }
+    if (r.includes("Dérivées de")) return "Formulaires dérivées primitives usuelles";
+    return "Fonctions usuelles";
+  }
+  if (old === "Analyse — Généralités & Fonctions") {
+    if (r.includes("multiplier deux inégalités")) return "Calcul algébrique dans R";
+    return "Généralités sur les fonctions";
+  }
+  if (old === "Analyse — Dérivation") return "Généralités sur les fonctions";
+  if (old === "Analyse — Limites & Comparaisons") {
+    if (r.includes("croissances comparées")) return "Fonctions usuelles";
+    return "Généralités sur les fonctions";
+  }
+  return old;
+}
+
+const ANGLAIS_COLLE5_STORAGE = "flash420_anglais_colle5_v1";
+const ANGLAIS_QUIZ_BATCH_SIZE = 25;
+
+const DEFAULT_MATHS_CARDS = [{"chapter": "Nombres complexes", "recto": "Nombres complexes : que vaut $z - \\bar{z}$ ?", "verso": "Pour tout $z \\in \\mathbb{C}$ : $z - \\bar{z} = 2i\\,\\mathrm{Im}(z)$."}, {"chapter": "Applications", "recto": "Soit $f : E \\to F$. Pour tout $y \\in F$, $y \\in \\{f(x) \\mid x \\in E\\} \\iff$ ?", "verso": "Cela équivaut à $f(E) = F$, c'est-à-dire que $f$ est surjective."}, {"chapter": "Ensembles", "recto": "Égalité de deux ensembles : $A = B \\iff$ ?", "verso": "$A = B \\iff \\forall x \\in E,\\ (x \\in A \\iff x \\in B)$ (ou de manière équivalente : $A \\subset B$ et $B \\subset A$)."}, {"chapter": "Ensembles", "recto": "Produit cartésien de deux ensembles $E$ et $F$ : définition de $E \\times F$ ?", "verso": "$E \\times F = \\{ (x, y) \\mid x \\in E \\text{ et } y \\in F \\}$ (ensemble des couples formés d'un élément de $E$ et d'un élément de $F$)."}, {"chapter": "Structures algébriques", "recto": "Commutativité et associativité d'une loi interne $\\top$ sur $E$ ?", "verso": "• Commutativité : $\\forall x, y \\in E,\\ x \\top y = y \\top x$\n• Associativité : $\\forall x, y, z \\in E,\\ (x \\top y) \\top z = x \\top (y \\top z)$"}, {"chapter": "Structures algébriques", "recto": "Élément symétrisable : un élément $x$ de $E$ (muni d'une loi $\\top$ d'élément neutre $e$) est symétrisable si ?", "verso": "$\\exists y \\in E$ tel que $x \\top y = e$ et $y \\top x = e$."}, {"chapter": "Structures algébriques", "recto": "Groupe : à quelle condition $(G, \\top)$ est-il un groupe ? Et un groupe abélien ?", "verso": "$(G, \\top)$ est un groupe si :\n1. $\\top$ est une L.C.I sur $G$\n2. $\\top$ est associative\n3. $G$ possède un élément neutre\n4. Tout élément de $G$ est symétrisable\n\nSi de plus $\\top$ est commutative, le groupe est dit abélien (ou commutatif)."}, {"chapter": "Trigonométrie", "recto": "Avec $t = \\tan(x/2)$, exprimer $\\cos(x)$, $\\sin(x)$ et $\\tan(x)$ en fonction de $t$.", "verso": "• $\\cos(x) = \\dfrac{1 - t^2}{1 + t^2}$\n• $\\sin(x) = \\dfrac{2t}{1 + t^2}$\n• $\\tan(x) = \\dfrac{2t}{1 - t^2}$\n(pour $x/2 \\notin \\pi/2 + \\pi\\mathbb{Z}$, et $t \\neq \\pm 1$ pour $\\tan(x)$)"}, {"chapter": "Structures algébriques", "recto": "Qu'est-ce qu'une loi de composition interne (L.C.I) $\\top$ sur un ensemble $G$ ?", "verso": "Une application de $G \\times G$ dans $G$ : $\\forall x, y \\in G,\\ x \\top y \\in G$."}, {"chapter": "Structures algébriques", "recto": "Élément neutre : $e$ est un élément neutre pour la loi $\\top$ sur $E$ si ?", "verso": "$\\forall x \\in E,\\ x \\top e = x$ et $e \\top x = x$ (avec $e \\in E$)."}, {"chapter": "Ensembles", "recto": "Définitions en compréhension : $A \\cap B$, $A \\cup B$ et $A \\setminus B$ (pour $A, B \\subset E$) ?", "verso": "• $A \\cap B = \\{ x \\in E \\mid x \\in A \\text{ et } x \\in B \\}$\n• $A \\cup B = \\{ x \\in E \\mid x \\in A \\text{ ou } x \\in B \\}$\n• $A \\setminus B = \\{ x \\in E \\mid x \\in A \\text{ et } x \\notin B \\} = \\{ x \\in A \\mid x \\notin B \\}$"}, {"chapter": "Ensembles", "recto": "Appartenance à un ensemble en compréhension : $x' \\in \\{ x \\in E \\mid P(x) \\} \\iff$ ?", "verso": "$x' \\in \\{ x \\in E \\mid P(x) \\} \\iff (x' \\in E \\text{ et } P(x'))$.\n(Si $x' \\in E$ est déjà connu, cela équivaut à $P(x')$.)"}, {"chapter": "Structures algébriques", "recto": "Caractérisation d'un sous-groupe $H$ d'un groupe $(G, \\top)$ ?", "verso": "$H$ est un sous-groupe de $(G, \\top)$ si et seulement si :\n1. $H \\subset G$ (et $e_G \\in H$)\n2. $H$ est stable par la loi $\\top$ : $\\forall x, y \\in H,\\ x \\top y \\in H$\n3. $H$ est stable par passage au symétrique : $\\forall x \\in H,\\ x^{-1} \\in H$"}, {"chapter": "Structures algébriques", "recto": "Définitions : morphisme de groupes, isomorphisme, endomorphisme, automorphisme ?", "verso": "Pour $\\varphi : (G, \\top) \\to (G', \\perp)$ :\n• Morphisme de groupes : $\\forall x, y \\in G,\\ \\varphi(x \\top y) = \\varphi(x) \\perp \\varphi(y)$\n• Isomorphisme : morphisme bijectif\n• Endomorphisme : morphisme de $G$ dans $G$ ($G' = G$, $\\perp = \\top$)\n• Automorphisme : endomorphisme bijectif"}, {"chapter": "Généralités sur les fonctions", "recto": "Étude d'une fonction — Étapes principales notées sur la fiche ?", "verso": "1) Ensemble de définition\n2) Périodicité / parité (réduction du domaine d'étude)\n3) Tableau de variation\n(puis 5) Courbe représentative)"}, {"chapter": "Ensembles", "recto": "Définition de l'ensemble des parties : $A \\in \\mathcal{P}(E) \\iff$ ?", "verso": "$A \\in \\mathcal{P}(E) \\iff A \\subset E$."}, {"chapter": "Ensembles", "recto": "Intersections et unions infinies : $\\bigcap_{n=1}^{+\\infty} A_n = ?$ et $\\bigcup_{n=1}^{+\\infty} A_n = ?$", "verso": "Pour $(A_n)_{n \\ge 1}$ parties de $E$ :\n• $\\bigcap_{n=1}^{+\\infty} A_n = \\{ x \\in E \\mid \\forall k \\in \\mathbb{N}^*,\\ x \\in A_k \\}$\n• $\\bigcup_{n=1}^{+\\infty} A_n = \\{ x \\in E \\mid \\exists k \\in \\mathbb{N}^*,\\ x \\in A_k \\}$"}, {"chapter": "Fonctions usuelles", "recto": "Pour $y \\in [-1, 1]$, exprimer $\\cos(\\arcsin(y))$ et $\\sin(\\arccos(y))$.", "verso": "• $\\cos(\\arcsin(y)) = \\sqrt{1 - y^2}$\n• $\\sin(\\arccos(y)) = \\sqrt{1 - y^2}$\n(car $\\cos \\ge 0$ sur $[-\\pi/2, \\pi/2]$ et $\\sin \\ge 0$ sur $[0, \\pi]$)"}, {"chapter": "Calcul algébrique dans R", "recto": "Quand peut-on multiplier deux inégalités $a \\le b$ et $c \\le d$ membre à membre ?", "verso": "Lorsque les nombres sont positifs ou nuls : si $0 \\le a \\le b$ et $0 \\le c \\le d$, alors $0 \\le ac \\le bd$."}, {"chapter": "Nombres complexes", "recto": "Égalité sous forme exponentielle : $r e^{i\\theta} = r' e^{i\\theta'} \\iff$ ? (avec $r, r' \\ge 0$ et $\\theta, \\theta' \\in \\mathbb{R}$)", "verso": "$r e^{i\\theta} = r' e^{i\\theta'} \\iff (r = r' \\text{ et } \\theta \\equiv \\theta'\\ [2\\pi])$.\n(Si $r = r' = 0$, l'égalité vaut $0 = 0$ pour tous $\\theta, \\theta' \\in \\mathbb{R}$.)"}, {"chapter": "Trigonométrie", "recto": "Formules d'addition : que valent $\\cos(a + b)$ et $\\sin(a + b)$ ?", "verso": "Pour tous $a, b \\in \\mathbb{R}$ :\n• $\\cos(a + b) = \\cos(a)\\cos(b) - \\sin(a)\\sin(b)$\n• $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$"}, {"chapter": "Trigonométrie", "recto": "Méthode pour transformer $a\\cos(x) + b\\sin(x)$ ?", "verso": "Pour $(a, b) \\neq (0, 0)$, on factorise par $R = \\sqrt{a^2 + b^2} > 0$ :\n$$a\\cos(x) + b\\sin(x) = R\\left[\\frac{a}{R}\\cos(x) + \\frac{b}{R}\\sin(x)\\right]$$\npuis on reconnaît $\\cos(\\varphi)$ et $\\sin(\\varphi)$ pour se ramener à une formule du type $\\cos(x \\pm \\varphi)$ ou $\\sin(x \\pm \\varphi)$."}, {"chapter": "Sommes et produits", "recto": "Énoncer la formule du binôme de Newton pour $(a + b)^n$.", "verso": "Pour $n \\in \\mathbb{N}$ et $a, b$ commutant :\n$$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^k b^{n-k}$$\n(avec la convention $0^0 = 1$)."}, {"chapter": "Généralités sur les fonctions", "recto": "Qu'est-ce que la continuité globale sur $A$ et la notation $\\mathcal{C}(D, \\mathbb{R})$ ?", "verso": "• Continuité sur $A$ : $f$ est continue sur $A$ si $f$ est continue en tout point de $A$.\n• $\\mathcal{C}(D, \\mathbb{R})$ : ensemble des fonctions continues définies sur $D$ à valeurs dans $\\mathbb{R}$."}, {"chapter": "Nombres complexes", "recto": "Module d'un nombre complexe $z = a + ib$ (avec $a, b \\in \\mathbb{R}$) : $|z| =$ ? et minoration ?", "verso": "$|z| = \\sqrt{a^2 + b^2} \\ge 0$."}, {"chapter": "Nombres complexes", "recto": "Somme d'un complexe et de son conjugué : $z + \\bar{z} =$ ?", "verso": "Pour tout $z \\in \\mathbb{C}$ : $z + \\bar{z} = 2\\,\\mathrm{Re}(z)$."}, {"chapter": "Sommes et produits", "recto": "Propriétés algébriques d'une somme $\\sum$ (linéarité) ?", "verso": "Sur un même ensemble d'indices et avec $\\lambda$ indépendant de l'indice :\n$$\\sum (a_i + b_i) = \\sum a_i + \\sum b_i$$\n$$\\sum_{i=0}^{n} (\\lambda a_i) = \\lambda \\sum_{i=0}^{n} a_i$$"}, {"chapter": "Sommes et produits", "recto": "Propriétés algébriques d'un produit $\\prod$ ?", "verso": "Sur un même ensemble d'indices et avec $\\lambda$ indépendant de l'indice :\n$$\\prod (a_i b_i) = \\left(\\prod a_i\\right)\\left(\\prod b_i\\right)$$\n$$\\prod (a_i)^\\lambda = \\left(\\prod a_i\\right)^\\lambda \\quad \\text{(lorsque les puissances sont définies)}$$"}, {"chapter": "Sommes et produits", "recto": "Sommes et produits « vides » : si $m > n$, que valent $\\sum_{k=m}^{n} (\\dots)$ et $\\prod_{k=m}^{n} (\\dots)$ ?", "verso": "Pour $m > n$ (indice vide) :\n$$\\sum_{k=m}^{n} (\\dots) = 0 \\qquad \\text{et} \\qquad \\prod_{k=m}^{n} (\\dots) = 1$$"}, {"chapter": "Sommes et produits", "recto": "Coefficients binomiaux : symétrie, formule avec factorielles et valeur hors bornes ?", "verso": "• Symétrie (pour $0 \\le k \\le n$) : $\\dbinom{n}{k} = \\dbinom{n}{n-k}$\n• Pour $0 \\le k \\le n$ : $\\dbinom{n}{k} = \\dfrac{n!}{k!(n-k)!}$\n• Par convention : $\\dbinom{n}{k} = 0$ si $k < 0$ ou $k > n$"}, {"chapter": "Sommes et produits", "recto": "Relation de Pascal et construction du triangle de Pascal ?", "verso": "• Formule de Pascal : $\\dbinom{n}{k} + \\dbinom{n}{k+1} = \\dbinom{n+1}{k+1}$\n• Triangle de Pascal : chaque terme est la somme de celui directement au-dessus et de celui au-dessus à gauche (avec des $1$ sur la diagonale et la première colonne)."}, {"chapter": "Sommes et produits", "recto": "Factorisation de $a^n - b^n$ (pour $n \\ge 1$ et $a, b$ commutant) ?", "verso": "$$a^n - b^n = (a - b) \\sum_{k=0}^{n-1} a^k b^{n-1-k} = (a - b) \\sum_{j=0}^{n-1} a^{n-1-j} b^j$$"}, {"chapter": "Nombres complexes", "recto": "Que vaut $z\\bar{z}$ pour $z \\in \\mathbb{C}$ ? Rappeler les majorations de $|\\mathrm{Re}(z)|$ et $|\\mathrm{Im}(z)|$.", "verso": "• $z\\bar{z} = |z|^2$\n• $|\\mathrm{Re}(z)| \\le |z|$ et $|\\mathrm{Im}(z)| \\le |z|$"}, {"chapter": "Trigonométrie", "recto": "Valeurs remarquables de $\\sin(x)$ et $\\cos(x)$ pour $x \\in \\{0, \\pi/6, \\pi/4, \\pi/3, \\pi/2\\}$ ?", "verso": "• $x = 0$ : $\\sin = 0$, $\\cos = 1$\n• $x = \\pi/6$ : $\\sin = 1/2$, $\\cos = \\sqrt{3}/2$\n• $x = \\pi/4$ : $\\sin = \\sqrt{2}/2$, $\\cos = \\sqrt{2}/2$\n• $x = \\pi/3$ : $\\sin = \\sqrt{3}/2$, $\\cos = 1/2$\n• $x = \\pi/2$ : $\\sin = 1$, $\\cos = 0$"}, {"chapter": "Trigonométrie", "recto": "Conversion radians / degrés : combien vaut $1\\text{ rad}$ en degrés (et $1^\\circ$ en radians) ?", "verso": "• $1\\text{ rad} = \\left(\\dfrac{180}{\\pi}\\right)^\\circ$\n• $1^\\circ = \\dfrac{\\pi}{180}\\text{ rad}$"}, {"chapter": "Trigonométrie", "recto": "Formule de duplication : $\\sin(2x) =$ ?", "verso": "Pour tout $x \\in \\mathbb{R}$ : $\\sin(2x) = 2\\cos(x)\\sin(x)$."}, {"chapter": "Trigonométrie", "recto": "Formules de l'angle moitié : exprimer $\\tan(2x)$, $\\sin(2x)$ et $\\cos(2x)$ en fonction de $\\tan(x)$.", "verso": "Pour $x \\notin \\pi/2 + \\pi\\mathbb{Z}$ (et $2x \\notin \\pi/2 + \\pi\\mathbb{Z}$ pour $\\tan(2x)$) :\n• $\\tan(2x) = \\dfrac{2\\tan(x)}{1 - \\tan^2(x)}$\n• $\\sin(2x) = \\dfrac{2\\tan(x)}{1 + \\tan^2(x)}$\n• $\\cos(2x) = \\dfrac{1 - \\tan^2(x)}{1 + \\tan^2(x)}$"}, {"chapter": "Trigonométrie", "recto": "« Schéma redoutable » reliant $\\sin^2(x)$, $1$, $\\cos^2(x)$ et $\\cos(2x)$ : quelles sont les identités associées ?", "verso": "• $\\cos^2(x) + \\sin^2(x) = 1$\n• $\\cos^2(x) - \\sin^2(x) = \\cos(2x)$\n• Linéarisation : $\\cos^2(x) = \\dfrac{1 + \\cos(2x)}{2}$ et $\\sin^2(x) = \\dfrac{1 - \\cos(2x)}{2}$"}, {"chapter": "Nombres complexes", "recto": "Énoncer les 2 formules d'Euler ($\\cos\\theta$ et $\\sin\\theta$).", "verso": "Pour tout $\\theta \\in \\mathbb{R}$ :\n• $\\cos(\\theta) = \\dfrac{e^{i\\theta} + e^{-i\\theta}}{2}$\n• $\\sin(\\theta) = \\dfrac{e^{i\\theta} - e^{-i\\theta}}{2i}$"}, {"chapter": "Équations différentielles", "recto": "EDL1 homogène : quelles sont les solutions de $y' + a(x)y = 0$ ?", "verso": "Si $A$ est une primitive de $a$ sur l'intervalle considéré :\n$$y_H(x) = C e^{-A(x)} \\quad (\\text{avec } C \\text{ constante réelle ou complexe})$$"}, {"chapter": "Équations différentielles", "recto": "EDL1 avec second membre : comment trouver une solution particulière par variation de la constante ?", "verso": "On cherche $y_p(x)$ sous la forme $C(x)e^{-A(x)}$ (où $A' = a$), on dérive $y_p$, on injecte $y_p$ et $y_p'$ dans $(E)$ pour déterminer $C'(x)$, puis on intègre pour obtenir $C(x)$."}, {"chapter": "Équations différentielles", "recto": "EDL2 à coefficients constants ($ay'' + by' + cy = 0$, $a \\neq 0$) : équation caractéristique et cas $\\Delta > 0$ ou $\\Delta = 0$ dans $\\mathbb{R}$ ?", "verso": "Équation caractéristique : $ar^2 + br + c = 0$ (discriminant $\\Delta = b^2 - 4ac$).\n• Si $\\Delta > 0$ (2 racines réelles $r_1, r_2$) : $y_H(x) = A e^{r_1 x} + B e^{r_2 x}$\n• Si $\\Delta = 0$ (racine double réelle $r_0$) : $y_H(x) = (A + Bx)e^{r_0 x}$"}, {"chapter": "Équations différentielles", "recto": "EDL2 à coefficients constants dans $\\mathbb{R}$ : forme de $y_H$ lorsque $\\Delta < 0$ (racine complexe $r = \\alpha + i\\beta$) ?", "verso": "Si $\\Delta < 0$ et $r = \\alpha + i\\beta$ est une racine complexe ($\\alpha, \\beta \\in \\mathbb{R}$, $\\beta \\neq 0$) :\n$$y_H(x) = e^{\\alpha x}\\big(A\\cos(\\beta x) + B\\sin(\\beta x)\\big) \\quad \\text{avec } A, B \\in \\mathbb{R}$$"}, {"chapter": "Équations différentielles", "recto": "EDL2 à coefficients constants avec second membre exponentiel $ay'' + by' + cy = e^{qx}$ : forme de $y_p$ ?", "verso": "Selon que $q$ est racine de l'équation caractéristique $ar^2 + br + c = 0$ :\n• $q$ non racine : $y_p(x) = C e^{qx}$\n• $q$ racine simple : $y_p(x) = Cx e^{qx}$\n• $q$ racine double : $y_p(x) = Cx^2 e^{qx}$"}, {"chapter": "Nombres complexes", "recto": "Comment déterminer les racines carrées d'un complexe $w$ (forme exponentielle et forme algébrique) ?", "verso": "• Forme exponentielle ($w = r e^{i\\theta}$, $r \\ge 0$) :\nLes deux racines carrées sont $\\sqrt{r}e^{i\\theta/2}$ et $-\\sqrt{r}e^{i\\theta/2}$ (soit $+\\sqrt{r}e^{i(\\theta/2 + \\pi)}$).\n\n• Forme algébrique ($z = a + ib$, $a, b \\in \\mathbb{R}$) :\n$$z^2 = w \\iff \\begin{cases} a^2 + b^2 = |w| \\\\ a^2 - b^2 = \\mathrm{Re}(w) \\\\ 2ab = \\mathrm{Im}(w) \\end{cases}$$"}, {"chapter": "Nombres complexes", "recto": "Définition et forme exponentielle de l'exponentielle complexe $e^z$ pour $z \\in \\mathbb{C}$ ?", "verso": "Pour $z = \\mathrm{Re}(z) + i\\,\\mathrm{Im}(z) \\in \\mathbb{C}$ :\n$$e^z = e^{\\mathrm{Re}(z)} e^{i\\,\\mathrm{Im}(z)}$$\nde module $r = e^{\\mathrm{Re}(z)} > 0$ et d'argument $\\theta \\equiv \\mathrm{Im}(z)\\ [2\\pi]$."}, {"chapter": "Nombres complexes", "recto": "Quand deux vecteurs (ou complexes) $u$ et $v$ sont-ils positivement liés ?", "verso": "$u$ et $v$ sont positivement liés si et seulement si :\n$$u = 0 \\quad \\text{ou} \\quad v = 0 \\quad \\text{ou} \\quad \\exists \\lambda \\in \\mathbb{R}_+^*,\\ u = \\lambda v$$"}, {"chapter": "Applications", "recto": "Que désigne la notation $f|_A$ (pour $f : E \\to F$ et $A \\subset E$) ?", "verso": "$f|_A$ est la restriction de $f$ à $A$ : c'est l'application définie sur $A$ à valeurs dans $F$ telle que $\\forall x \\in A,\\ f|_A(x) = f(x)$."}, {"chapter": "Généralités sur les fonctions", "recto": "Équation de la tangente à la courbe représentative de $f$ au point d'abscisse $a$ ($f$ dérivable en $a$) ?", "verso": "$$y = f'(a)(x - a) + f(a)$$"}, {"chapter": "Sommes et produits", "recto": "Formules de télescopage (somme et produit, pour $m \\le n$) ?", "verso": "$$\\sum_{k=m}^{n} (x_{k+1} - x_k) = x_{n+1} - x_m$$\n$$\\prod_{k=m}^{n} \\frac{x_{k+1}}{x_k} = \\frac{x_{n+1}}{x_m} \\quad \\text{(avec les } x_k \\text{ non nuls)}$$"}, {"chapter": "Nombres complexes", "recto": "Racines $n$-ièmes de l'unité $\\mathbb{U}_n$ et somme des racines ?", "verso": "• $\\mathbb{U}_n = \\{ e^{2ik\\pi/n},\\ k \\in \\llbracket 0, n - 1 \\rrbracket \\}$ ($n$ racines distinctes)\n• Pour $n \\ge 2$ : $$\\sum_{k=0}^{n-1} e^{2ik\\pi/n} = 0$$"}, {"chapter": "Généralités sur les fonctions", "recto": "Définition de la dérivabilité en $a$ et du taux d'accroissement (avec $x \\to a$ ou $h \\to 0$, $h = x - a$) ?", "verso": "$f$ est dérivable en $a$ si le taux d'accroissement admet une limite finie :\n$$f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a} = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$"}, {"chapter": "Généralités sur les fonctions", "recto": "Soit $f : I \\to J$ bijective : caractérisation de $f^{-1}$ et lien entre les graphes $\\mathcal{C}_f$ et $\\mathcal{C}_{f^{-1}}$ ?", "verso": "• $\\forall y \\in J, \\forall x \\in I : f(x) = y \\iff x = f^{-1}(y)$\n• $(x_0, y_0) \\in \\mathcal{C}_f$ (avec $y_0 = f(x_0)$) $\\iff (y_0, x_0) \\in \\mathcal{C}_{f^{-1}}$ (symétrie par rapport à la droite $y = x$)."}, {"chapter": "Généralités sur les fonctions", "recto": "Formule de dérivation de la réciproque $(f^{-1})'(y)$ ?", "verso": "Si $f$ est dérivable en $f^{-1}(y)$ et $f'(f^{-1}(y)) \\neq 0$, alors $f^{-1}$ est dérivable en $y$ et :\n$$(f^{-1})'(y) = \\frac{1}{f'(f^{-1}(y))}$$"}, {"chapter": "Fonctions usuelles", "recto": "Logarithme de base $a$ ($a > 0$, $a \\neq 1$) et puissance réelle $x^\\alpha$ ($x > 0$, $\\alpha \\in \\mathbb{R}$) ?", "verso": "• $\\log_a(x) = \\dfrac{\\ln(x)}{\\ln(a)}$ (pour $x > 0$)\n• $x^\\alpha = \\exp(\\alpha \\ln(x)) = e^{\\alpha\\ln(x)}$ (pour $x > 0$, $\\alpha \\in \\mathbb{R}$)"}, {"chapter": "Fonctions usuelles", "recto": "Règle des croissances comparées en $+\\infty$ (hiérarchie entre $\\exp$, puissances et $\\ln$) ?", "verso": "En $+\\infty$, l'exponentielle l'emporte sur les puissances, qui l'emportent sur le logarithme (pour tout $\\alpha > 0$) :\n• $\\dfrac{e^x}{x^\\alpha} \\to +\\infty$ (et $x^\\alpha e^{-x} \\to 0$)\n• $\\dfrac{\\ln x}{x^\\alpha} \\to 0$ (et $x^\\alpha \\ln x \\to 0$ en $0^+$)"}, {"chapter": "Fonctions usuelles", "recto": "Intervalles de bijection de $\\sin$, $\\cos$ et $\\tan$ (et ensembles de départ/arrivée de $\\arcsin$, $\\arccos$, $\\arctan$) ?", "verso": "• $\\sin : [-\\pi/2, \\pi/2] \\to [-1, 1]$ (réciproque $\\arcsin : [-1, 1] \\to [-\\pi/2, \\pi/2]$)\n• $\\cos : [0, \\pi] \\to [-1, 1]$ (réciproque $\\arccos : [-1, 1] \\to [0, \\pi]$)\n• $\\tan : ]-\\pi/2, \\pi/2[ \\to \\mathbb{R}$ (réciproque $\\arctan : \\mathbb{R} \\to ]-\\pi/2, \\pi/2[$)"}, {"chapter": "Formulaires dérivées primitives usuelles", "recto": "Dérivées de $\\arcsin$, $\\arccos$, $\\arctan$, $\\tan$, $\\cosh$, $\\sinh$ et $\\tanh$ ?", "verso": "• $\\arcsin'(y) = \\dfrac{1}{\\sqrt{1 - y^2}}$ ($y \\in ]-1, 1[$)\n• $\\arccos'(y) = -\\dfrac{1}{\\sqrt{1 - y^2}}$ ($y \\in ]-1, 1[$)\n• $\\arctan'(y) = \\dfrac{1}{1 + y^2}$ ($y \\in \\mathbb{R}$)\n• $\\tan'(x) = 1 + \\tan^2(x) = \\dfrac{1}{\\cos^2(x)}$ ($x \\notin \\pi/2 + \\pi\\mathbb{Z}$)\n• $\\cosh'(x) = \\sinh(x)$, $\\sinh'(x) = \\cosh(x)$, $\\tanh'(x) = 1 - \\tanh^2(x) = \\dfrac{1}{\\cosh^2(x)}$ ($x \\in \\mathbb{R}$)"}, {"chapter": "Nombres complexes", "recto": "Propriétés algébriques de l'argument (conjugué, produit, quotient, puissance) ?", "verso": "Pour $u, v \\in \\mathbb{C}^*$ et $n \\in \\mathbb{Z}$ (modulo $2\\pi$) :\n• $\\arg(\\bar{u}) \\equiv -\\arg(u)\\ [2\\pi]$\n• $\\arg(uv) \\equiv \\arg(u) + \\arg(v)\\ [2\\pi]$\n• $\\arg(u/v) \\equiv \\arg(u) - \\arg(v)\\ [2\\pi]$\n• $\\arg(u^n) \\equiv n\\arg(u)\\ [2\\pi]$"}, {"chapter": "Nombres complexes", "recto": "Racines $n$-ièmes complexes de $w = r e^{i\\theta}$ ($r > 0$, $n \\in \\mathbb{N}^*$) ?", "verso": "Les $n$ racines $n$-ièmes de $w$ sont données pour $k \\in \\{0, 1, \\dots, n - 1\\}$ par :\n$$z_k = r^{1/n} e^{i(\\theta/n + 2k\\pi/n)} = r^{1/n} e^{i\\theta/n} e^{i\\cdot 2k\\pi/n}$$"}, {"chapter": "Nombres complexes", "recto": "Géométrie plane avec affixes ($A, B, C$ distincts) : angle $(\\overrightarrow{AB}, \\overrightarrow{AC})$, alignement et orthogonalité ?", "verso": "• $(\\overrightarrow{AB}, \\overrightarrow{AC}) \\equiv \\arg\\!\\left(\\dfrac{z_C - z_A}{z_B - z_A}\\right) [2\\pi]$\n• $A, B, C$ alignés $\\iff (\\overrightarrow{AB}, \\overrightarrow{AC}) \\equiv 0\\ [\\pi] \\iff \\dfrac{z_C - z_A}{z_B - z_A} \\in \\mathbb{R}$\n• $(AB) \\perp (AC) \\iff (\\overrightarrow{AB}, \\overrightarrow{AC}) \\equiv \\pm\\pi/2\\ [\\pi] \\iff \\dfrac{z_C - z_A}{z_B - z_A} \\in i\\mathbb{R}$"}, {"chapter": "Généralités sur les fonctions", "recto": "Caractérisation de la continuité en $a$ (et importance de la limite à gauche / à droite) ?", "verso": "$f$ est continue en $a$ ($a \\in D_f$) $\\iff \\lim_{x \\to a} f(x) = f(a)$.\nIl faut une limite unique : si les limites à gauche et à droite diffèrent (ex. $x \\mapsto \\lfloor x \\rfloor$ en $1$, où $\\lim_{1^-} = 0 \\neq 1 = \\lim_{1^+}$), il n'y a pas continuité."}, {"chapter": "Généralités sur les fonctions", "recto": "Quand une fonction $f : D \\to \\mathbb{R}$ est-elle dite $T$-périodique ?", "verso": "Pour $T \\in \\mathbb{R}^*$ (souvent $T > 0$), avec $D$ stable par translation de $T$ : $\\forall x \\in D,\\ f(x + T) = f(x)$."}, {"chapter": "Généralités sur les fonctions", "recto": "Traduire en langage mathématique : $f$ est majorée, $f$ est minorée (sur $D$).", "verso": "• $f$ est majorée sur $D \\iff \\exists M \\in \\mathbb{R},\\ \\forall x \\in D,\\ f(x) \\le M$\n• $f$ est minorée sur $D \\iff \\exists N \\in \\mathbb{R},\\ \\forall x \\in D,\\ f(x) \\ge N$"}, {"chapter": "Généralités sur les fonctions", "recto": "Signe d'une fonction $f : D \\to \\mathbb{R}$ : majoration/minoration par $0$ et positivité/négativité stricte ?", "verso": "• Minorée par $0 \\iff f \\ge 0$ ($\\forall x \\in D,\\ f(x) \\ge 0$)\n• Majorée par $0 \\iff f \\le 0$ ($\\forall x \\in D,\\ f(x) \\le 0$)\n• $f > 0 \\iff \\forall x \\in D,\\ f(x) > 0$\n• $f < 0 \\iff \\forall x \\in D,\\ f(x) < 0$"}, {"chapter": "Généralités sur les fonctions", "recto": "Caractérisation d'un maximum et d'un minimum global en $a \\in D$ ?", "verso": "• $f$ admet un maximum global en $a \\in D \\iff \\forall x \\in D,\\ f(x) \\le f(a)$\n• $f$ admet un minimum global en $a \\in D \\iff \\forall x \\in D,\\ f(x) \\ge f(a)$"}, {"chapter": "Généralités sur les fonctions", "recto": "Méthode générale pour déterminer l'ensemble de dérivabilité $D'_f$ d'une fonction $f$ ?", "verso": "1. Dérivabilité sur les intervalles où les opérations/composées usuelles s'appliquent (ex. pour $\\sqrt{x + 1}$, $x \\mapsto x + 1$ dérivable sur $]-1, 1[$ à valeurs dans $\\mathbb{R}_+^*$, et $\\sqrt{\\cdot}$ dérivable sur $\\mathbb{R}_+^*$). \n2. Étudier à part les points hors de ces domaines via la limite du taux d'accroissement (limite finie $\\iff$ dérivable en ce point)."}, {"chapter": "Nombres complexes", "recto": "Équation du second degré $az^2 + bz + c = 0$ ($a \\neq 0$) : somme et produit des racines $z_1, z_2$, et équation associée à $(S, P)$ ?", "verso": "• $z_1 + z_2 = -b/a$ et $z_1 z_2 = c/a$ (avec multiplicité)\n• Réciproquement, si $z_1 + z_2 = S$ et $z_1 z_2 = P$, alors $z_1$ et $z_2$ sont racines de :\n$$z^2 - Sz + P = 0$$"}, {"chapter": "Généralités sur les fonctions", "recto": "Qu'est-ce qu'un intervalle non trivial (parfois noté $I^\\circ$) ?", "verso": "Un intervalle non vide et non réduit à un singleton (il ne se réduit pas à un point)."}, {"chapter": "Généralités sur les fonctions", "recto": "Caractérisation : $f$ croissante ($\\nearrow$), décroissante ($\\searrow$), monotone, constante sur $D$ ?", "verso": "• $f$ croissante sur $D \\iff \\forall x_1, x_2 \\in D,\\ x_1 \\le x_2 \\implies f(x_1) \\le f(x_2)$\n• $f$ décroissante sur $D \\iff \\forall x_1, x_2 \\in D,\\ x_1 \\le x_2 \\implies f(x_1) \\ge f(x_2)$\n• $f$ monotone sur $D \\iff f$ croissante ou décroissante sur $D$\n• $f$ constante sur $D \\iff \\exists c \\in \\mathbb{R},\\ \\forall x \\in D,\\ f(x) = c$ (équivalent, si $D \\neq \\emptyset$, à $\\forall x_1, x_2 \\in D,\\ f(x_1) = f(x_2)$)"}, {"chapter": "Généralités sur les fonctions", "recto": "Condition suffisante pour que la composée $g \\circ f$ soit bien définie et continue sur $D$ ?", "verso": "Il suffit que :\n• $f$ soit définie et continue sur $D$ à valeurs dans $D'$,\n• $g$ soit définie et continue sur $D'$,\n• $\\forall x \\in D,\\ f(x) \\in D'$."}, {"chapter": "Nombres complexes", "recto": "Partie réelle et partie imaginaire du conjugué $\\bar{z}$ pour $z \\in \\mathbb{C}$ ?", "verso": "• $\\mathrm{Re}(\\bar{z}) = \\mathrm{Re}(z)$\n• $\\mathrm{Im}(\\bar{z}) = -\\mathrm{Im}(z)$"}, {"chapter": "Sommes et produits", "recto": "Somme géométrique $\\displaystyle\\sum_{k=0}^{n} x^k$ (pour $n \\in \\mathbb{N}$, $x \\in \\mathbb{C}$) ?", "verso": "$$\\sum_{k=0}^{n} x^k = 1 + x + x^2 + \\dots + x^n = \\begin{cases} \\dfrac{1 - x^{n+1}}{1 - x} & \\text{si } x \\neq 1 \\\\[8pt] n + 1 & \\text{si } x = 1 \\end{cases}$$"}];
+const DEFAULT_EXTRA_CARDS = [{"id": "pc_opt1_1", "subject": "physique", "chapter": "Optique géométrique", "recto": "Qu'est-ce qu'un modèle de l'optique géométrique ? Limite ?", "verso": "Modélisé par des rayons lumineux négligeant les ondes et la diffraction. Ce modèle ne s'applique pas aux objets trop proches."}, {"id": "pc_opt1_2", "subject": "physique", "chapter": "Optique géométrique", "recto": "Qu'est-ce que le spectre lumineux d'une source ?", "verso": "La décomposition de la lumière en fonction des longueurs d'onde qui la composent."}, {"id": "pc_opt1_3", "subject": "physique", "chapter": "Optique géométrique", "recto": "Lien : stigmatisme approché et caractéristique d'un détecteur ?", "verso": "Stigmatisme approché $\\Rightarrow$ tache. Si tache $<$ cellule du détecteur, alors l'image est nette (le système optique est suffisant)."}, {"id": "pc_opt1_4", "subject": "physique", "chapter": "Optique géométrique", "recto": "Qu'est-ce que le cône d'acceptance en fibre optique ?", "verso": "L'ensemble des angles d'incidence pour lesquels le rayon subit une réflexion totale."}, {"id": "pc_opt1_5", "subject": "physique", "chapter": "Optique géométrique", "recto": "Qu'est-ce que la dispersion intermodale ?", "verso": "Différence de temps entre le rayon direct (le long de l'axe optique) et le rayon à la limite du cône."}, {"id": "pc_opt1_6", "subject": "physique", "chapter": "Optique géométrique", "recto": "Milieux de propagation : 3 caractéristiques attendues ?", "verso": "Homogène : mêmes propriétés physiques en tout point ; Transparent : pas d'absorption ; Isotrope : propagation équiprobable dans toutes les directions."}, {"id": "pc_opt1_7", "subject": "physique", "chapter": "Optique géométrique", "recto": "Qu'est-ce qu'une source ponctuelle monochromatique ?", "verso": "Un modèle idéalisé de source lumineuse considérée comme un point qui émet une seule longueur d'onde $\\lambda$."}, {"id": "pc_opt1_8", "subject": "physique", "chapter": "Optique géométrique", "recto": "Qu'est-ce que l'indice d'un milieu ?", "verso": "Le rapport $\\dfrac{c}{v}$ (vitesse de la lumière dans le vide sur vitesse de propagation dans le milieu)."}, {"id": "pc_opt2_1", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "$\\overline{OF} = f$. Si $f < 0$, alors la lentille est ?", "verso": "Convergente."}, {"id": "pc_opt2_2", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Si la lentille est divergente, alors quel signe ont $f$ et $f'$ ?", "verso": "$f > 0$ et $f' < 0$."}, {"id": "pc_opt2_3", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Qu'est-ce que l'approximation de Gauss ?", "verso": "On se limite aux rayons paraxiaux (peu inclinés et proches de l'axe optique) $\\Rightarrow$ stigmatisme approché."}, {"id": "pc_opt2_4", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Formule dioptrique (vergence) ?", "verso": "$V = \\dfrac{1}{f'}$, avec $f'$ en $\\text{m}$ et $V$ en dioptries ($\\delta$)."}, {"id": "pc_opt2_5", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Définition du stigmatisme ?", "verso": "Lorsque tout rayon passant par un point objet $A$ passe par un point image $A'$, on dit que $A$ et $A'$ sont conjugués."}, {"id": "pc_opt2_6", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Définition de l'aplanétisme ?", "verso": "Nécessite un stigmatisme. Il y a aplanétisme si un objet $AB$ plan et $\\perp$ à l'axe optique donne une image $A'B'$ plane et $\\perp$ à l'axe optique."}, {"id": "pc_opt2_7", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Relation de conjugaison du miroir plan ?", "verso": "$\\overline{AH} = \\overline{HA'}$ soit $\\overline{AH} + \\overline{A'H} = 0$ (pour un point $A$ et son image $A'$ à travers un miroir plan en $H$)."}, {"id": "pc_opt2_8", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Relation de conjugaison du dioptre plan ?", "verso": "$n_1 \\times \\overline{A'H} = n_2 \\times \\overline{AH}$ (pour un point $A$, son image $A'$ et le projeté orthogonal $H$ sur le dioptre plan séparant les milieux d'indices $n_1$ et $n_2$)."}, {"id": "pc_opt2_9", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Formules de Descartes ?", "verso": "$\\dfrac{1}{\\overline{OA'}} - \\dfrac{1}{\\overline{OA}} = \\dfrac{1}{f'}$ et $\\gamma = \\dfrac{\\overline{OA'}}{\\overline{OA}}$."}, {"id": "pc_opt2_10", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Énoncer $\\gamma$, le grandissement.", "verso": "$\\gamma = \\dfrac{\\overline{A'B'}}{\\overline{AB}}$."}, {"id": "pc_opt2_11", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Distance focale équivalente de 2 lentilles accolées ?", "verso": "2 lentilles accolées ont le même centre optique, d'où $\\dfrac{1}{f'_{\\text{éq}}} = \\dfrac{1}{f'_1} + \\dfrac{1}{f'_2}$."}, {"id": "pc_opt2_12", "subject": "physique", "chapter": "Miroir plan, dioptre plan, lentilles minces : construction d’image dans l’approximation de Gauss", "recto": "Lunette astronomique et lunette terrestre : configuration des foyers et grossissement $G$ ?", "verso": "$G = \\dfrac{\\alpha'}{\\alpha}$ (système afocal : $F'_1 = F_2$ entre objectif et oculaire ; la lunette terrestre ajoute un véhicule redresseur)."}, {"id": "pc_elec1_1", "subject": "physique", "chapter": "Lois générales de l’électrocinétique dans le cadre de l’ARQS", "recto": "Temps de propagation dans un circuit de longueur $L$ ?", "verso": "$\\tau = \\dfrac{L}{c}$"}, {"id": "pc_elec1_2", "subject": "physique", "chapter": "Lois générales de l’électrocinétique dans le cadre de l’ARQS", "recto": "$i(t) = ?$ et $U_{AB} = ?$", "verso": "$i(t) = \\dfrac{dq}{dt}$ (avec $q$ en $\\text{C}$ et $t$ en $\\text{s}$) et $U_{AB} = V_A - V_B$."}, {"id": "pc_elec1_3", "subject": "physique", "chapter": "Lois générales de l’électrocinétique dans le cadre de l’ARQS", "recto": "Représenter un dipôle $\\mathcal{D}$ : 1) en convention récepteur ; 2) en convention générateur.", "verso": "1) Convention récepteur : $i$ et $u$ (flèche de tension) en sens opposés. 2) Convention générateur : $i$ et $u$ dans le même sens."}, {"id": "pc_elec1_4", "subject": "physique", "chapter": "Lois générales de l’électrocinétique dans le cadre de l’ARQS", "recto": "Loi des nœuds ? Loi des mailles ?", "verso": "Loi des nœuds : $\\sum_k \\varepsilon_k i_k = 0$ ($\\varepsilon_k = 1$ si $i_k$ va vers le nœud, sinon $\\varepsilon_k = -1$). Loi des mailles : $\\sum_k \\varepsilon_k u_k = 0$ ($\\varepsilon_k = 1$ si $u_k$ dans le sens orienté choisi, sinon $\\varepsilon_k = -1$)."}, {"id": "pc_elec1_5", "subject": "physique", "chapter": "Lois générales de l’électrocinétique dans le cadre de l’ARQS", "recto": "Les dipôles en dérivation sont traversés par la même ... ? Et en série ... ?", "verso": "Dérivation : même tension (en $\\text{V}$). Série : même intensité (en $\\text{A}$)."}, {"id": "pc_elec1_6", "subject": "physique", "chapter": "Lois générales de l’électrocinétique dans le cadre de l’ARQS", "recto": "2 régimes variables + exemples ?", "verso": "Régime transitoire (charge / décharge d'un condensateur, passage d'un régime continu à un autre) ; Régime variable forcé (générateur sinusoïdal)."}, {"id": "pc_elec2_1", "subject": "physique", "chapter": "Circuit linéaire en régime continu : étude des résistors et des générateurs", "recto": "Si la caractéristique est linéaire passant par l'origine $\\Rightarrow$ ... $\\Rightarrow$ ... ? Si la caractéristique est linéaire mais ne passe pas par l'origine $\\Rightarrow$ ... ?", "verso": "Linéaire passant par l'origine $\\Rightarrow$ passif $\\Rightarrow$ récepteur. Linéaire ne passant pas par l'origine $\\Rightarrow$ actif."}, {"id": "pc_elec4_1", "subject": "physique", "chapter": "Oscillateurs électriques en régime transitoire (circuits du 2nd ordre) & Analogie électro-mécanique", "recto": "Pour un circuit du 2nd ordre lorsque $\\Delta > 0$, donner la forme de $q(t)$ et le nom du régime.", "verso": "$q(t) = A e^{r_1 t} + B e^{r_2 t}$ — Régime apériodique."}, {"id": "pc_elec4_2", "subject": "physique", "chapter": "Oscillateurs électriques en régime transitoire (circuits du 2nd ordre) & Analogie électro-mécanique", "recto": "Pour un circuit du 2nd ordre lorsque $\\Delta = 0$, donner la forme de $q(t)$ et le nom du régime.", "verso": "$q(t) = (At + B) e^{r_0 t}$ — Régime critique."}, {"id": "pc_elec4_3", "subject": "physique", "chapter": "Oscillateurs électriques en régime transitoire (circuits du 2nd ordre) & Analogie électro-mécanique", "recto": "Pour un circuit du 2nd ordre lorsque $\\Delta < 0$, donner la forme de $q(t)$ et le nom du régime.", "verso": "$q(t) = e^{-\\frac{\\omega_0}{2Q} t} \\bigl(A \\cos(\\omega t) + B \\sin(\\omega t)\\bigr)$ — Régime pseudo-oscillatoire (avec racines complexes conjuguées)."}, {"id": "pc_chim1_1", "subject": "chimie", "chapter": "Description d’un système physico-chimique", "recto": "$a(\\text{Solvant}) = ?$ ; $a(X) = ?$ ; $a(X_{(g)}) = ?$ ; $a(\\text{Solide}) = ?$", "verso": "$a(\\text{Solvant}) = 1$ ; $a(X) = [X]$ ; $a(X_{(g)}) = \\dfrac{P(X_{(g)})}{P^\\circ}$ avec $P^\\circ = 1\\text{ bar} = 10^5\\text{ Pa}$ ; $a(\\text{Solide}) = 1$."}, {"id": "pc_chim1_2", "subject": "chimie", "chapter": "Description d’un système physico-chimique", "recto": "Formules des fractions molaire ($x_i$) et massique ($w_i$) ?", "verso": "$x_i = \\dfrac{n_i}{n}$ et $w_i = \\dfrac{m_i}{m}$"}, {"id": "pc_chim1_3", "subject": "chimie", "chapter": "Description d’un système physico-chimique", "recto": "Formule de la pression partielle ?", "verso": "$P_i = x_i P$ (et pour un gaz parfait : $PV = nRT$ et $P_i V = n_i RT$)."}, {"id": "pc_chim1_4", "subject": "chimie", "chapter": "Description d’un système physico-chimique", "recto": "Différence entre variable intensive et variable extensive ?", "verso": "Variable intensive : ne dépend pas de la quantité de matière du système (pression, température...). Variable extensive : dépend de la quantité de matière (additive)."}, {"id": "pc_chim1_5", "subject": "chimie", "chapter": "Description d’un système physico-chimique", "recto": "Qu'est-ce qu'un système physico-chimique ?", "verso": "Une substance identifiable dans un système (ion, atome...)."}, {"id": "pc_chim2_1", "subject": "chimie", "chapter": "Transformation chimique", "recto": "$\\tau_f = ?$", "verso": "$\\tau_f = \\dfrac{\\xi_f}{\\xi_{\\max}} \\iff \\dfrac{x_f}{x_{\\max}}$"}, {"id": "pc_chim2_2", "subject": "chimie", "chapter": "Transformation chimique", "recto": "$d\\xi = ?$ et $\\xi(t) - \\xi(t=0) = ?$", "verso": "$d\\xi = \\dfrac{dn_i}{\\nu_i}$ ; par intégration : $\\xi(t) - \\xi(t=0) = \\dfrac{n_i(t) - n_i(t=0)}{\\nu_i}$ (avec $\\xi(t=0) = 0$)."}, {"id": "pc_chim2_3", "subject": "chimie", "chapter": "Transformation chimique", "recto": "Qu'est-ce que $\\nu_i$ et $\\xi$ ?", "verso": "$\\nu_i$ : coefficient stœchiométrique algébrique ; $\\xi$ : l'avancement."}, {"id": "maths_extra_1", "subject": "maths", "chapter": "Nombres complexes", "recto": "Racines $n$-ièmes de l'unité : définition de $\\mathbb{U}_n$ ?", "verso": "$$\\mathbb{U}_n = \\left\\{ 1,\\, e^{i\\frac{2\\pi}{n}},\\, e^{i\\frac{4\\pi}{n}},\\, \\dots,\\, e^{i\\frac{2(n-1)\\pi}{n}} \\right\\} = \\left\\{ z \\in \\mathbb{C} \\mid \\exists k \\in [\\![0, n-1]\\!],\\ z = e^{\\frac{2ik\\pi}{n}} \\right\\}$$"}, {"id": "maths_extra_2", "subject": "maths", "chapter": "Nombres complexes", "recto": "Comment montrer qu'un complexe $z$ est réel ($z \\in \\mathbb{R}$) ou imaginaire pur ($z \\in i\\mathbb{R}$) ?", "verso": "• $z \\in \\mathbb{R} \\iff \\mathrm{Im}(z) = 0 \\iff z = \\bar{z} \\iff (z = 0 \\text{ ou } \\arg(z) \\equiv 0\\ [\\pi])$\n• $z \\in i\\mathbb{R} \\iff \\mathrm{Re}(z) = 0 \\iff z = -\\bar{z} \\iff (z = 0 \\text{ ou } \\arg(z) \\equiv \\frac{\\pi}{2}\\ [\\pi])$"}, {"id": "maths_extra_3", "subject": "maths", "chapter": "Nombres complexes", "recto": "Caractérisations avec le module : $z \\in \\mathbb{R}_+$, $z \\in \\mathbb{R}_-$ et $z \\in i\\mathbb{R}$ ?", "verso": "• $z \\in \\mathbb{R}_+ \\iff z = |z|$\n• $z \\in \\mathbb{R}_- \\iff z = -|z|$\n• $z \\in i\\mathbb{R} \\iff z = i|z| \\text{ ou } z = -i|z|$"}];
+
+const ANGLAIS_COLLE5_CARDS = [{"id": "colle5_1", "sub": "Employment (p. 245)", "en": "to employ", "phonetic": "[ɪmˈplɔɪ]", "fr": "employer"}, {"id": "colle5_2", "sub": "Employment (p. 245)", "en": "an employer", "phonetic": "", "fr": "un/e employeur/-euse"}, {"id": "colle5_3", "sub": "Employment (p. 245)", "en": "an employee", "phonetic": "", "fr": "un/e employé/e"}, {"id": "colle5_4", "sub": "Employment (p. 245)", "en": "employment", "phonetic": "", "fr": "l'emploi"}, {"id": "colle5_5", "sub": "Employment (p. 245)", "en": "to hire", "phonetic": "[haɪə]", "fr": "engager qqn"}, {"id": "colle5_6", "sub": "Employment (p. 245)", "en": "to take* sb on", "phonetic": "", "fr": "engager qqn"}, {"id": "colle5_7", "sub": "Employment (p. 245)", "en": "to recruit", "phonetic": "[rɪˈkruːt]", "fr": "recruter qqn"}, {"id": "colle5_8", "sub": "Employment (p. 245)", "en": "sb", "phonetic": "", "fr": "quelqu'un (qqn)"}, {"id": "colle5_9", "sub": "Employment (p. 245)", "en": "a headhunter", "phonetic": "", "fr": "un chasseur de têtes"}, {"id": "colle5_10", "sub": "Employment (p. 245)", "en": "to apply for a job", "phonetic": "[əˈplaɪ]", "fr": "poser sa candidature à un poste"}, {"id": "colle5_11", "sub": "Employment (p. 245)", "en": "an application", "phonetic": "", "fr": "une candidature"}, {"id": "colle5_12", "sub": "Employment (p. 245)", "en": "UK a CV", "phonetic": "[siː ˈviː]", "fr": "un CV (curriculum vitae)"}, {"id": "colle5_13", "sub": "Employment (p. 245)", "en": "US a résumé", "phonetic": "[ˈrezjumeɪ]", "fr": "un CV (curriculum vitae)"}, {"id": "colle5_14", "sub": "Employment (p. 245)", "en": "qualifications", "phonetic": "[ˌkwɒlɪfɪˈkeɪʃnz]", "fr": "les diplômes"}, {"id": "colle5_15", "sub": "Employment (p. 245)", "en": "to appoint sb to a post", "phonetic": "[əˈpɔɪnt]", "fr": "nommer qqn sur un poste"}, {"id": "colle5_16", "sub": "Employment (p. 245)", "en": "a post", "phonetic": "", "fr": "un poste"}, {"id": "colle5_17", "sub": "Employment (p. 245)", "en": "an appointment", "phonetic": "[əˈpɔɪntmənt]", "fr": "un rendez-vous (▲)"}, {"id": "colle5_18", "sub": "Employment (p. 245)", "en": "a position", "phonetic": "", "fr": "un poste / une situation"}, {"id": "colle5_19", "sub": "Employment (p. 245)", "en": "a probationary period", "phonetic": "", "fr": "une période d'essai"}, {"id": "colle5_20", "sub": "Employment (p. 245)", "en": "a trial period", "phonetic": "", "fr": "une période d'essai"}, {"id": "colle5_21", "sub": "Employment (p. 245)", "en": "to promote", "phonetic": "[prəˈməʊt]", "fr": "promouvoir qqn"}, {"id": "colle5_22", "sub": "Employment (p. 245)", "en": "to upgrade sb", "phonetic": "[ʌpˈɡreɪd]", "fr": "promouvoir qqn"}, {"id": "colle5_23", "sub": "Employment (p. 245)", "en": "promotion", "phonetic": "[prəˈməʊʃn]", "fr": "la promotion / l'avancement"}, {"id": "colle5_24", "sub": "Employment (p. 245)", "en": "to demote", "phonetic": "[diːˈməʊt]", "fr": "rétrograder qqn"}, {"id": "colle5_25", "sub": "Employment (p. 245)", "en": "to downgrade sb", "phonetic": "", "fr": "rétrograder qqn"}, {"id": "colle5_26", "sub": "Employment (p. 245)", "en": "wages", "phonetic": "[ˈweɪdʒɪz]", "fr": "des gages / un salaire → un/e salarié/e"}, {"id": "colle5_27", "sub": "Employment (p. 245)", "en": "a wage earner", "phonetic": "", "fr": "un/e salarié/e"}, {"id": "colle5_28", "sub": "Employment (p. 245)", "en": "the pay", "phonetic": "[peɪ]", "fr": "la paie"}, {"id": "colle5_29", "sub": "Employment (p. 245)", "en": "a payslip", "phonetic": "", "fr": "un bulletin de paie"}, {"id": "colle5_30", "sub": "Employment (p. 245)", "en": "the payroll", "phonetic": "[ˈpeɪrəʊl]", "fr": "le registre du personnel"}, {"id": "colle5_31", "sub": "Employment (p. 245)", "en": "payday", "phonetic": "", "fr": "le jour de paie"}, {"id": "colle5_32", "sub": "Employment (p. 245)", "en": "a salary", "phonetic": "[ˈsæləri]", "fr": "un salaire"}, {"id": "colle5_33", "sub": "Employment (p. 245)", "en": "a stipend", "phonetic": "[ˈstaɪpend]", "fr": "des appointements"}, {"id": "colle5_34", "sub": "Employment (p. 245)", "en": "a bonus", "phonetic": "[ˈbəʊnəs]", "fr": "une prime"}, {"id": "colle5_35", "sub": "Employment (p. 245)", "en": "a fee", "phonetic": "[fiː]", "fr": "des honoraires"}, {"id": "colle5_36", "sub": "Employment (p. 245)", "en": "fees", "phonetic": "", "fr": "des honoraires"}, {"id": "colle5_37", "sub": "Employment (p. 245)", "en": "an employment agency", "phonetic": "", "fr": "une agence de placement"}, {"id": "colle5_38", "sub": "Employment (p. 245)", "en": "a recruitment agency", "phonetic": "", "fr": "une agence de recrutement"}, {"id": "colle5_39", "sub": "Employment (p. 245)", "en": "an application form", "phonetic": "", "fr": "un formulaire / dossier de candidature"}, {"id": "colle5_40", "sub": "Employment (p. 245)", "en": "the list of positions available", "phonetic": "", "fr": "la liste des postes vacants"}, {"id": "colle5_41", "sub": "Employment (p. 245)", "en": "He has been appointed sales manager.", "phonetic": "", "fr": "Il a été nommé directeur des ventes."}, {"id": "colle5_42", "sub": "Employment (p. 245)", "en": "He was promoted / upgraded to sales manager.", "phonetic": "", "fr": "Il a été promu directeur des ventes."}, {"id": "colle5_43", "sub": "Employment (p. 245)", "en": "a term contract", "phonetic": "", "fr": "un contrat à durée déterminée (CDD)"}, {"id": "colle5_44", "sub": "Employment (p. 245)", "en": "a rolling / an open-ended contract", "phonetic": "", "fr": "un contrat à durée indéterminée (CDI)"}, {"id": "colle5_45", "sub": "Employment (p. 245)", "en": "to take* sb on probation / on a trial basis", "phonetic": "", "fr": "prendre qqn à l'essai"}, {"id": "colle5_46", "sub": "Employment (p. 245)", "en": "to create job opportunities", "phonetic": "", "fr": "créer des débouchés"}, {"id": "colle5_47", "sub": "Employment (p. 245)", "en": "the labour / job market", "phonetic": "", "fr": "le marché du travail"}, {"id": "colle5_48", "sub": "Employment (p. 245)", "en": "He was fired for professional misconduct.", "phonetic": "", "fr": "Il a été mis à pied pour faute professionnelle."}, {"id": "colle5_49", "sub": "Work (p. 246)", "en": "to work", "phonetic": "[wɜːk]", "fr": "travailler"}, {"id": "colle5_50", "sub": "Work (p. 246)", "en": "a worker", "phonetic": "", "fr": "un/e travailleur/-se / ouvrier/-ère"}, {"id": "colle5_51", "sub": "Work (p. 246)", "en": "UK a labourer", "phonetic": "[ˈleɪbərə]", "fr": "un manœuvre"}, {"id": "colle5_52", "sub": "Work (p. 246)", "en": "US a laborer", "phonetic": "", "fr": "un manœuvre"}, {"id": "colle5_53", "sub": "Work (p. 246)", "en": "a job", "phonetic": "[dʒɒb]", "fr": "un emploi / travail / poste"}, {"id": "colle5_54", "sub": "Work (p. 246)", "en": "a trade", "phonetic": "[treɪd]", "fr": "un métier"}, {"id": "colle5_55", "sub": "Work (p. 246)", "en": "a trainee", "phonetic": "", "fr": "un/e apprenti/e"}, {"id": "colle5_56", "sub": "Work (p. 246)", "en": "an apprentice", "phonetic": "", "fr": "un/e apprenti/e"}, {"id": "colle5_57", "sub": "Work (p. 246)", "en": "apprenticeship", "phonetic": "", "fr": "l'apprentissage"}, {"id": "colle5_58", "sub": "Work (p. 246)", "en": "an occupation", "phonetic": "[ˌɒkjʊˈpeɪʃn]", "fr": "un métier (profession)"}, {"id": "colle5_59", "sub": "Work (p. 246)", "en": "occupational", "phonetic": "", "fr": "professionnel·le"}, {"id": "colle5_60", "sub": "Work (p. 246)", "en": "a profession", "phonetic": "[prəˈfeʃn]", "fr": "une profession libérale"}, {"id": "colle5_61", "sub": "Work (p. 246)", "en": "professional", "phonetic": "", "fr": "professionnel·le (≠ amateur)"}, {"id": "colle5_62", "sub": "Work (p. 246)", "en": "a career", "phonetic": "[kəˈrɪə]", "fr": "une carrière"}, {"id": "colle5_63", "sub": "Work (p. 246)", "en": "a calling", "phonetic": "[ˈkɔːlɪŋ]", "fr": "une vocation"}, {"id": "colle5_64", "sub": "Work (p. 246)", "en": "a task", "phonetic": "[tɑːsk]", "fr": "une tâche"}, {"id": "colle5_65", "sub": "Work (p. 246)", "en": "to moonlight", "phonetic": "[ˈmuːnlaɪt]", "fr": "travailler au noir"}, {"id": "colle5_66", "sub": "Work (p. 246)", "en": "moonlighting", "phonetic": "", "fr": "le travail au noir"}, {"id": "colle5_67", "sub": "Work (p. 246)", "en": "a moonlighter", "phonetic": "", "fr": "un travailleur au noir"}, {"id": "colle5_68", "sub": "Work (p. 246)", "en": "to be* busy", "phonetic": "", "fr": "être occupé"}, {"id": "colle5_69", "sub": "Work (p. 246)", "en": "the boss", "phonetic": "[bɒs]", "fr": "le patron"}, {"id": "colle5_70", "sub": "Work (p. 246)", "en": "a team", "phonetic": "[tiːm]", "fr": "une équipe"}, {"id": "colle5_71", "sub": "Work (p. 246)", "en": "teamwork", "phonetic": "", "fr": "le travail d'équipe"}, {"id": "colle5_72", "sub": "Work (p. 246)", "en": "to clock in / out", "phonetic": "", "fr": "pointer en arrivant / en partant"}, {"id": "colle5_73", "sub": "Work (p. 246)", "en": "to punch in / out", "phonetic": "", "fr": "pointer en arrivant / en partant"}, {"id": "colle5_74", "sub": "Work (p. 246)", "en": "a break", "phonetic": "[breɪk]", "fr": "une pause"}, {"id": "colle5_75", "sub": "Work (p. 246)", "en": "a leave", "phonetic": "[liːv]", "fr": "un congé"}, {"id": "colle5_76", "sub": "Work (p. 246)", "en": "a maternity / sick leave", "phonetic": "", "fr": "un congé de maternité / de maladie"}, {"id": "colle5_77", "sub": "Work (p. 246)", "en": "a luncheon voucher", "phonetic": "[ˈvɔʊtʃə]", "fr": "un ticket-restaurant"}, {"id": "colle5_78", "sub": "Work (p. 246)", "en": "holidays with pay", "phonetic": "", "fr": "les congés payés"}, {"id": "colle5_79", "sub": "Work (p. 246)", "en": "an expense account", "phonetic": "", "fr": "une / des notes de frais"}, {"id": "colle5_80", "sub": "Work (p. 246)", "en": "an industrial injury", "phonetic": "", "fr": "un accident du travail"}, {"id": "colle5_81", "sub": "Work (p. 246)", "en": "a disablement pension", "phonetic": "", "fr": "une pension d'invalidité"}, {"id": "colle5_82", "sub": "Work (p. 246)", "en": "health and safety regulations", "phonetic": "", "fr": "les règles de sécurité"}, {"id": "colle5_83", "sub": "Work (p. 246)", "en": "a factory / labour inspector", "phonetic": "", "fr": "un inspecteur du travail"}, {"id": "colle5_84", "sub": "Work (p. 246)", "en": "parity", "phonetic": "", "fr": "la parité"}, {"id": "colle5_85", "sub": "Word Partners (p. 246)", "en": "seasonal work", "phonetic": "", "fr": "le travail saisonnier"}, {"id": "colle5_86", "sub": "Word Partners (p. 246)", "en": "clerical work", "phonetic": "", "fr": "le travail de bureau"}, {"id": "colle5_87", "sub": "Word Partners (p. 246)", "en": "work-sharing", "phonetic": "", "fr": "le partage du travail"}, {"id": "colle5_88", "sub": "Word Partners (p. 246)", "en": "a work station", "phonetic": "", "fr": "un poste de travail"}, {"id": "colle5_89", "sub": "Word Partners (p. 246)", "en": "UK a working day / week", "phonetic": "", "fr": "une journée de travail / une semaine de travail"}, {"id": "colle5_90", "sub": "Word Partners (p. 246)", "en": "US a work-day / work-week", "phonetic": "", "fr": "une journée de travail / une semaine de travail"}, {"id": "colle5_91", "sub": "Word Partners (p. 246)", "en": "the working population", "phonetic": "", "fr": "la population active"}, {"id": "colle5_92", "sub": "Word Partners (p. 246)", "en": "to concentrate on / to be* engrossed in one's work", "phonetic": "", "fr": "se concentrer sur / être absorbé par son travail"}, {"id": "colle5_93", "sub": "Word Partners (p. 246)", "en": "work experience", "phonetic": "", "fr": "l'expérience professionnelle"}, {"id": "colle5_94", "sub": "Word Partners (p. 246)", "en": "a work contract", "phonetic": "", "fr": "un contrat de travail"}, {"id": "colle5_95", "sub": "Word Partners (p. 246)", "en": "US a service contract", "phonetic": "", "fr": "un contrat de travail"}, {"id": "colle5_96", "sub": "Word Partners (p. 246)", "en": "work (– le travail à forfait)", "phonetic": "", "fr": "travail au forfait"}, {"id": "colle5_97", "sub": "Word Partners (p. 246)", "en": "job (– le travail à la pièce)", "phonetic": "", "fr": "travail à la pièce"}, {"id": "colle5_98", "sub": "Word Partners (p. 246)", "en": "a work permit", "phonetic": "", "fr": "un permis de travail"}, {"id": "colle5_99", "sub": "Word Partners (p. 246)", "en": "the workforce", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_100", "sub": "Word Partners (p. 246)", "en": "manpower", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_101", "sub": "Word Partners (p. 246)", "en": "labour", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_102", "sub": "Word Partners (p. 246)", "en": "US labor", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_103", "sub": "Word Partners (p. 246)", "en": "a worker → a semi-skilled / a skilled worker ≠ an unskilled worker", "phonetic": "", "fr": "un ouvrier spécialisé / qualifié ≠ non qualifié"}, {"id": "colle5_104", "sub": "Word Partners (p. 246)", "en": "a temporary worker", "phonetic": "", "fr": "un intérimaire"}, {"id": "colle5_105", "sub": "Word Partners (p. 246)", "en": "a temp", "phonetic": "", "fr": "un intérimaire"}, {"id": "colle5_106", "sub": "Word Partners (p. 246)", "en": "a freelance", "phonetic": "", "fr": "un travailleur indépendant"}, {"id": "colle5_107", "sub": "Word Partners (p. 246)", "en": "a self-employed person", "phonetic": "", "fr": "un travailleur indépendant"}, {"id": "colle5_108", "sub": "Word Partners (p. 246)", "en": "an immigrant worker", "phonetic": "", "fr": "un immigré"}, {"id": "colle5_109", "sub": "Word Partners (p. 246)", "en": "a factory hand", "phonetic": "", "fr": "un/e ouvrier/-ère d'usine"}, {"id": "colle5_110", "sub": "Word Partners (p. 246)", "en": "a manual worker", "phonetic": "", "fr": "un travailleur manuel"}, {"id": "colle5_111", "sub": "Word Partners (p. 246)", "en": "a blue collar", "phonetic": "", "fr": "un col bleu"}, {"id": "colle5_112", "sub": "Word Partners (p. 246)", "en": "white-collar", "phonetic": "", "fr": "un col blanc"}, {"id": "colle5_113", "sub": "Word Partners (p. 246)", "en": "casual labour", "phonetic": "", "fr": "la main-d'œuvre occasionnelle"}, {"id": "colle5_114", "sub": "Word Partners (p. 246)", "en": "shortage ≠ surplus labour", "phonetic": "", "fr": "le manque / le surplus de main-d'œuvre"}, {"id": "colle5_115", "sub": "Word Partners (p. 246)", "en": "a rewarding job / task / work", "phonetic": "", "fr": "un travail / une tâche gratifiant(e)"}, {"id": "colle5_116", "sub": "Word Partners (p. 246)", "en": "an absorbing / engrossing (≠ absorbent/e) work", "phonetic": "", "fr": "un travail absorbant"}, {"id": "colle5_117", "sub": "Word Partners (p. 246)", "en": "a part-time / half-time / full-time job", "phonetic": "", "fr": "un travail à temps partiel / à mi-temps / à plein temps"}, {"id": "colle5_118", "sub": "Word Partners (p. 246)", "en": "odd jobs", "phonetic": "", "fr": "les petits boulots / le bricolage"}, {"id": "colle5_119", "sub": "Word Partners (p. 246)", "en": "to leave* one's job", "phonetic": "", "fr": "quitter son emploi"}, {"id": "colle5_120", "sub": "Word Partners (p. 246)", "en": "job security", "phonetic": "", "fr": "la sécurité de l'emploi"}, {"id": "colle5_121", "sub": "Word Partners (p. 246)", "en": "job satisfaction", "phonetic": "", "fr": "la satisfaction professionnelle"}, {"id": "colle5_122", "sub": "Word Partners (p. 246)", "en": "a job offer", "phonetic": "", "fr": "une offre d'emploi"}, {"id": "colle5_123", "sub": "Word Partners (p. 246)", "en": "a job application", "phonetic": "", "fr": "une candidature pour un emploi"}, {"id": "colle5_124", "sub": "Word Partners (p. 246)", "en": "a job advert(isement)", "phonetic": "", "fr": "une annonce pour un emploi"}, {"id": "colle5_125", "sub": "Word Partners (p. 246)", "en": "a job centre", "phonetic": "", "fr": "une agence pour l'emploi"}, {"id": "colle5_126", "sub": "Word Partners (p. 246)", "en": "an employment office", "phonetic": "", "fr": "une agence pour l'emploi"}, {"id": "colle5_127", "sub": "Word Partners (p. 246)", "en": "a job-creation scheme", "phonetic": "", "fr": "un plan de création d'emplois"}, {"id": "colle5_128", "sub": "Word Partners (p. 246)", "en": "to look for work", "phonetic": "", "fr": "chercher du travail"}, {"id": "colle5_129", "sub": "Word Partners (p. 246)", "en": "to move to a new job / post", "phonetic": "", "fr": "changer d'emploi / de poste"}, {"id": "colle5_130", "sub": "Word Partners (p. 246)", "en": "to change / switch jobs", "phonetic": "", "fr": "changer d'emploi / de poste"}, {"id": "colle5_131", "sub": "Word Partners (p. 246)", "en": "occupational hazards", "phonetic": "", "fr": "les risques du métier"}, {"id": "colle5_132", "sub": "Word Partners (p. 246)", "en": "an occupational disease", "phonetic": "", "fr": "une maladie professionnelle"}, {"id": "colle5_133", "sub": "Word Partners (p. 246)", "en": "to delegate a task to sb", "phonetic": "", "fr": "déléguer une tâche à qqn"}, {"id": "colle5_134", "sub": "Word Partners (p. 246)", "en": "to set* sb a task", "phonetic": "", "fr": "confier une tâche à qqn"}];
+
+let allCards = []; // { id, subject: 'maths'|'physique'|'si'|'espagnol'|'francais', chapter, recto, verso, box, dueAt }
+let activeSubject = "maths"; // 'maths' | 'physique' | 'si'
+let currentCard = null;
+let isFlipped = false;
+let sessionCount = 0;
+let sessionOk = 0;
+let sessionMid = 0;
+let sessionFail = 0;
+let hasSeenVerso = false;
+let freePracticeMode = false;
+let shuffleAllSubjectMode = false;
+let cooldownInterval = null;
+let currentView = "home";
+let viewHistory = [];
+
+// Anglais Colle n°5 state
+let angState = loadAnglaisState();
+let angQueue = [];
+let angIdx = 0;
+let angRevealed = false;
+let angSessionOk = 0;
+let angSessionFail = 0;
+
+// Espagnol state
+let espIdx = 0;
+let espFlipped = false;
+
+// Mélange général (20 ou 30) state
+let mixQueue = [];
+let mixIdx = 0;
+let mixFlipped = false;
+let mixOk = 0;
+let mixTargetCount = 20;
+
+function renderMathInEl(el) {
+  if (!el || typeof renderMathInElement !== "function") return;
+  try {
+    renderMathInElement(el, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  } catch (e) {}
+}
+
+function uid() {
+  return "c_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+}
+
+function nowMs() {
+  return Date.now();
+}
+
+function addDaysMs(days) {
+  return nowMs() + days * 24 * 60 * 60 * 1000;
+}
+
+function showToast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function stripChapPrefix(text) {
+  return String(text || "").replace(/^Chap\.\s*\d+\s*[—–-]\s*/i, "");
+}
+
+/* =========================================================
+   NAVIGATION & FIL D'ARIANE ÉPURÉ
+   ========================================================= */
+function navigateTo(viewId, pushHistory = true) {
+  if (pushHistory && currentView && currentView !== viewId) {
+    viewHistory.push(currentView);
+  }
+  currentView = viewId;
+
+  document.querySelectorAll(".view-section").forEach(sec => {
+    sec.classList.toggle("active", sec.id === "view-" + viewId);
+  });
+
+  // Barre du bas visible uniquement dans l'espace Maths / Physique / SI
+  const bottomNav = document.getElementById("srs-bottom-nav");
+  bottomNav.classList.toggle("visible", viewId === "srs-workspace");
+
+  // Fil d'Ariane masqué sur l'accueil pur
+  const crumbBar = document.getElementById("top-crumb-bar");
+  if (viewId === "home") {
+    crumbBar.style.display = "none";
+    viewHistory = [];
+  } else {
+    crumbBar.style.display = "flex";
+    updateBreadcrumb(viewId);
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goBack() {
+  if (viewHistory.length > 0) {
+    const prev = viewHistory.pop();
+    navigateTo(prev, false);
+    if (prev === "subjects") updateSubjectCounts();
+    return;
+  }
+  navigateTo("home", false);
+}
+
+function subjectDisplayName(subj) {
+  const map = {
+    maths: "Maths",
+    physique: "Physique",
+    si: "SI",
+    chimie: "Chimie",
+    anglais: "Anglais",
+    espagnol: "Espagnol",
+    francais: "Français"
+  };
+  return map[subj] || subj;
+}
+
+function updateBreadcrumb(viewId) {
+  const trailEl = document.getElementById("breadcrumb-trail");
+  let parts = ["Accueil"];
+  if (viewId === "main-menu") {
+    parts.push("Menu");
+  } else if (viewId === "subjects") {
+    parts.push("Menu", "Flashcards");
+  } else if (viewId === "maths-chapters") {
+    const chSubj = document.getElementById("btn-maths-shuffle-all").dataset.shuffleSubj || "maths";
+    parts.push("Flashcards", subjectDisplayName(chSubj));
+  } else if (viewId === "anglais-menu") {
+    parts.push("Flashcards", "Anglais", "Colles");
+  } else if (viewId === "anglais-quiz") {
+    parts.push("Anglais", "Colles", "Vocabulaire Colle n°5");
+  } else if (viewId === "srs-workspace") {
+    parts.push("Flashcards", subjectDisplayName(activeSubject));
+  } else if (viewId === "espagnol-workspace") {
+    parts.push("Flashcards", "Espagnol");
+  } else if (viewId === "mix-quiz") {
+    parts.push("Flashcards", `Mélange (${mixTargetCount} questions)`);
+  } else if (viewId === "exercises") {
+    parts.push("Menu", "Exercices");
+  } else if (viewId === "exercise-subject") {
+    parts.push("Menu", "Exercices", subjectDisplayName(activeExerciseSubject));
+  }
+
+  trailEl.innerHTML = parts
+    .map((p, idx) => idx === parts.length - 1
+      ? `<span class="active-crumb">${escapeHtml(p)}</span>`
+      : `<span>${escapeHtml(p)}</span><span>›</span>`)
+    .join(" ");
+}
+
+/* =========================================================
+   CHARGEMENT & SAUVEGARDE DES CARTES
+   ========================================================= */
+function loadState() {
+  const savedTheme = localStorage.getItem(THEME_KEY) || "carmine";
+  applyTheme(savedTheme);
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        allCards = parsed.map(c => ({
+          ...c,
+          subject: c.subject || "maths",
+          chapter: remapLegacyMathsChapter(c),
+          recto: stripChapPrefix(c.recto),
+          verso: stripChapPrefix(c.verso)
+        }));
+        const existingIds = new Set(allCards.map(c => c.id));
+        const missingExtras = DEFAULT_EXTRA_CARDS.filter(c => !existingIds.has(c.id)).map(c => ({
+          ...c,
+          recto: stripChapPrefix(c.recto),
+          verso: stripChapPrefix(c.verso),
+          box: 0,
+          dueAt: 0
+        }));
+        if (missingExtras.length > 0) {
+          allCards = [...allCards, ...missingExtras];
+        }
+        saveCards();
+        return;
+      }
+    }
+    // Migration douce depuis v12 si présente
+    const oldRaw = localStorage.getItem("flashlab_mpsi_cards_v12");
+    if (oldRaw) {
+      const parsedOld = JSON.parse(oldRaw);
+      if (Array.isArray(parsedOld) && parsedOld.length > 0) {
+        allCards = parsedOld.map(c => ({
+          ...c,
+          subject: "maths",
+          recto: stripChapPrefix(c.recto),
+          verso: stripChapPrefix(c.verso)
+        }));
+        saveCards();
+        return;
+      }
+    }
+  } catch (e) {}
+
+  const mathsInit = DEFAULT_MATHS_CARDS.map((c, idx) => ({
+    id: "maths_" + idx,
+    subject: "maths",
+    chapter: c.chapter,
+    recto: stripChapPrefix(c.recto),
+    verso: stripChapPrefix(c.verso),
+    box: 0,
+    dueAt: 0
+  }));
+  const extrasInit = DEFAULT_EXTRA_CARDS.map(c => ({
+    ...c,
+    recto: stripChapPrefix(c.recto),
+    verso: stripChapPrefix(c.verso),
+    box: 0,
+    dueAt: 0
+  }));
+  allCards = [...mathsInit, ...extrasInit];
+  saveCards();
+}
+
+function saveCards() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(allCards));
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_KEY, theme);
+  document.querySelectorAll(".theme-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.setTheme === theme);
+  });
+}
+
+function getSubjectCards(subj) {
+  return allCards.filter(c => (c.subject || "maths") === subj);
+}
+
+function updateSubjectCounts() {
+  const m = getSubjectCards("maths").length;
+  const p = getSubjectCards("physique").length;
+  const s = getSubjectCards("si").length;
+  const c = getSubjectCards("chimie").length;
+  const e = getSubjectCards("espagnol").length;
+  document.getElementById("badge-count-maths").textContent = `${m} fiche${m > 1 ? "s" : ""}`;
+  document.getElementById("badge-count-physique").textContent = `${p} fiche${p > 1 ? "s" : ""}`;
+  document.getElementById("badge-count-chimie").textContent = `${c} fiche${c > 1 ? "s" : ""}`;
+  document.getElementById("badge-count-si").textContent = `${s} fiche${s > 1 ? "s" : ""}`;
+  document.getElementById("badge-count-espagnol").textContent = `${e} fiche${e > 1 ? "s" : ""}`;
+}
+
+/* =========================================================
+   SOUS-MENU MATHS (Chapitres sans numéro + Tout mélanger)
+   ========================================================= */
+function getOrderedChaptersForSubject(subj) {
+  const preset = SUBJECT_CHAPTERS[subj] || [];
+  const existing = getSubjectCards(subj).map(c => c.chapter);
+  const exoChaps = allExercises.filter(e => e.subject === subj).map(e => e.chapter);
+  const extras = [...new Set([...existing, ...exoChaps])].filter(ch => ch && !preset.includes(ch));
+  return [...preset, ...extras];
+}
+
+function openSubjectChaptersMenu(subj) {
+  const subjCards = getSubjectCards(subj);
+  const chapters = getOrderedChaptersForSubject(subj);
+  const label = subjectDisplayName(subj);
+  document.getElementById("subject-chapters-kicker").textContent = `Flashcards • ${label}`;
+  document.getElementById("subject-chapters-title").textContent = `Chapitres de ${label}`;
+  document.getElementById("subject-chapters-desc").textContent =
+    `Sélectionne un chapitre précis ou mélange toutes les cartes de ${label}.`;
+  document.getElementById("btn-subject-shuffle-all-title").textContent = `Mélanger toutes les cartes en ${label}`;
+  document.getElementById("btn-subject-shuffle-all-sub").textContent = `Tirage aléatoire parmi tous les chapitres de ${label}`;
+  document.getElementById("btn-maths-shuffle-all").dataset.shuffleSubj = subj;
+
+  const container = document.getElementById("maths-chapters-list");
+  container.innerHTML = "";
+
+  chapters.forEach(ch => {
+    const count = subjCards.filter(c => c.chapter === ch).length;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "menu-tile";
+    btn.innerHTML = `
+      <div>
+        <div class="menu-tile-title">${escapeHtml(ch)}</div>
+        <div class="menu-tile-sub">${count > 0 ? "Révision ciblée sur ce chapitre" : "Chapitre prêt • Ajoute tes flashcards"}</div>
+      </div>
+      <span class="menu-tile-badge">${count} fiche${count > 1 ? "s" : ""}</span>
+    `;
+    btn.addEventListener("click", () => {
+      openSrsSubject(subj, ch, false);
+    });
+    container.appendChild(btn);
+  });
+
+  navigateTo("maths-chapters");
+}
+
+/* =========================================================
+   ESPACE RÉPÉTITION 5x (Maths, Physique, SI)
+   ========================================================= */
+function openSrsSubject(subject, chapterFilterValue = "ALL", shuffleAll = false) {
+  activeSubject = subject;
+  freePracticeMode = shuffleAll;
+  shuffleAllSubjectMode = shuffleAll;
+  sessionCount = 0;
+  sessionOk = 0;
+  sessionMid = 0;
+  sessionFail = 0;
+
+  refreshChapterSelectors();
+  const filterEl = document.getElementById("chapter-filter");
+  if ([...filterEl.options].some(o => o.value === chapterFilterValue)) {
+    filterEl.value = chapterFilterValue;
+  } else {
+    filterEl.value = "ALL";
+  }
+  if (chapterFilterValue !== "ALL") {
+    document.getElementById("add-chapter").value = chapterFilterValue;
+  } else {
+    document.getElementById("add-chapter").value = "";
+  }
+
+  document.getElementById("add-card-heading").textContent = `Nouvelle fiche (${subjectDisplayName(subject)})`;
+  switchSrsTab("study");
+  navigateTo("srs-workspace");
+  if (shuffleAll) {
+    showToast(`Toutes les cartes de ${subjectDisplayName(subject)} mélangées !`);
+  }
+}
+
+function switchSrsTab(tabName) {
+  document.querySelectorAll("#srs-bottom-nav .nav-item").forEach(b => {
+    b.classList.toggle("active", b.dataset.srstab === tabName);
+  });
+  document.querySelectorAll(".srs-subpanel").forEach(p => {
+    p.style.display = p.id === "srs-tab-" + tabName ? "block" : "none";
+  });
+  if (tabName === "study") renderStudy();
+  if (tabName === "deck") renderDeck();
+}
+
+function getChaptersForActiveSubject() {
+  return getOrderedChaptersForSubject(activeSubject);
+}
+
+function refreshChapterSelectors() {
+  const sc = getSubjectCards(activeSubject);
+  const chapters = getChaptersForActiveSubject();
+  const filter = document.getElementById("chapter-filter");
+  const prev = filter.value;
+  filter.innerHTML = `<option value="ALL">Tous les chapitres — ${subjectDisplayName(activeSubject)} (${sc.length} fiches)</option>`;
+  chapters.forEach(ch => {
+    const count = sc.filter(c => c.chapter === ch).length;
+    const opt = document.createElement("option");
+    opt.value = ch;
+    opt.textContent = `${ch} (${count})`;
+    filter.appendChild(opt);
+  });
+  if ([...filter.options].some(o => o.value === prev)) {
+    filter.value = prev;
+  }
+
+  const dl = document.getElementById("chapter-suggestions");
+  dl.innerHTML = "";
+  chapters.forEach(ch => {
+    const opt = document.createElement("option");
+    opt.value = ch;
+    dl.appendChild(opt);
+  });
+}
+
+function updateStats() {
+  const sc = getSubjectCards(activeSubject);
+  const dueCount = sc.filter(c => (c.box || 0) < 5 && (c.dueAt || 0) <= nowMs()).length;
+  const masteredCount = sc.filter(c => (c.box || 0) >= 5).length;
+  document.getElementById("stat-due").textContent = dueCount;
+  document.getElementById("stat-total").textContent = sc.length;
+  document.getElementById("stat-mastered").textContent = masteredCount;
+  document.getElementById("stat-streak").textContent = sessionCount;
+}
+
+function formatDuration(ms) {
+  const totalSec = Math.max(0, Math.floor(ms / 1000));
+  const h = String(Math.floor(totalSec / 3600)).padStart(2, "0");
+  const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, "0");
+  const s = String(totalSec % 60).padStart(2, "0");
+  return `${h}:${m}:${s}`;
+}
+
+function getCooldownRemaining() {
+  const until = Number(localStorage.getItem(COOLDOWN_PREFIX + activeSubject) || 0);
+  return Math.max(0, until - nowMs());
+}
+
+function startCooldownTimer() {
+  clearInterval(cooldownInterval);
+  const tick = () => {
+    const rem = getCooldownRemaining();
+    if (rem <= 0) {
+      clearInterval(cooldownInterval);
+      localStorage.removeItem(COOLDOWN_PREFIX + activeSubject);
+      renderStudy();
+      return;
+    }
+    document.getElementById("cooldown-timer").textContent = formatDuration(rem);
+  };
+  tick();
+  cooldownInterval = setInterval(tick, 1000);
+}
+
+function pickNextCard() {
+  const selectedChapter = document.getElementById("chapter-filter").value;
+  let pool = getSubjectCards(activeSubject).filter(
+    c => (c.box || 0) < 5 && (selectedChapter === "ALL" || c.chapter === selectedChapter)
+  );
+  if (!freePracticeMode) {
+    pool = pool.filter(c => (c.dueAt || 0) <= nowMs());
+  }
+  if (pool.length === 0) return null;
+
+  if (shuffleAllSubjectMode) {
+    const candidates = pool.length > 1 && currentCard
+      ? pool.filter(c => c.id !== currentCard.id)
+      : pool;
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
+  pool.sort((a, b) => (a.dueAt || 0) - (b.dueAt || 0));
+  const topSlice = pool.slice(0, Math.min(4, pool.length));
+  return topSlice[Math.floor(Math.random() * topSlice.length)];
+}
+
+function buildSessionSummaryHtml(summary) {
+  if (!summary || summary.total <= 0) return "";
+  const pctOk = Math.round((summary.ok / summary.total) * 100);
+  const pctMid = Math.round((summary.mid / summary.total) * 100);
+  const pctFail = Math.round((summary.fail / summary.total) * 100);
+  return `
+    <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:14px; text-align:left;">
+      <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); margin-bottom:10px; text-align:center;">
+        Bilan de la session (${summary.total} carte${summary.total > 1 ? "s" : ""})
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; text-align:center;">
+        <div style="background:rgba(22, 163, 74, 0.14); border:1px solid rgba(22, 163, 74, 0.35); border-radius:12px; padding:10px 6px;">
+          <div style="font-size:18px; font-weight:800; color:#22c55e;">${summary.ok}</div>
+          <div style="font-size:11px; font-weight:700; color:#22c55e;">Bonnes (${pctOk}%)</div>
+        </div>
+        <div style="background:rgba(217, 119, 6, 0.14); border:1px solid rgba(217, 119, 6, 0.35); border-radius:12px; padding:10px 6px;">
+          <div style="font-size:18px; font-weight:800; color:#f59e0b;">${summary.mid}</div>
+          <div style="font-size:11px; font-weight:700; color:#f59e0b;">J'hésite (${pctMid}%)</div>
+        </div>
+        <div style="background:rgba(220, 38, 38, 0.14); border:1px solid rgba(220, 38, 38, 0.35); border-radius:12px; padding:10px 6px;">
+          <div style="font-size:18px; font-weight:800; color:#ef4444;">${summary.fail}</div>
+          <div style="font-size:11px; font-weight:700; color:#ef4444;">Fausses (${pctFail}%)</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderSessionSummaries() {
+  let summary = null;
+  if (sessionCount > 0) {
+    summary = { total: sessionCount, ok: sessionOk, mid: sessionMid, fail: sessionFail };
+  } else {
+    try {
+      const saved = JSON.parse(localStorage.getItem(SESSION_SUMMARY_PREFIX + activeSubject) || "null");
+      if (saved && saved.total > 0) summary = saved;
+    } catch (e) {}
+  }
+
+  const htmlSummary = buildSessionSummaryHtml(summary);
+  const cdSum = document.getElementById("cooldown-summary");
+  const emSum = document.getElementById("empty-summary");
+  if (htmlSummary) {
+    cdSum.innerHTML = htmlSummary;
+    cdSum.style.display = "block";
+    emSum.innerHTML = htmlSummary;
+    emSum.style.display = "block";
+  } else {
+    cdSum.style.display = "none";
+    emSum.style.display = "none";
+  }
+}
+
+function renderStudy() {
+  updateStats();
+  const cooldownBox = document.getElementById("cooldown-container");
+  const emptyBox = document.getElementById("empty-due-container");
+  const studyBox = document.getElementById("study-card-container");
+
+  const sc = getSubjectCards(activeSubject);
+  if (sc.length === 0) {
+    cooldownBox.style.display = "none";
+    studyBox.style.display = "none";
+    emptyBox.style.display = "block";
+    document.getElementById("empty-due-title").textContent = `Aucune fiche en ${subjectDisplayName(activeSubject)} pour l'instant`;
+    document.getElementById("empty-due-desc").textContent = "Utilise l'onglet « Ajouter » ou « Import/Export » en bas pour créer tes fiches.";
+    document.getElementById("btn-practice-all").style.display = "none";
+    return;
+  }
+
+  document.getElementById("empty-due-title").textContent = "Toutes les cartes du jour sont à jour !";
+  document.getElementById("empty-due-desc").textContent = "Aucune fiche due dans cette sélection pour le moment.";
+  document.getElementById("btn-practice-all").style.display = "inline-flex";
+
+  const rem = getCooldownRemaining();
+  if (rem > 0 && !freePracticeMode) {
+    cooldownBox.style.display = "block";
+    emptyBox.style.display = "none";
+    studyBox.style.display = "none";
+    renderSessionSummaries();
+    startCooldownTimer();
+    return;
+  }
+
+  cooldownBox.style.display = "none";
+  currentCard = pickNextCard();
+
+  if (!currentCard) {
+    if (sessionCount > 0) {
+      const summary = { total: sessionCount, ok: sessionOk, mid: sessionMid, fail: sessionFail };
+      localStorage.setItem(SESSION_SUMMARY_PREFIX + activeSubject, JSON.stringify(summary));
+      if (!freePracticeMode) {
+        localStorage.setItem(COOLDOWN_PREFIX + activeSubject, String(nowMs() + COOLDOWN_MS));
+        sessionCount = 0;
+        sessionOk = 0;
+        sessionMid = 0;
+        sessionFail = 0;
+        renderStudy();
+        return;
+      }
+    }
+    emptyBox.style.display = "block";
+    studyBox.style.display = "none";
+    renderSessionSummaries();
+    return;
+  }
+
+  emptyBox.style.display = "none";
+  studyBox.style.display = "block";
+  isFlipped = false;
+  hasSeenVerso = false;
+
+  const boxLevel = Math.min(5, currentCard.box || 0);
+  document.getElementById("card-chapter").textContent = currentCard.chapter;
+  document.getElementById("card-box").textContent = boxLevel >= 5 ? "Acquise (5/5)" : `Boîte ${boxLevel}/5`;
+
+  const nextDays = LEITNER_INTERVALS_DAYS[Math.min(boxLevel, LEITNER_INTERVALS_DAYS.length - 1)];
+  document.getElementById("next-ok-label").textContent = boxLevel >= 4
+    ? `+1/5 → Acquise (5/5)`
+    : `+1/5 (J+${nextDays})`;
+
+  renderCardFace();
+}
+
+function renderCardFace() {
+  if (!currentCard) return;
+  const bodyEl = document.getElementById("card-content");
+  if (!isFlipped) {
+    document.getElementById("card-side-label").textContent = "RECTO • QUESTION";
+    bodyEl.className = "card-body";
+    bodyEl.textContent = currentCard.recto;
+    document.getElementById("card-hint").textContent = hasSeenVerso
+      ? "Appuie sur la carte pour revenir au verso"
+      : "Appuie sur la carte pour afficher le verso";
+  } else {
+    document.getElementById("card-side-label").textContent = "VERSO • RÉPONSE";
+    bodyEl.className = "card-body verso-text";
+    bodyEl.textContent = currentCard.verso;
+    document.getElementById("card-hint").textContent = "Appuie sur la carte pour revoir la question (recto)";
+  }
+
+  renderMathInEl(bodyEl);
+
+  if (!hasSeenVerso) {
+    document.getElementById("reveal-wrap").style.display = "block";
+    document.getElementById("rating-wrap").style.display = "none";
+  } else {
+    document.getElementById("reveal-wrap").style.display = "none";
+    document.getElementById("rating-wrap").style.display = "grid";
+  }
+}
+
+function toggleFlipCard() {
+  if (!currentCard) return;
+  isFlipped = !isFlipped;
+  if (isFlipped) {
+    hasSeenVerso = true;
+  }
+  renderCardFace();
+}
+
+function rateCurrentCard(mode) {
+  if (!currentCard) return;
+  const idx = allCards.findIndex(c => c.id === currentCard.id);
+  if (idx === -1) return;
+
+  const card = allCards[idx];
+  const curBox = card.box || 0;
+
+  if (mode === "fail") {
+    card.box = 0;
+    card.dueAt = addDaysMs(1);
+    sessionFail += 1;
+    showToast("Raté : 0/5 • À revoir dans J+1");
+  } else if (mode === "mid") {
+    card.box = curBox;
+    card.dueAt = addDaysMs(2);
+    sessionMid += 1;
+    showToast("J'hésite : à revoir dans J+2");
+  } else if (mode === "ok") {
+    const days = LEITNER_INTERVALS_DAYS[Math.min(curBox, LEITNER_INTERVALS_DAYS.length - 1)];
+    card.box = Math.min(5, curBox + 1);
+    sessionOk += 1;
+    if (card.box >= 5) {
+      card.dueAt = Infinity;
+      showToast("+1/5 → Acquise (5/5) ! Déplacée dans le bloc des cartes acquises.");
+    } else {
+      card.dueAt = addDaysMs(days);
+      showToast(`Réussi : +1/5 (${card.box}/5) • J+${days}`);
+    }
+  }
+
+  sessionCount += 1;
+  saveCards();
+  renderStudy();
+}
+
+let currentDeckFilter = "active";
+
+function renderDeck() {
+  const q = document.getElementById("deck-search").value.trim().toLowerCase();
+  const listEl = document.getElementById("deck-list");
+  const banner = document.getElementById("acquired-banner");
+  banner.style.display = currentDeckFilter === "acquired" ? "block" : "none";
+
+  const filtered = getSubjectCards(activeSubject).filter(c => {
+    const isAcquired = (c.box || 0) >= 5;
+    if (currentDeckFilter === "active" && isAcquired) return false;
+    if (currentDeckFilter === "acquired" && !isAcquired) return false;
+    return !q ||
+      c.chapter.toLowerCase().includes(q) ||
+      c.recto.toLowerCase().includes(q) ||
+      c.verso.toLowerCase().includes(q);
+  });
+
+  if (filtered.length === 0) {
+    const emptyMsg = currentDeckFilter === "acquired"
+      ? "Aucune carte acquise (5/5) dans ce bloc pour le moment."
+      : "Aucune fiche trouvée dans cette matière.";
+    listEl.innerHTML = `<div class="cooldown-box"><p style="color:var(--text-muted); margin:0;">${emptyMsg}</p></div>`;
+    return;
+  }
+
+  listEl.innerHTML = "";
+  filtered.forEach(c => {
+    const item = document.createElement("div");
+    item.className = "deck-item";
+    const isAcquired = (c.box || 0) >= 5;
+    const statusTxt = isAcquired ? "Acquise 5/5" : `Boîte ${c.box || 0}/5`;
+    const reintegrateBtn = isAcquired
+      ? `<button class="icon-del" style="background:var(--accent-soft); color:var(--accent); margin-bottom:6px;" data-reset-id="${c.id}">Réviser</button>`
+      : "";
+    item.innerHTML = `
+      <div style="flex:1; min-width:0;">
+        <div style="margin-bottom:5px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="pill">${escapeHtml(c.chapter)}</span>
+          <span class="box-badge">${statusTxt}</span>
+        </div>
+        <div class="deck-item-title">${escapeHtml(c.recto)}</div>
+        <div class="deck-item-sub">${escapeHtml(c.verso)}</div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end;">
+        ${reintegrateBtn}
+        <button class="icon-del" data-del-id="${c.id}">Suppr.</button>
+      </div>
+    `;
+    renderMathInEl(item);
+    listEl.appendChild(item);
+  });
+
+  listEl.querySelectorAll("[data-reset-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = allCards.find(c => c.id === btn.dataset.resetId);
+      if (card) {
+        card.box = 0;
+        card.dueAt = 0;
+        saveCards();
+        updateStats();
+        renderDeck();
+        showToast("Fiche réintégrée dans le paquet à réviser (0/5)");
+      }
+    });
+  });
+
+  listEl.querySelectorAll("[data-del-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.delId;
+      allCards = allCards.filter(c => c.id !== id);
+      saveCards();
+      refreshChapterSelectors();
+      updateStats();
+      renderDeck();
+      showToast("Fiche supprimée");
+    });
+  });
+}
+
+/* =========================================================
+   ANGLAIS -> COLLES -> VOCABULAIRE COLLE N°5
+   ========================================================= */
+function defaultAnglaisState() {
+  const items = {};
+  for (const c of ANGLAIS_COLLE5_CARDS) {
+    items[c.id] = {
+      status: "NEW",
+      streak: 0,
+      skipQuizzes: 0,
+      priorityNext: false
+    };
+  }
+  return {
+    quizNumber: 1,
+    subFilter: "ALL",
+    items
+  };
+}
+
+function loadAnglaisState() {
+  try {
+    const raw = localStorage.getItem(ANGLAIS_COLLE5_STORAGE);
+    if (!raw) return defaultAnglaisState();
+    const parsed = JSON.parse(raw);
+    const base = defaultAnglaisState();
+    base.quizNumber = parsed.quizNumber || 1;
+    base.subFilter = parsed.subFilter || "ALL";
+    for (const c of ANGLAIS_COLLE5_CARDS) {
+      if (parsed.items && parsed.items[c.id]) {
+        base.items[c.id] = { ...base.items[c.id], ...parsed.items[c.id] };
+      }
+    }
+    return base;
+  } catch (e) {
+    return defaultAnglaisState();
+  }
+}
+
+function saveAnglaisState() {
+  localStorage.setItem(ANGLAIS_COLLE5_STORAGE, JSON.stringify(angState));
+}
+
+function shuffleArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function getAnglaisPool() {
+  if (angState.subFilter === "ALL") return ANGLAIS_COLLE5_CARDS;
+  return ANGLAIS_COLLE5_CARDS.filter(c => c.sub === angState.subFilter);
+}
+
+function buildAnglaisQuiz() {
+  const pool = getAnglaisPool();
+  const failedPriority = [];
+  const dueCards = [];
+  const spacedCards = [];
+
+  for (const c of pool) {
+    const st = angState.items[c.id];
+    if (st.priorityNext || st.status === "FAIL") {
+      failedPriority.push(c);
+    } else if (st.skipQuizzes > 0) {
+      spacedCards.push({ c, skip: st.skipQuizzes });
+    } else {
+      dueCards.push(c);
+    }
+  }
+
+  shuffleArr(failedPriority);
+  shuffleArr(dueCards);
+  spacedCards.sort((a, b) => a.skip - b.skip);
+  const fallbackSpaced = spacedCards.map(x => x.c);
+
+  const batchTarget = Math.min(ANGLAIS_QUIZ_BATCH_SIZE, pool.length);
+  let selected = [...failedPriority];
+  if (selected.length < batchTarget) {
+    selected = selected.concat(dueCards.slice(0, batchTarget - selected.length));
+  }
+  if (selected.length < batchTarget) {
+    selected = selected.concat(fallbackSpaced.slice(0, batchTarget - selected.length));
+  }
+
+  const prioritySet = new Set(failedPriority.map(c => c.id));
+  const head = selected.filter(c => prioritySet.has(c.id));
+  const tail = selected.filter(c => !prioritySet.has(c.id));
+  shuffleArr(tail);
+  return [...head, ...tail];
+}
+
+function startAnglaisQuiz() {
+  angSessionOk = 0;
+  angSessionFail = 0;
+  angIdx = 0;
+  angRevealed = false;
+  angQueue = buildAnglaisQuiz();
+  renderAnglaisCard();
+}
+
+function renderAnglaisCard() {
+  const stage = document.getElementById("ang-card-stage");
+  const doneBox = document.getElementById("ang-quiz-done");
+  const total = angQueue.length;
+
+  document.getElementById("ang-progress-text").textContent =
+    `Quiz n°${angState.quizNumber} • Carte ${Math.min(angIdx + 1, total)} / ${total}`;
+
+  const pct = total > 0 ? Math.round((angIdx / total) * 100) : 0;
+  document.getElementById("ang-progress-bar").style.width = `${pct}%`;
+
+  const prioCount = angQueue.filter(c => {
+    const st = angState.items[c.id];
+    return st.priorityNext || st.status === "FAIL";
+  }).length;
+
+  document.getElementById("ang-priority-text").textContent =
+    prioCount > 0 ? `${prioCount} raté(s) en tête (quiz allégé)` : "Session équilibrée";
+
+  if (angIdx >= total) {
+    stage.style.display = "none";
+    doneBox.style.display = "block";
+    document.getElementById("ang-done-title").textContent = `Quiz n°${angState.quizNumber} terminé !`;
+    document.getElementById("ang-done-desc").textContent =
+      `Bilan : ${angSessionOk} réussi(s) (espacés) • ${angSessionFail} raté(s) (en tête du quiz n°${angState.quizNumber + 1}).`;
+    return;
+  }
+
+  stage.style.display = "block";
+  doneBox.style.display = "none";
+
+  const card = angQueue[angIdx];
+  const st = angState.items[card.id];
+
+  document.getElementById("ang-card-sub").textContent = card.sub;
+  if (st.priorityNext || st.status === "FAIL") {
+    document.getElementById("ang-card-state").textContent = "Raté • Priorité quiz suivant";
+  } else if (st.status === "OK") {
+    document.getElementById("ang-card-state").textContent = `Réussi ×${st.streak} • Saute ${st.skipQuizzes} quiz`;
+  } else {
+    document.getElementById("ang-card-state").textContent = "Nouveau";
+  }
+
+  document.getElementById("ang-front-word").textContent = card.en;
+  document.getElementById("ang-phonetic").textContent = card.phonetic || "";
+  document.getElementById("ang-back-word").textContent = card.fr;
+
+  const backBox = document.getElementById("ang-back-box");
+  const revealWrap = document.getElementById("ang-reveal-wrap");
+  const ratingWrap = document.getElementById("ang-rating-wrap");
+  const hint = document.getElementById("ang-card-hint");
+
+  if (angRevealed) {
+    backBox.style.display = "block";
+    revealWrap.style.display = "none";
+    ratingWrap.style.display = "grid";
+    hint.textContent = "Choisis Raté ou Réussi ci-dessous";
+  } else {
+    backBox.style.display = "none";
+    revealWrap.style.display = "block";
+    ratingWrap.style.display = "none";
+    hint.textContent = "Appuie sur la carte pour voir la traduction";
+  }
+}
+
+function toggleAnglaisReveal() {
+  if (angIdx >= angQueue.length) return;
+  angRevealed = !angRevealed;
+  renderAnglaisCard();
+}
+
+function rateAnglaisCard(isSuccess) {
+  if (!angRevealed || angIdx >= angQueue.length) return;
+  const card = angQueue[angIdx];
+  const st = angState.items[card.id];
+
+  if (isSuccess) {
+    st.status = "OK";
+    st.streak += 1;
+    st.priorityNext = false;
+    st.skipQuizzes = st.streak === 1 ? 2 : (st.streak === 2 ? 4 : 7);
+    angSessionOk += 1;
+    showToast(`Réussi : revu dans ${st.skipQuizzes} quiz`);
+  } else {
+    st.status = "FAIL";
+    st.streak = 0;
+    st.skipQuizzes = 0;
+    st.priorityNext = true;
+    angSessionFail += 1;
+    showToast("Raté : placé en priorité au quiz suivant");
+  }
+
+  saveAnglaisState();
+  angIdx += 1;
+  angRevealed = false;
+  renderAnglaisCard();
+}
+
+function finishAnglaisQuizAndNext() {
+  const testedIds = new Set(angQueue.map(c => c.id));
+  for (const c of ANGLAIS_COLLE5_CARDS) {
+    const st = angState.items[c.id];
+    if (!testedIds.has(c.id) && st.skipQuizzes > 0) {
+      st.skipQuizzes = Math.max(0, st.skipQuizzes - 1);
+    }
+  }
+  angState.quizNumber += 1;
+  saveAnglaisState();
+  startAnglaisQuiz();
+}
+
+/* =========================================================
+   ESPAGNOL (Sans système 5x)
+   ========================================================= */
+function renderEspagnol() {
+  const area = document.getElementById("esp-study-area");
+  const espCards = getSubjectCards("espagnol");
+  if (espCards.length === 0) {
+    area.innerHTML = `<div class="cooldown-box" style="padding:16px;"><p style="color:var(--text-muted); margin:0; font-size:13.5px;">Aucune carte d'Espagnol enregistrée pour le moment.</p></div>`;
+    return;
+  }
+  const card = espCards[espIdx % espCards.length];
+  area.innerHTML = `
+    <div class="flashcard" id="esp-card-box" style="min-height:200px;">
+      <div class="card-meta">
+        <span class="pill">Espagnol</span>
+        <span class="box-badge">${(espIdx % espCards.length) + 1} / ${espCards.length}</span>
+      </div>
+      <div style="text-align:center;">
+        <div class="card-side-label">${espFlipped ? "FRANÇAIS" : "ESPAGNOL"}</div>
+        <div class="card-body">${escapeHtml(espFlipped ? card.verso : card.recto)}</div>
+      </div>
+      <div class="card-hint">Appuie pour retourner</div>
+    </div>
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <button class="btn btn-primary" id="btn-esp-next" type="button">Carte suivante →</button>
+    </div>
+  `;
+  document.getElementById("esp-card-box").addEventListener("click", () => {
+    espFlipped = !espFlipped;
+    renderEspagnol();
+  });
+  document.getElementById("btn-esp-next").addEventListener("click", () => {
+    espIdx = (espIdx + 1) % espCards.length;
+    espFlipped = false;
+    renderEspagnol();
+  });
+}
+
+/* =========================================================
+   MÉLANGE GÉNÉRAL (20 ou 30 questions, tout sauf Espagnol)
+   ========================================================= */
+function startMixQuiz(count) {
+  mixTargetCount = count;
+  mixIdx = 0;
+  mixFlipped = false;
+  mixOk = 0;
+
+  // Tout sauf Espagnol : Maths, Physique, SI, Français + Vocabulaire Anglais
+  const nonEspSrs = allCards
+    .filter(c => (c.subject || "maths") !== "espagnol")
+    .map(c => ({
+      subject: subjectDisplayName(c.subject || "maths"),
+      sub: c.chapter,
+      recto: c.recto,
+      verso: c.verso
+    }));
+
+  const engItems = ANGLAIS_COLLE5_CARDS.map(c => ({
+    subject: "Anglais",
+    sub: c.sub,
+    recto: c.en + (c.phonetic ? " " + c.phonetic : ""),
+    verso: c.fr
+  }));
+
+  const pool = [...nonEspSrs, ...engItems];
+  shuffleArr(pool);
+  mixQueue = pool.slice(0, Math.min(count, pool.length));
+
+  document.getElementById("mix-title").textContent = `Série mélangée (${mixQueue.length} questions • hors Espagnol)`;
+  renderMixCard();
+  navigateTo("mix-quiz");
+}
+
+function renderMixCard() {
+  const stage = document.getElementById("mix-stage");
+  const doneBox = document.getElementById("mix-done-box");
+  const total = mixQueue.length;
+
+  document.getElementById("mix-counter").textContent = `${Math.min(mixIdx + 1, total)} / ${total}`;
+
+  if (mixIdx >= total) {
+    stage.style.display = "none";
+    doneBox.style.display = "block";
+    document.getElementById("mix-done-summary").textContent =
+      `Tu as validé ${mixOk} / ${total} questions (Maths, Physique, SI, Anglais — hors Espagnol).`;
+    return;
+  }
+
+  stage.style.display = "block";
+  doneBox.style.display = "none";
+
+  const item = mixQueue[mixIdx];
+  document.getElementById("mix-card-subject").textContent = item.subject;
+  document.getElementById("mix-card-sub").textContent = item.sub;
+
+  const contentEl = document.getElementById("mix-card-content");
+  if (!mixFlipped) {
+    document.getElementById("mix-side-label").textContent = "QUESTION";
+    contentEl.className = "card-body";
+    contentEl.textContent = item.recto;
+    document.getElementById("mix-card-hint").textContent = "Appuie sur la carte pour afficher la réponse";
+    document.getElementById("mix-reveal-wrap").style.display = "block";
+    document.getElementById("mix-next-wrap").style.display = "none";
+  } else {
+    document.getElementById("mix-side-label").textContent = "RÉPONSE";
+    contentEl.className = "card-body verso-text";
+    contentEl.textContent = item.verso;
+    document.getElementById("mix-card-hint").textContent = "Passe à la question suivante";
+    document.getElementById("mix-reveal-wrap").style.display = "none";
+    document.getElementById("mix-next-wrap").style.display = "grid";
+  }
+
+  renderMathInEl(contentEl);
+}
+
+function advanceMixCard(wasOk) {
+  if (wasOk) mixOk += 1;
+  mixIdx += 1;
+  mixFlipped = false;
+  renderMixCard();
+}
+
+/* =========================================================
+   EXERCICES (SI, Physique, Chimie, Maths)
+   ========================================================= */
+const EXO_STORAGE_KEY = "flash420_exercises_v1";
+let allExercises = []; // { id, subject: 'si'|'physique'|'chimie'|'maths', chapter, prompt, solution }
+let activeExerciseSubject = "si";
+
+function loadExercises() {
+  try {
+    const raw = localStorage.getItem(EXO_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        allExercises = parsed;
+        return;
+      }
+    }
+  } catch (e) {}
+  allExercises = [];
+}
+
+function saveExercises() {
+  localStorage.setItem(EXO_STORAGE_KEY, JSON.stringify(allExercises));
+}
+
+function updateExerciseCounts() {
+  ["si", "physique", "chimie", "maths"].forEach(subj => {
+    const cnt = allExercises.filter(e => e.subject === subj).length;
+    const el = document.getElementById("badge-exo-" + subj);
+    if (el) el.textContent = `${cnt} exo${cnt > 1 ? "s" : ""}`;
+  });
+}
+
+function refreshExerciseChaptersUI() {
+  const chapters = getOrderedChaptersForSubject(activeExerciseSubject);
+  const filterSel = document.getElementById("exo-chapter-filter");
+  const prev = filterSel.value;
+  filterSel.innerHTML = `<option value="ALL">Tous les chapitres (${allExercises.filter(e => e.subject === activeExerciseSubject).length})</option>`;
+  const dl = document.getElementById("exo-chapter-suggestions");
+  dl.innerHTML = "";
+  const pillsWrap = document.getElementById("exo-chapters-pills");
+  pillsWrap.innerHTML = "";
+
+  chapters.forEach(ch => {
+    const cnt = allExercises.filter(e => e.subject === activeExerciseSubject && e.chapter === ch).length;
+    const opt = document.createElement("option");
+    opt.value = ch;
+    opt.textContent = `${ch} (${cnt})`;
+    filterSel.appendChild(opt);
+
+    const dopt = document.createElement("option");
+    dopt.value = ch;
+    dl.appendChild(dopt);
+
+    const tile = document.createElement("button");
+    tile.type = "button";
+    tile.className = "menu-tile";
+    tile.style.padding = "11px 14px";
+    tile.innerHTML = `
+      <div>
+        <div class="menu-tile-title" style="font-size:14px;">${escapeHtml(ch)}</div>
+      </div>
+      <span class="menu-tile-badge">${cnt} exo${cnt > 1 ? "s" : ""}</span>
+    `;
+    tile.addEventListener("click", () => {
+      filterSel.value = ch;
+      document.getElementById("exo-chapter").value = ch;
+      renderExercises();
+    });
+    pillsWrap.appendChild(tile);
+  });
+
+  if ([...filterSel.options].some(o => o.value === prev)) {
+    filterSel.value = prev;
+  }
+}
+
+function openExerciseSubject(subj) {
+  activeExerciseSubject = subj;
+  const label = subjectDisplayName(subj);
+  document.getElementById("exo-subject-kicker").textContent = `Exercices • ${label}`;
+  document.getElementById("exo-subject-title").textContent = `Exercices — ${label}`;
+  document.getElementById("exo-chapter-filter").value = "ALL";
+  refreshExerciseChaptersUI();
+  renderExercises();
+  navigateTo("exercise-subject");
+}
+
+function renderExercises() {
+  const listEl = document.getElementById("exo-list");
+  const selectedCh = document.getElementById("exo-chapter-filter").value;
+  const items = allExercises.filter(e =>
+    e.subject === activeExerciseSubject && (selectedCh === "ALL" || e.chapter === selectedCh)
+  );
+  if (items.length === 0) {
+    listEl.innerHTML = `<div class="cooldown-box" style="padding:16px;"><p style="color:var(--text-muted); margin:0; font-size:13.5px;">Aucun exercice enregistré en ${escapeHtml(subjectDisplayName(activeExerciseSubject))} pour l'instant.</p></div>`;
+    return;
+  }
+
+  listEl.innerHTML = "";
+  items.forEach((ex, idx) => {
+    const card = document.createElement("div");
+    card.className = "box-card";
+    card.style.marginBottom = "10px";
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+        <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+          <span class="pill">${escapeHtml(ex.chapter || "Général")}</span>
+          <span class="box-badge">Exo #${idx + 1}</span>
+        </div>
+        <button class="icon-del" data-del-exo="${ex.id}">Suppr.</button>
+      </div>
+      <div class="deck-item-title" style="margin-bottom:8px;">${escapeHtml(ex.prompt)}</div>
+      ${ex.solution ? `<div class="card-body verso-text" style="font-size:13.5px; padding:10px 12px;">${escapeHtml(ex.solution)}</div>` : ""}
+    `;
+    renderMathInEl(card);
+    listEl.appendChild(card);
+  });
+
+  listEl.querySelectorAll("[data-del-exo]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      allExercises = allExercises.filter(e => e.id !== btn.dataset.delExo);
+      saveExercises();
+      updateExerciseCounts();
+      refreshExerciseChaptersUI();
+      renderExercises();
+      showToast("Exercice supprimé");
+    });
+  });
+}
+
+/* =========================================================
+   ÉVÉNEMENTS
+   ========================================================= */
+document.getElementById("brand-home-link").addEventListener("click", () => navigateTo("home", false));
+document.getElementById("btn-go-back").addEventListener("click", goBack);
+document.getElementById("btn-home-commencer").addEventListener("click", () => navigateTo("main-menu"));
+document.getElementById("btn-open-flashcards").addEventListener("click", () => {
+  updateSubjectCounts();
+  navigateTo("subjects");
+});
+
+document.getElementById("btn-open-exercises").addEventListener("click", () => {
+  updateExerciseCounts();
+  navigateTo("exercises");
+});
+
+document.querySelectorAll("[data-select-exercise]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    openExerciseSubject(btn.dataset.selectExercise);
+  });
+});
+
+document.getElementById("exo-chapter-filter").addEventListener("change", () => {
+  const val = document.getElementById("exo-chapter-filter").value;
+  if (val !== "ALL") document.getElementById("exo-chapter").value = val;
+  renderExercises();
+});
+
+document.getElementById("btn-add-exo").addEventListener("click", () => {
+  const chapter = document.getElementById("exo-chapter").value.trim() || "Général";
+  const prompt = document.getElementById("exo-prompt").value.trim();
+  const solution = document.getElementById("exo-solution").value.trim();
+  if (!prompt) {
+    showToast("Renseigne l'énoncé de l'exercice");
+    return;
+  }
+  allExercises.unshift({
+    id: uid(),
+    subject: activeExerciseSubject,
+    chapter,
+    prompt,
+    solution
+  });
+  saveExercises();
+  updateExerciseCounts();
+  refreshExerciseChaptersUI();
+  document.getElementById("exo-prompt").value = "";
+  document.getElementById("exo-solution").value = "";
+  renderExercises();
+  showToast(`Exercice ajouté en ${subjectDisplayName(activeExerciseSubject)} !`);
+});
+
+document.querySelectorAll("[data-select-subject]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const subj = btn.dataset.selectSubject;
+    if (subj === "maths" || subj === "physique" || subj === "chimie") {
+      openSubjectChaptersMenu(subj);
+    } else if (subj === "anglais") {
+      navigateTo("anglais-menu");
+    } else if (subj === "espagnol") {
+      renderEspagnol();
+      navigateTo("espagnol-workspace");
+    } else {
+      openSrsSubject(subj, "ALL", false);
+    }
+  });
+});
+
+document.getElementById("btn-maths-shuffle-all").addEventListener("click", (e) => {
+  const subj = e.currentTarget.dataset.shuffleSubj || "maths";
+  openSrsSubject(subj, "ALL", true);
+});
+
+document.getElementById("btn-open-colle-5").addEventListener("click", () => {
+  startAnglaisQuiz();
+  navigateTo("anglais-quiz");
+});
+
+document.getElementById("btn-mix-20").addEventListener("click", () => startMixQuiz(20));
+document.getElementById("btn-mix-30").addEventListener("click", () => startMixQuiz(30));
+document.getElementById("btn-mix-replay-20").addEventListener("click", () => startMixQuiz(20));
+document.getElementById("btn-mix-replay-30").addEventListener("click", () => startMixQuiz(30));
+
+document.getElementById("mix-flashcard").addEventListener("click", () => {
+  mixFlipped = !mixFlipped;
+  renderMixCard();
+});
+document.getElementById("btn-mix-reveal").addEventListener("click", () => {
+  mixFlipped = true;
+  renderMixCard();
+});
+document.getElementById("btn-mix-fail").addEventListener("click", () => advanceMixCard(false));
+document.getElementById("btn-mix-ok").addEventListener("click", () => advanceMixCard(true));
+
+document.querySelectorAll(".theme-btn").forEach(btn => {
+  btn.addEventListener("click", () => applyTheme(btn.dataset.setTheme));
+});
+
+// Barre du bas dans l'espace SRS (Maths / Physique / SI)
+document.querySelectorAll("#srs-bottom-nav .nav-item").forEach(btn => {
+  btn.addEventListener("click", () => switchSrsTab(btn.dataset.srstab));
+});
+
+document.querySelectorAll(".deck-subtab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".deck-subtab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentDeckFilter = btn.dataset.deckFilter;
+    renderDeck();
+  });
+});
+
+document.getElementById("flashcard").addEventListener("click", toggleFlipCard);
+document.getElementById("btn-reveal").addEventListener("click", toggleFlipCard);
+document.querySelectorAll("[data-rate]").forEach(btn => {
+  btn.addEventListener("click", () => rateCurrentCard(btn.dataset.rate));
+});
+
+document.getElementById("chapter-filter").addEventListener("change", () => {
+  freePracticeMode = false;
+  shuffleAllSubjectMode = false;
+  renderStudy();
+});
+
+document.getElementById("btn-shuffle-now").addEventListener("click", () => {
+  freePracticeMode = true;
+  shuffleAllSubjectMode = true;
+  renderStudy();
+  showToast(`Cartes de ${subjectDisplayName(activeSubject)} mélangées !`);
+});
+
+document.getElementById("btn-bypass-cooldown").addEventListener("click", () => {
+  freePracticeMode = true;
+  sessionCount = 0;
+  sessionOk = 0;
+  sessionMid = 0;
+  sessionFail = 0;
+  renderStudy();
+});
+
+document.getElementById("btn-practice-all").addEventListener("click", () => {
+  freePracticeMode = true;
+  sessionCount = 0;
+  sessionOk = 0;
+  sessionMid = 0;
+  sessionFail = 0;
+  renderStudy();
+});
+
+document.getElementById("deck-search").addEventListener("input", renderDeck);
+
+document.getElementById("btn-add-card").addEventListener("click", () => {
+  const chapter = stripChapPrefix(document.getElementById("add-chapter").value.trim()) || "Général";
+  const recto = stripChapPrefix(document.getElementById("add-recto").value.trim());
+  const verso = stripChapPrefix(document.getElementById("add-verso").value.trim());
+  if (!recto || !verso) {
+    showToast("Renseigne le recto et le verso");
+    return;
+  }
+  allCards.unshift({
+    id: uid(),
+    subject: activeSubject,
+    chapter,
+    recto,
+    verso,
+    box: 0,
+    dueAt: 0
+  });
+  saveCards();
+  refreshChapterSelectors();
+  updateStats();
+  updateSubjectCounts();
+  document.getElementById("add-recto").value = "";
+  document.getElementById("add-verso").value = "";
+  showToast(`Fiche ajoutée en ${subjectDisplayName(activeSubject)} !`);
+});
+
+document.getElementById("btn-import-json").addEventListener("click", () => {
+  const raw = document.getElementById("import-json-text").value.trim();
+  if (!raw) {
+    showToast("Colle un bloc JSON valide");
+    return;
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) throw new Error("Format invalide");
+    let added = 0;
+    parsed.forEach(item => {
+      if (item && item.recto && item.verso) {
+        const cleanRecto = stripChapPrefix(String(item.recto).trim());
+        const exists = allCards.some(c => c.subject === activeSubject && c.recto.trim() === cleanRecto);
+        if (!exists) {
+          allCards.push({
+            id: uid(),
+            subject: activeSubject,
+            chapter: stripChapPrefix(String(item.chapter || "Général").trim()),
+            recto: cleanRecto,
+            verso: stripChapPrefix(String(item.verso).trim()),
+            box: Number(item.box || 0),
+            dueAt: Number(item.dueAt || 0)
+          });
+          added++;
+        }
+      }
+    });
+    saveCards();
+    refreshChapterSelectors();
+    updateStats();
+    updateSubjectCounts();
+    document.getElementById("import-json-text").value = "";
+    showToast(`${added} nouvelle(s) fiche(s) importée(s) en ${subjectDisplayName(activeSubject)} !`);
+  } catch (err) {
+    showToast("Erreur JSON : vérifie la syntaxe");
+  }
+});
+
+document.getElementById("btn-export-json").addEventListener("click", () => {
+  const sc = getSubjectCards(activeSubject);
+  const blob = new Blob([JSON.stringify(sc, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `flash420-${activeSubject}-backup.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Sauvegarde JSON téléchargée");
+});
+
+document.getElementById("btn-reset-default").addEventListener("click", () => {
+  const subj = activeSubject || "maths";
+  if (subj === "physique" || subj === "chimie") {
+    const others = allCards.filter(c => (c.subject || "maths") !== subj);
+    const defaultsForSubj = DEFAULT_EXTRA_CARDS.filter(c => c.subject === subj).map(c => ({
+      ...c,
+      recto: stripChapPrefix(c.recto),
+      verso: stripChapPrefix(c.verso),
+      box: 0,
+      dueAt: 0
+    }));
+    allCards = [...others, ...defaultsForSubj];
+    localStorage.removeItem(COOLDOWN_PREFIX + subj);
+    saveCards();
+    refreshChapterSelectors();
+    updateStats();
+    updateSubjectCounts();
+    renderStudy();
+    showToast(`Fiches par défaut de ${subjectDisplayName(subj)} (${defaultsForSubj.length}) rechargées !`);
+    return;
+  }
+  const nonMaths = allCards.filter(c => (c.subject || "maths") !== "maths");
+  const resetMaths = DEFAULT_MATHS_CARDS.map((c, idx) => ({
+    id: "maths_" + idx,
+    subject: "maths",
+    chapter: c.chapter,
+    recto: stripChapPrefix(c.recto),
+    verso: stripChapPrefix(c.verso),
+    box: 0,
+    dueAt: 0
+  }));
+  const extraMaths = DEFAULT_EXTRA_CARDS.filter(c => c.subject === "maths").map(c => ({
+    ...c,
+    recto: stripChapPrefix(c.recto),
+    verso: stripChapPrefix(c.verso),
+    box: 0,
+    dueAt: 0
+  }));
+  allCards = [...resetMaths, ...extraMaths, ...nonMaths];
+  localStorage.removeItem(COOLDOWN_PREFIX + "maths");
+  saveCards();
+  refreshChapterSelectors();
+  updateStats();
+  updateSubjectCounts();
+  renderStudy();
+  showToast(`Paquet complet de Maths (${resetMaths.length + extraMaths.length} fiches) rechargé !`);
+});
+
+// Ajout rapide Espagnol
+document.getElementById("btn-add-espagnol").addEventListener("click", () => {
+  const r = document.getElementById("esp-recto").value.trim();
+  const v = document.getElementById("esp-verso").value.trim();
+  if (!r || !v) {
+    showToast("Renseigne le mot et sa traduction");
+    return;
+  }
+  allCards.push({
+    id: uid(),
+    subject: "espagnol",
+    chapter: "Vocabulaire",
+    recto: r,
+    verso: v,
+    box: 0,
+    dueAt: 0
+  });
+  saveCards();
+  updateSubjectCounts();
+  document.getElementById("esp-recto").value = "";
+  document.getElementById("esp-verso").value = "";
+  renderEspagnol();
+  showToast("Carte ajoutée en Espagnol");
+});
+
+// Événements Anglais -> Colles -> Vocabulaire Colle n°5
+document.getElementById("ang-sub-filter").value = angState.subFilter;
+document.getElementById("ang-sub-filter").addEventListener("change", (e) => {
+  angState.subFilter = e.target.value;
+  saveAnglaisState();
+  startAnglaisQuiz();
+});
+document.getElementById("ang-flashcard").addEventListener("click", toggleAnglaisReveal);
+document.getElementById("btn-ang-reveal").addEventListener("click", toggleAnglaisReveal);
+document.getElementById("btn-ang-fail").addEventListener("click", () => rateAnglaisCard(false));
+document.getElementById("btn-ang-ok").addEventListener("click", () => rateAnglaisCard(true));
+document.getElementById("btn-ang-new-quiz").addEventListener("click", startAnglaisQuiz);
+document.getElementById("btn-ang-next-quiz").addEventListener("click", finishAnglaisQuizAndNext);
+document.getElementById("btn-ang-reset").addEventListener("click", () => {
+  if (!confirm("Réinitialiser la progression de Vocabulaire Colle n°5 ?")) return;
+  angState = defaultAnglaisState();
+  document.getElementById("ang-sub-filter").value = "ALL";
+  saveAnglaisState();
+  startAnglaisQuiz();
+  showToast("Progression Colle n°5 réinitialisée");
+});
+
+loadState();
+loadExercises();
+updateSubjectCounts();
+updateExerciseCounts();
+angQueue = buildAnglaisQuiz();
+
+window.addEventListener("load", () => {
+  renderMathInEl(document.body);
+});
+</script>
+</body>
+</html>
