@@ -3674,9 +3674,9 @@ function updateGlobalBottomNavActive(viewId) {
   document.querySelectorAll("#global-bottom-nav .nav-item").forEach(btn => {
     const key = btn.dataset.gnav;
     let active = false;
-    if (key === "accueil" && viewId === "home") active = true;
-    if (key === "carte" && viewId === "carte") active = true;
-    if (key === "export" && viewId === "export") active = true;
+    if (key === "Accueil" && viewId === "home") active = true;
+    if (key === "Flashcards" && viewId === "carte") active = true;
+    if (key === "Import/Export" && viewId === "export") active = true;
     btn.classList.toggle("active", active);
   });
 }
@@ -3710,10 +3710,10 @@ async function unlockGlobalExportWith6767() {
     if (err) err.style.display = "none";
     refreshGlobalExportUI();
     refreshImportGateUI();
-    showToast("Export déverrouillé (6767)");
+    showToast("Export déverrouillé");
   } else {
     if (err) err.style.display = "block";
-    showToast("Mot de passe incorrect (6767)");
+    showToast("Mot de passe incorrect");
   }
 }
 
