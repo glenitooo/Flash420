@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="carmine">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Flash420 — MPSI • Répétition espacée</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --surface-2: #eef1f7;
+    --text: #161922;
+    --text-muted: #5e6678;
+    --border: #dde2ec;
+    --accent: #9b111e;
+    --accent-hover: #7d0d18;
+    --accent-soft: rgba(155, 17, 30, 0.10);
+    --accent-text: #ffffff;
+    --danger: #dc2626;
+    --warn: #d97706;
+    --success: #16a34a;
+    --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    --radius: 18px;
+  }
+
+  [data-theme="light"] {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface-2: #edf1f8;
+    --text: #141824;
+    --text-muted: #5a6375;
+    --border: #dce2ee;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-soft: rgba(37, 99, 235, 0.10);
+    --accent-text: #ffffff;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0f1117;
+    --surface: #181c26;
+    --surface-2: #222836;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #2c3446;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --accent-soft: rgba(96, 165, 250, 0.14);
+    --accent-text: #0b1120;
+    --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  [data-theme="carmine"] {
+    --bg: #14090c;
+    --surface: #1f0e13;
+    --surface-2: #2c141b;
+    --text: #fdf2f4;
+    --text-muted: #d6a6b0;
+    --border: #461d28;
+    --accent: #b81d33;
+    --accent-hover: #991629;
+    --accent-soft: rgba(184, 29, 51, 0.22);
+    --accent-text: #ffffff;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="rose"] {
+    --bg: #160a10;
+    --surface: #231019;
+    --surface-2: #321624;
+    --text: #fff1f6;
+    --text-muted: #e3a7be;
+    --border: #522139;
+    --accent: #ec4899;
+    --accent-hover: #db2777;
+    --accent-soft: rgba(236, 72, 153, 0.20);
+    --accent-text: #ffffff;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="bleu"] {
+    --bg: #08111e;
+    --surface: #0f1d32;
+    --surface-2: #162a47;
+    --text: #eff6ff;
+    --text-muted: #9ec0eb;
+    --border: #233f68;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --accent-soft: rgba(56, 189, 248, 0.18);
+    --accent-text: #071322;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  [data-theme="vert"] {
+    --bg: #081510;
+    --surface: #0f221a;
+    --surface-2: #163125;
+    --text: #ecfdf5;
+    --text-muted: #9ad7bc;
+    --border: #214a38;
+    --accent: #22c55e;
+    --accent-hover: #16a34a;
+    --accent-soft: rgba(34, 197, 94, 0.18);
+    --accent-text: #071a10;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .logo-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: var(--accent);
+    color: var(--accent-text);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.5px;
+    box-shadow: 0 4px 12px var(--accent-soft);
+  }
+
+  .brand-title {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .theme-switcher {
+    display: flex;
+    gap: 4px;
+    background: var(--surface-2);
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    max-width: 62vw;
+    scrollbar-width: none;
+  }
+
+  .theme-switcher::-webkit-scrollbar {
+    display: none;
+  }
+
+  .theme-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .theme-btn.active {
+    background: var(--accent);
+    color: var(--accent-text);
+  }
+
+  main {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px 16px 96px;
+    flex: 1;
+  }
+
+  .hierarchy-nav {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .breadcrumb-item {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .matiere-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .matiere-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    text-align: center;
+  }
+
+  .matiere-btn.active {
+    background: var(--accent);
+    color: var(--accent-text);
+    border-color: var(--accent);
+  }
+
+  .sub-tree {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sub-tree-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  .colle-pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .colle-pill-btn {
+    border: 1px solid var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 11px;
+    padding: 8px 13px;
+    font-size: 12.5px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+
+  .colle-pill-btn.active {
+    background: var(--accent);
+    color: var(--accent-text);
+  }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+
+  .stat-val {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  select, input[type="text"], input[type="password"], textarea {
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 13px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  select:focus, input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .panel {
+    display: none;
+  }
+
+  .panel.active {
+    display: block;
+  }
+
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+  }
+
+  .hero-kicker {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 5px 11px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 10px;
+  }
+
+  .hero-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 18px;
+  }
+
+  .rules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .rule-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .rule-badge {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rule-badge.fail {
+    background: rgba(220, 38, 38, 0.16);
+    color: #ef4444;
+  }
+
+  .rule-badge.mid {
+    background: rgba(217, 119, 6, 0.16);
+    color: #f59e0b;
+  }
+
+  .rule-badge.ok {
+    background: rgba(22, 163, 74, 0.16);
+    color: #22c55e;
+  }
+
+  .rule-text {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .rule-text strong {
+    display: block;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .rule-text span {
+    color: var(--text-muted);
+  }
+
+  .science-note {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .cooldown-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .cooldown-timer {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 10px 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-stage {
+    perspective: 1200px;
+    margin-bottom: 14px;
+  }
+
+  .flashcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-height: 290px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .flashcard:active {
+    transform: scale(0.992);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .box-badge {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .card-side-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .card-body {
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 600;
+    white-space: pre-line;
+    word-break: break-word;
+    margin: auto 0;
+  }
+
+  .card-body.verso-text {
+    font-weight: 500;
+    font-size: 15.5px;
+    background: var(--surface-2);
+    padding: 14px;
+    border-radius: 13px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .card-hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+  }
+
+  .rating-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .anglais-rating-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: transform 0.12s ease, opacity 0.15s ease, background 0.15s ease;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-text);
+    width: 100%;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-secondary {
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .deck-subtab.active {
+    background: var(--accent);
+    color: var(--accent-text);
+    border-color: var(--accent);
+  }
+
+  .btn-rate-fail {
+    background: rgba(220, 38, 38, 0.14);
+    color: #ef4444;
+    border: 1px solid rgba(220, 38, 38, 0.35);
+  }
+
+  .btn-rate-mid {
+    background: rgba(217, 119, 6, 0.14);
+    color: #f59e0b;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+
+  .btn-rate-ok {
+    background: rgba(22, 163, 74, 0.15);
+    color: #22c55e;
+    border: 1px solid rgba(22, 163, 74, 0.38);
+  }
+
+  .btn small {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .box-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .box-card h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+
+  .deck-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .deck-item-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .deck-item-sub {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    white-space: pre-line;
+  }
+
+  .icon-del {
+    border: none;
+    background: rgba(220, 38, 38, 0.12);
+    color: #ef4444;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .icon-know {
+    border: none;
+    background: rgba(22, 163, 74, 0.14);
+    color: #22c55e;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-bottom: 6px;
+  }
+
+  .icon-readd {
+    border: none;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-bottom: 6px;
+  }
+
+  .toast {
+    position: fixed;
+    top: 68px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-16px);
+    background: var(--accent);
+    color: var(--accent-text);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 60;
+    box-shadow: var(--shadow);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  footer.credits {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 12px 16px 86px;
+  }
+
+  nav.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    z-index: 40;
+  }
+
+  .nav-item {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 7px 4px;
+    font-size: 11.5px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  .nav-item.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .nav-icon {
+    font-size: 17px;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand" id="brand-home-link" title="Retour à l'accueil">
+    <div class="logo-badge">420</div>
+    <div>
+      <div class="brand-title">Flash420</div>
+      <div class="brand-sub">MPSI • Matières &amp; Colles</div>
+    </div>
+  </div>
+  <div class="theme-switcher" role="group" aria-label="Thèmes">
+    <button class="theme-btn active" data-set-theme="carmine">Carmin</button>
+    <button class="theme-btn" data-set-theme="rose">Rose</button>
+    <button class="theme-btn" data-set-theme="bleu">Bleu</button>
+    <button class="theme-btn" data-set-theme="vert">Vert</button>
+    <button class="theme-btn" data-set-theme="dark">Sombre</button>
+    <button class="theme-btn" data-set-theme="light">Clair</button>
+  </div>
+</header>
+
+<div id="toast" class="toast"></div>
+
+<main>
+  <div class="hierarchy-nav" id="hierarchy-nav">
+    <div class="breadcrumb" id="breadcrumb-bar">
+      <span class="breadcrumb-item">Matières</span>
+      <span>›</span>
+      <span class="breadcrumb-item" id="bc-matiere">Maths</span>
+    </div>
+
+    <div class="matiere-tabs" role="tablist">
+      <button class="matiere-btn active" id="btn-matiere-maths" type="button">Maths (Leitner)</button>
+      <button class="matiere-btn" id="btn-matiere-anglais" type="button">Anglais</button>
+    </div>
+
+    <div class="sub-tree" id="anglais-sub-tree" style="display:none;">
+      <div class="sub-tree-label">Sous-bloc : Colles d'Anglais</div>
+      <div class="colle-pill-row">
+        <button class="colle-pill-btn active" id="btn-colle-5" type="button">
+          Vocabulaire Colle n°5 (134 cartes)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="maths-stats-bar">
+    <div class="stat-card">
+      <div class="stat-val" id="stat-due">0</div>
+      <div class="stat-lbl">À réviser</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-total">0</div>
+      <div class="stat-lbl">Total fiches</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-mastered">0</div>
+      <div class="stat-lbl">Connues (5/5)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-streak">0</div>
+      <div class="stat-lbl">Série session</div>
+    </div>
+  </div>
+
+  <div class="stats-bar" id="anglais-stats-bar" style="display:none;">
+    <div class="stat-card">
+      <div class="stat-val" id="ang-stat-quiz">1</div>
+      <div class="stat-lbl">Quiz n°</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="ang-stat-fail" style="color:#ef4444;">0</div>
+      <div class="stat-lbl">Ratées (quiz suiv.)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="ang-stat-ok" style="color:#22c55e;">0</div>
+      <div class="stat-lbl">Réussies (espacées)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="ang-stat-new">134</div>
+      <div class="stat-lbl">Nouvelles</div>
+    </div>
+  </div>
+
+  <div id="maths-workspace">
+    <!-- ACCUEIL -->
+    <section id="panel-home" class="panel active">
+      <div class="hero-card">
+        <span class="hero-kicker">Méthode Leitner • MPSI</span>
+        <h1 class="hero-title">Bienvenue sur Flash420</h1>
+        <p class="hero-desc">
+          Ton espace d'entraînement actif pour ancrer durablement tes définitions, formules et théorèmes de mathématiques. À chaque fiche, essaie de retrouver la réponse de tête avant de retourner la carte, puis évalue honnêtement ta maîtrise :
+        </p>
+
+        <div class="rules-list">
+          <div class="rule-item">
+            <span class="rule-badge fail">Raté</span>
+            <div class="rule-text">
+              <strong>J+1 • 0/5</strong>
+              <span>Tu n'as pas su répondre : la fiche repart au niveau 0/5 et reviendra dès demain.</span>
+            </div>
+          </div>
+          <div class="rule-item">
+            <span class="rule-badge mid">J'hésite</span>
+            <div class="rule-text">
+              <strong>J+2</strong>
+              <span>Réponse fragile ou hésitante : tu la reverras dans 2 jours sans monter de palier.</span>
+            </div>
+          </div>
+          <div class="rule-item">
+            <span class="rule-badge ok">Réussi</span>
+            <div class="rule-text">
+              <strong>+1/5 • J+3 → J+7 → J+15 → J+30 → Connue (5/5)</strong>
+              <span>À <strong>5/5</strong>, la carte passe dans <strong>Connues</strong> et n'apparaît plus dans tes révisions (tu peux la remettre quand tu veux dans l'onglet <em>Carte</em>).</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="science-note">
+          <strong>Conseil de révision :</strong> fais ta session tous les soirs avant de dormir et respecte une <strong>pause de 2 heures</strong> entre deux séries complètes pour consolider la mémorisation.
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-primary" id="btn-start-study" style="font-size:15px; padding:15px; flex:1;">
+            Réviser maintenant →
+          </button>
+          <button class="btn btn-secondary" id="btn-go-cards" style="font-size:14px; padding:15px;">
+            Gérer mes cartes
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RÉVISER -->
+    <section id="panel-study" class="panel">
+      <div class="filter-row">
+        <select id="chapter-filter" aria-label="Filtrer par chapitre">
+          <option value="ALL">Tous les chapitres</option>
+        </select>
+      </div>
+
+      <div id="cooldown-container" class="cooldown-box" style="display:none;">
+        <div style="font-size:34px;">⏳</div>
+        <h3 style="margin:6px 0;">Pause de consolidation (2h)</h3>
+        <p style="color:var(--text-muted); font-size:14px; margin:0 0 8px;">
+          Session terminée ! Prochaine session débloquée dans :
+        </p>
+        <div id="cooldown-timer" class="cooldown-timer">02:00:00</div>
+        <div id="cooldown-summary" style="display:none; margin: 12px 0;"></div>
+        <button class="btn btn-secondary" id="btn-bypass-cooldown" style="width:100%;">
+          Forcer une révision anticipée
+        </button>
+      </div>
+
+      <div id="empty-due-container" class="cooldown-box" style="display:none;">
+        <div style="font-size:36px;">🎯</div>
+        <h3 style="margin:6px 0;">Toutes les cartes du jour sont à jour !</h3>
+        <div id="empty-summary" style="display:none; margin: 12px 0;"></div>
+        <p style="color:var(--text-muted); font-size:14px; margin:0 0 14px;">
+          Aucune fiche due dans ce chapitre pour le moment.
+        </p>
+        <button class="btn btn-primary" id="btn-practice-all">
+          Réviser tout le paquet en mode libre
+        </button>
+      </div>
+
+      <div id="study-card-container" style="display:none;">
+        <div class="card-stage">
+          <div class="flashcard" id="flashcard">
+            <div class="card-meta">
+              <span class="pill" id="card-chapter">Chapitre</span>
+              <span class="box-badge" id="card-box">Boîte 0/5</span>
+            </div>
+
+            <div>
+              <div class="card-side-label" id="card-side-label">RECTO • QUESTION</div>
+              <div class="card-body" id="card-content"></div>
+            </div>
+
+            <div class="card-hint" id="card-hint">Appuie sur la carte pour afficher le verso</div>
+          </div>
+        </div>
+
+        <div id="reveal-wrap">
+          <button class="btn btn-primary" id="btn-reveal">Afficher la réponse</button>
+        </div>
+
+        <div id="rating-wrap" class="rating-grid" style="display:none;">
+          <button class="btn btn-rate-fail" data-rate="fail">
+            <span>Raté</span>
+            <small>J+1 (0/5)</small>
+          </button>
+          <button class="btn btn-rate-mid" data-rate="mid">
+            <span>J'hésite</span>
+            <small>J+2</small>
+          </button>
+          <button class="btn btn-rate-ok" data-rate="ok">
+            <span>Réussi</span>
+            <small id="next-ok-label">+1/5 (J+3)</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTE (Recherche, enlever celles que tu connais déjà, remettre celles que tu veux, ajouter) -->
+    <section id="panel-deck" class="panel">
+      <div class="filter-row" style="gap:6px;">
+        <button class="btn btn-secondary deck-subtab active" data-deck-filter="active" style="flex:1; padding:10px; font-size:12.5px;">À réviser</button>
+        <button class="btn btn-secondary deck-subtab" data-deck-filter="acquired" style="flex:1; padding:10px; font-size:12.5px;">Connues (retirées)</button>
+        <button class="btn btn-secondary deck-subtab" data-deck-filter="all" style="flex:1; padding:10px; font-size:12.5px;">Toutes</button>
+      </div>
+
+      <div id="acquired-banner" class="science-note" style="display:none; margin-bottom:12px;">
+        <strong>Cartes connues (retirées des révisions) :</strong> clique sur <strong>Remettre</strong> pour réintégrer n'importe quelle flashcard dans tes révisions.
+      </div>
+
+      <div class="filter-row">
+        <input type="text" id="deck-search" placeholder="Rechercher une flashcard (mot-clé, formule, chapitre)..." />
+      </div>
+
+      <div id="deck-list"></div>
+
+      <div class="box-card" style="margin-top:18px;">
+        <h3>Ajouter une flashcard</h3>
+        <div class="form-group">
+          <label for="add-chapter">Chapitre</label>
+          <input type="text" id="add-chapter" list="chapter-suggestions" placeholder="Ex : Nombres complexes" />
+          <datalist id="chapter-suggestions"></datalist>
+        </div>
+        <div class="form-group">
+          <label for="add-recto">Recto (Question / Énoncé)</label>
+          <textarea id="add-recto" rows="2" placeholder="Ex : Formule d'Euler pour $\cos(\theta)$ ?"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="add-verso">Verso (Réponse / Démonstration)</label>
+          <textarea id="add-verso" rows="3" placeholder="Ex : $\cos(\theta) = \dfrac{e^{i\theta} + e^{-i\theta}}{2}$"></textarea>
+        </div>
+        <button class="btn btn-primary" id="btn-add-card">Ajouter la fiche</button>
+      </div>
+    </section>
+
+    <!-- IMPORT / EXPORT PROTÉGÉ PAR MOT DE PASSE (6767) -->
+    <section id="panel-import" class="panel">
+      <div id="import-gate-box" class="box-card">
+        <h3>Accès Export / Import protégé</h3>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+          Mot de passe requis pour accéder à l'export et à l'import.
+        </p>
+        <div class="form-group">
+          <input type="password" id="import-pwd-input" placeholder="Entrez le mot de passe" autocomplete="off" />
+        </div>
+        <div id="import-pwd-err" style="color:#ef4444; font-size:12.5px; font-weight:700; margin-bottom:10px; display:none;">
+          Mot de passe incorrect.
+        </div>
+        <button class="btn btn-primary" id="btn-import-unlock" type="button">Déverrouiller</button>
+      </div>
+
+      <div id="import-panel-body" style="display:none;">
+        <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+          <button class="btn btn-secondary" id="btn-import-lock" type="button" style="padding:8px 12px; font-size:12px;">Verrouiller</button>
+        </div>
+
+        <div class="box-card">
+          <h3>Export &amp; Sauvegarde</h3>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+            Exporte toutes tes flashcards et ta progression en fichier JSON, ou recharge le paquet initial.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-primary" id="btn-export-json" style="flex:1;">Exporter JSON</button>
+            <button class="btn btn-secondary" id="btn-reset-default" style="flex:1;">Recharger le paquet initial</button>
+          </div>
+        </div>
+
+        <div class="box-card">
+          <h3>Importer un lot JSON</h3>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:0;">
+            Colle un tableau JSON <code>[{"chapter":"...","recto":"...","verso":"..."}]</code> pour ajouter des cartes.
+          </p>
+          <div class="form-group">
+            <textarea id="import-json-text" rows="5" placeholder='[{"chapter":"Chapitre","recto":"Question","verso":"Réponse"}]'></textarea>
+          </div>
+          <button class="btn btn-secondary" id="btn-import-json" style="width:100%;">Importer les fiches</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- VUE ANGLAIS -->
+  <div id="anglais-workspace" style="display:none;">
+    <div class="hero-card" style="padding:16px 18px; margin-bottom:14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+        <div>
+          <span class="hero-kicker" style="margin-bottom:6px;">Matières › Anglais › Colles</span>
+          <h2 style="margin:0; font-size:19px; font-weight:800;">Vocabulaire Colle n°5</h2>
+          <div style="font-size:12.5px; color:var(--text-muted); margin-top:3px;">
+            Sections <em>Employment</em> (p. 245) &amp; <em>Work</em> + <em>Word Partners</em> (p. 246) • 1 flashcard par mot
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-secondary" id="btn-ang-new-quiz" style="padding:9px 12px; font-size:12.5px;">Nouveau quiz</button>
+          <button class="icon-del" id="btn-ang-reset" style="padding:9px 12px;">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <select id="ang-sub-filter" aria-label="Filtrer par sous-partie de la Colle n°5">
+        <option value="ALL">Vocabulaire Colle n°5 — Tout (134 cartes)</option>
+        <option value="Employment (p. 245)">Employment uniquement (p. 245)</option>
+        <option value="Work (p. 246)">Work uniquement (p. 246)</option>
+        <option value="Word Partners (p. 246)">Word Partners — pavé bleu (p. 246)</option>
+      </select>
+    </div>
+
+    <div class="progress-wrap" style="margin-bottom:14px;">
+      <div class="progress-meta" style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted); font-weight:700; margin-bottom:6px;">
+        <span id="ang-progress-text">Quiz n°1 • Carte 1 / 25</span>
+        <span id="ang-priority-text">Ratées du quiz précédent en tête</span>
+      </div>
+      <div style="height:7px; background:var(--surface-2); border-radius:999px; overflow:hidden; border:1px solid var(--border);">
+        <div id="ang-progress-bar" style="height:100%; width:0%; background:var(--accent); transition:width 0.2s ease;"></div>
+      </div>
+    </div>
+
+    <div id="ang-card-stage">
+      <div class="card-stage">
+        <div class="flashcard" id="ang-flashcard">
+          <div class="card-meta">
+            <span class="pill" id="ang-card-sub">Employment (p. 245)</span>
+            <span class="box-badge" id="ang-card-state">Nouvelle</span>
+          </div>
+
+          <div style="text-align:center;">
+            <div class="card-side-label" id="ang-side-label">ANGLAIS • MOT / EXPRESSION</div>
+            <div class="card-body" id="ang-front-word" style="font-size:22px; font-weight:800;"></div>
+            <div id="ang-phonetic" style="font-size:13px; color:var(--text-muted); margin-top:4px;"></div>
+
+            <div id="ang-back-box" style="display:none; margin-top:16px; padding-top:14px; border-top:1px dashed var(--border);">
+              <div class="card-side-label" style="margin-bottom:4px;">FRANÇAIS</div>
+              <div id="ang-back-word" style="font-size:17px; font-weight:700; color:var(--accent);"></div>
+            </div>
+          </div>
+
+          <div class="card-hint" id="ang-card-hint">Appuie sur la carte pour voir la traduction</div>
+        </div>
+      </div>
+
+      <div id="ang-reveal-wrap">
+        <button class="btn btn-primary" id="btn-ang-reveal">Afficher la traduction</button>
+      </div>
+
+      <div id="ang-rating-wrap" class="anglais-rating-grid" style="display:none;">
+        <button class="btn btn-rate-fail" id="btn-ang-fail">
+          <span>Raté</span>
+          <small>Revient au quiz suivant (priorité)</small>
+        </button>
+        <button class="btn btn-rate-ok" id="btn-ang-ok">
+          <span>Réussi</span>
+          <small>Espacée (revient moins souvent)</small>
+        </button>
+      </div>
+    </div>
+
+    <div id="ang-quiz-done" class="cooldown-box" style="display:none;">
+      <div style="font-size:34px;">✅</div>
+      <h3 id="ang-done-title" style="margin:6px 0;">Quiz n°1 terminé !</h3>
+      <p id="ang-done-desc" style="color:var(--text-muted); font-size:14px; margin:0 0 14px;"></p>
+      <button class="btn btn-primary" id="btn-ang-next-quiz">Lancer le quiz suivant</button>
+    </div>
+  </div>
+</main>
+
+<footer class="credits">
+  Flash420 • Conçu pour la MPSI • Crédits : <strong>Glen, Colin, Camille, Raphaël, chambre 420</strong>
+</footer>
+
+<nav class="bottom-nav" aria-label="Navigation principale">
+  <button class="nav-item active" data-tab="home" type="button">
+    <span class="nav-icon">🏠</span>
+    <span>Accueil</span>
+  </button>
+  <button class="nav-item" data-tab="deck" type="button">
+    <span class="nav-icon">🃏</span>
+    <span>Carte</span>
+  </button>
+  <button class="nav-item" data-tab="import" type="button">
+    <span class="nav-icon">🔒</span>
+    <span>Export</span>
+  </button>
+</nav>
+
+<script>
+const STORAGE_KEY = "flashlab_mpsi_cards_v12";
+const THEME_KEY = "flashlab_mpsi_theme";
+const COOLDOWN_KEY = "flashlab_mpsi_cooldown_until";
+const COOLDOWN_MS = 2 * 60 * 60 * 1000;
+const LEITNER_INTERVALS_DAYS = [3, 7, 15, 30, 60];
+const SESSION_SUMMARY_KEY = "flashlab_mpsi_last_summary";
+
+const ANGLAIS_COLLE5_STORAGE = "flash420_anglais_colle5_v1";
+const ANGLAIS_QUIZ_BATCH_SIZE = 25;
+
+const DEFAULT_CARDS = [{"chapter": "Nombres complexes", "recto": "Chap. 5 — Nombres complexes : que vaut $z - \\bar{z}$ ?", "verso": "Pour tout $z \\in \\mathbb{C}$ : $z - \\bar{z} = 2i\\,\\mathrm{Im}(z)$."}, {"chapter": "Ensembles & Applications", "recto": "Soit $f : E \\to F$. Pour tout $y \\in F$, $y \\in \\{f(x) \\mid x \\in E\\} \\iff$ ?", "verso": "Cela équivaut à $f(E) = F$, c'est-à-dire que $f$ est surjective."}, {"chapter": "Ensembles & Applications", "recto": "Égalité de deux ensembles : $A = B \\iff$ ?", "verso": "$A = B \\iff \\forall x \\in E,\\ (x \\in A \\iff x \\in B)$ (ou de manière équivalente : $A \\subset B$ et $B \\subset A$)."}, {"chapter": "Ensembles & Applications", "recto": "Produit cartésien de deux ensembles $E$ et $F$ : définition de $E \\times F$ ?", "verso": "$E \\times F = \\{ (x, y) \\mid x \\in E \\text{ et } y \\in F \\}$ (ensemble des couples formés d'un élément de $E$ et d'un élément de $F$)."}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Commutativité et associativité d'une loi interne $\\top$ sur $E$ ?", "verso": "• Commutativité : $\\forall x, y \\in E,\\ x \\top y = y \\top x$\n• Associativité : $\\forall x, y, z \\in E,\\ (x \\top y) \\top z = x \\top (y \\top z)$"}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Élément symétrisable : un élément $x$ de $E$ (muni d'une loi $\\top$ d'élément neutre $e$) est symétrisable si ?", "verso": "$\\exists y \\in E$ tel que $x \\top y = e$ et $y \\top x = e$."}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Groupe : à quelle condition $(G, \\top)$ est-il un groupe ? Et un groupe abélien ?", "verso": "$(G, \\top)$ est un groupe si :\n1. $\\top$ est une L.C.I sur $G$\n2. $\\top$ est associative\n3. $G$ possède un élément neutre\n4. Tout élément de $G$ est symétrisable\n\nSi de plus $\\top$ est commutative, le groupe est dit abélien (ou commutatif)."}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Avec $t = \\tan(x/2)$, exprimer $\\cos(x)$, $\\sin(x)$ et $\\tan(x)$ en fonction de $t$.", "verso": "• $\\cos(x) = \\dfrac{1 - t^2}{1 + t^2}$\n• $\\sin(x) = \\dfrac{2t}{1 + t^2}$\n• $\\tan(x) = \\dfrac{2t}{1 - t^2}$\n(pour $x/2 \\notin \\pi/2 + \\pi\\mathbb{Z}$, et $t \\neq \\pm 1$ pour $\\tan(x)$)"}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Qu'est-ce qu'une loi de composition interne (L.C.I) $\\top$ sur un ensemble $G$ ?", "verso": "Une application de $G \\times G$ dans $G$ : $\\forall x, y \\in G,\\ x \\top y \\in G$."}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Élément neutre : $e$ est un élément neutre pour la loi $\\top$ sur $E$ si ?", "verso": "$\\forall x \\in E,\\ x \\top e = x$ et $e \\top x = x$ (avec $e \\in E$)."}, {"chapter": "Ensembles & Applications", "recto": "Définitions en compréhension : $A \\cap B$, $A \\cup B$ et $A \\setminus B$ (pour $A, B \\subset E$) ?", "verso": "• $A \\cap B = \\{ x \\in E \\mid x \\in A \\text{ et } x \\in B \\}$\n• $A \\cup B = \\{ x \\in E \\mid x \\in A \\text{ ou } x \\in B \\}$\n• $A \\setminus B = \\{ x \\in E \\mid x \\in A \\text{ et } x \\notin B \\} = \\{ x \\in A \\mid x \\notin B \\}$"}, {"chapter": "Ensembles & Applications", "recto": "Appartenance à un ensemble en compréhension : $x' \\in \\{ x \\in E \\mid P(x) \\} \\iff$ ?", "verso": "$x' \\in \\{ x \\in E \\mid P(x) \\} \\iff (x' \\in E \\text{ et } P(x'))$.\n(Si $x' \\in E$ est déjà connu, cela équivaut à $P(x')$.)"}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Caractérisation d'un sous-groupe $H$ d'un groupe $(G, \\top)$ ?", "verso": "$H$ est un sous-groupe de $(G, \\top)$ si et seulement si :\n1. $H \\subset G$ (et $e_G \\in H$)\n2. $H$ est stable par la loi $\\top$ : $\\forall x, y \\in H,\\ x \\top y \\in H$\n3. $H$ est stable par passage au symétrique : $\\forall x \\in H,\\ x^{-1} \\in H$"}, {"chapter": "Algèbre — Lois de composition & Groupes", "recto": "Définitions : morphisme de groupes, isomorphisme, endomorphisme, automorphisme ?", "verso": "Pour $\\varphi : (G, \\top) \\to (G', \\perp)$ :\n• Morphisme de groupes : $\\forall x, y \\in G,\\ \\varphi(x \\top y) = \\varphi(x) \\perp \\varphi(y)$\n• Isomorphisme : morphisme bijectif\n• Endomorphisme : morphisme de $G$ dans $G$ ($G' = G$, $\\perp = \\top$)\n• Automorphisme : endomorphisme bijectif"}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Étude d'une fonction — Étapes principales notées sur la fiche ?", "verso": "1) Ensemble de définition\n2) Périodicité / parité (réduction du domaine d'étude)\n3) Tableau de variation\n(puis 5) Courbe représentative)"}, {"chapter": "Ensembles & Applications", "recto": "Définition de l'ensemble des parties : $A \\in \\mathcal{P}(E) \\iff$ ?", "verso": "$A \\in \\mathcal{P}(E) \\iff A \\subset E$."}, {"chapter": "Ensembles & Applications", "recto": "Intersections et unions infinies : $\\bigcap_{n=1}^{+\\infty} A_n = ?$ et $\\bigcup_{n=1}^{+\\infty} A_n = ?$", "verso": "Pour $(A_n)_{n \\ge 1}$ parties de $E$ :\n• $\\bigcap_{n=1}^{+\\infty} A_n = \\{ x \\in E \\mid \\forall k \\in \\mathbb{N}^*,\\ x \\in A_k \\}$\n• $\\bigcup_{n=1}^{+\\infty} A_n = \\{ x \\in E \\mid \\exists k \\in \\mathbb{N}^*,\\ x \\in A_k \\}$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Pour $y \\in [-1, 1]$, exprimer $\\cos(\\arcsin(y))$ et $\\sin(\\arccos(y))$.", "verso": "• $\\cos(\\arcsin(y)) = \\sqrt{1 - y^2}$\n• $\\sin(\\arccos(y)) = \\sqrt{1 - y^2}$\n(car $\\cos \\ge 0$ sur $[-\\pi/2, \\pi/2]$ et $\\sin \\ge 0$ sur $[0, \\pi]$)"}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Quand peut-on multiplier deux inégalités $a \\le b$ et $c \\le d$ membre à membre ?", "verso": "Lorsque les nombres sont positifs ou nuls : si $0 \\le a \\le b$ et $0 \\le c \\le d$, alors $0 \\le ac \\le bd$."}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Égalité sous forme exponentielle : $r e^{i\\theta} = r' e^{i\\theta'} \\iff$ ? (avec $r, r' \\ge 0$ et $\\theta, \\theta' \\in \\mathbb{R}$)", "verso": "$r e^{i\\theta} = r' e^{i\\theta'} \\iff (r = r' \\text{ et } \\theta \\equiv \\theta'\\ [2\\pi])$.\n(Si $r = r' = 0$, l'égalité vaut $0 = 0$ pour tous $\\theta, \\theta' \\in \\mathbb{R}$.)"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Formules d'addition : que valent $\\cos(a + b)$ et $\\sin(a + b)$ ?", "verso": "Pour tous $a, b \\in \\mathbb{R}$ :\n• $\\cos(a + b) = \\cos(a)\\cos(b) - \\sin(a)\\sin(b)$\n• $\\sin(a + b) = \\sin(a)\\cos(b) + \\cos(a)\\sin(b)$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Chap. 4 — Méthode pour transformer $a\\cos(x) + b\\sin(x)$ ?", "verso": "Pour $(a, b) \\neq (0, 0)$, on factorise par $R = \\sqrt{a^2 + b^2} > 0$ :\n$$a\\cos(x) + b\\sin(x) = R\\left[\\frac{a}{R}\\cos(x) + \\frac{b}{R}\\sin(x)\\right]$$\npuis on reconnaît $\\cos(\\varphi)$ et $\\sin(\\varphi)$ pour se ramener à une formule du type $\\cos(x \\pm \\varphi)$ ou $\\sin(x \\pm \\varphi)$."}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Énoncer la formule du binôme de Newton pour $(a + b)^n$.", "verso": "Pour $n \\in \\mathbb{N}$ et $a, b$ commutant :\n$$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^k b^{n-k}$$\n(avec la convention $0^0 = 1$)."}, {"chapter": "Analyse — Limites & Comparaisons", "recto": "Chap. 6 — Qu'est-ce que la continuité globale sur $A$ et la notation $\\mathcal{C}(D, \\mathbb{R})$ ?", "verso": "• Continuité sur $A$ : $f$ est continue sur $A$ si $f$ est continue en tout point de $A$.\n• $\\mathcal{C}(D, \\mathbb{R})$ : ensemble des fonctions continues définies sur $D$ à valeurs dans $\\mathbb{R}$."}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Module d'un nombre complexe $z = a + ib$ (avec $a, b \\in \\mathbb{R}$) : $|z| =$ ? et minoration ?", "verso": "$|z| = \\sqrt{a^2 + b^2} \\ge 0$."}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Somme d'un complexe et de son conjugué : $z + \\bar{z} =$ ?", "verso": "Pour tout $z \\in \\mathbb{C}$ : $z + \\bar{z} = 2\\,\\mathrm{Re}(z)$."}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Propriétés algébriques d'une somme $\\sum$ (linéarité) ?", "verso": "Sur un même ensemble d'indices et avec $\\lambda$ indépendant de l'indice :\n$$\\sum (a_i + b_i) = \\sum a_i + \\sum b_i$$\n$$\\sum_{i=0}^{n} (\\lambda a_i) = \\lambda \\sum_{i=0}^{n} a_i$$"}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Propriétés algébriques d'un produit $\\prod$ ?", "verso": "Sur un même ensemble d'indices et avec $\\lambda$ indépendant de l'indice :\n$$\\prod (a_i b_i) = \\left(\\prod a_i\\right)\\left(\\prod b_i\\right)$$\n$$\\prod (a_i)^\\lambda = \\left(\\prod a_i\\right)^\\lambda \\quad \\text{(lorsque les puissances sont définies)}$$"}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Sommes et produits « vides » : si $m > n$, que valent $\\sum_{k=m}^{n} (\\dots)$ et $\\prod_{k=m}^{n} (\\dots)$ ?", "verso": "Pour $m > n$ (indice vide) :\n$$\\sum_{k=m}^{n} (\\dots) = 0 \\qquad \\text{et} \\qquad \\prod_{k=m}^{n} (\\dots) = 1$$"}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Coefficients binomiaux : symétrie, formule avec factorielles et valeur hors bornes ?", "verso": "• Symétrie (pour $0 \\le k \\le n$) : $\\dbinom{n}{k} = \\dbinom{n}{n-k}$\n• Pour $0 \\le k \\le n$ : $\\dbinom{n}{k} = \\dfrac{n!}{k!(n-k)!}$\n• Par convention : $\\dbinom{n}{k} = 0$ si $k < 0$ ou $k > n$"}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Relation de Pascal et construction du triangle de Pascal ?", "verso": "• Formule de Pascal : $\\dbinom{n}{k} + \\dbinom{n}{k+1} = \\dbinom{n+1}{k+1}$\n• Triangle de Pascal : chaque terme est la somme de celui directement au-dessus et de celui au-dessus à gauche (avec des $1$ sur la diagonale et la première colonne)."}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Factorisation de $a^n - b^n$ (pour $n \\ge 1$ et $a, b$ commutant) ?", "verso": "$$a^n - b^n = (a - b) \\sum_{k=0}^{n-1} a^k b^{n-1-k} = (a - b) \\sum_{j=0}^{n-1} a^{n-1-j} b^j$$"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Que vaut $z\\bar{z}$ pour $z \\in \\mathbb{C}$ ? Rappeler les majorations de $|\\mathrm{Re}(z)|$ et $|\\mathrm{Im}(z)|$.", "verso": "• $z\\bar{z} = |z|^2$\n• $|\\mathrm{Re}(z)| \\le |z|$ et $|\\mathrm{Im}(z)| \\le |z|$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Valeurs remarquables de $\\sin(x)$ et $\\cos(x)$ pour $x \\in \\{0, \\pi/6, \\pi/4, \\pi/3, \\pi/2\\}$ ?", "verso": "• $x = 0$ : $\\sin = 0$, $\\cos = 1$\n• $x = \\pi/6$ : $\\sin = 1/2$, $\\cos = \\sqrt{3}/2$\n• $x = \\pi/4$ : $\\sin = \\sqrt{2}/2$, $\\cos = \\sqrt{2}/2$\n• $x = \\pi/3$ : $\\sin = \\sqrt{3}/2$, $\\cos = 1/2$\n• $x = \\pi/2$ : $\\sin = 1$, $\\cos = 0$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Conversion radians / degrés : combien vaut $1\\text{ rad}$ en degrés (et $1^\\circ$ en radians) ?", "verso": "• $1\\text{ rad} = \\left(\\dfrac{180}{\\pi}\\right)^\\circ$\n• $1^\\circ = \\dfrac{\\pi}{180}\\text{ rad}$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Chap. 4 — Formule de duplication : $\\sin(2x) =$ ?", "verso": "Pour tout $x \\in \\mathbb{R}$ : $\\sin(2x) = 2\\cos(x)\\sin(x)$."}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Formules de l'angle moitié : exprimer $\\tan(2x)$, $\\sin(2x)$ et $\\cos(2x)$ en fonction de $\\tan(x)$.", "verso": "Pour $x \\notin \\pi/2 + \\pi\\mathbb{Z}$ (et $2x \\notin \\pi/2 + \\pi\\mathbb{Z}$ pour $\\tan(2x)$) :\n• $\\tan(2x) = \\dfrac{2\\tan(x)}{1 - \\tan^2(x)}$\n• $\\sin(2x) = \\dfrac{2\\tan(x)}{1 + \\tan^2(x)}$\n• $\\cos(2x) = \\dfrac{1 - \\tan^2(x)}{1 + \\tan^2(x)}$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Chap. 4 — « Schéma redoutable » reliant $\\sin^2(x)$, $1$, $\\cos^2(x)$ et $\\cos(2x)$ : quelles sont les identités associées ?", "verso": "• $\\cos^2(x) + \\sin^2(x) = 1$\n• $\\cos^2(x) - \\sin^2(x) = \\cos(2x)$\n• Linéarisation : $\\cos^2(x) = \\dfrac{1 + \\cos(2x)}{2}$ et $\\sin^2(x) = \\dfrac{1 - \\cos(2x)}{2}$"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Énoncer les 2 formules d'Euler ($\\cos\\theta$ et $\\sin\\theta$).", "verso": "Pour tout $\\theta \\in \\mathbb{R}$ :\n• $\\cos(\\theta) = \\dfrac{e^{i\\theta} + e^{-i\\theta}}{2}$\n• $\\sin(\\theta) = \\dfrac{e^{i\\theta} - e^{-i\\theta}}{2i}$"}, {"chapter": "Analyse — Équations différentielles", "recto": "EDL1 homogène : quelles sont les solutions de $y' + a(x)y = 0$ ?", "verso": "Si $A$ est une primitive de $a$ sur l'intervalle considéré :\n$$y_H(x) = C e^{-A(x)} \\quad (\\text{avec } C \\text{ constante réelle ou complexe})$$"}, {"chapter": "Analyse — Équations différentielles", "recto": "EDL1 avec second membre : comment trouver une solution particulière par variation de la constante ?", "verso": "On cherche $y_p(x)$ sous la forme $C(x)e^{-A(x)}$ (où $A' = a$), on dérive $y_p$, on injecte $y_p$ et $y_p'$ dans $(E)$ pour déterminer $C'(x)$, puis on intègre pour obtenir $C(x)$."}, {"chapter": "Analyse — Équations différentielles", "recto": "EDL2 à coefficients constants ($ay'' + by' + cy = 0$, $a \\neq 0$) : équation caractéristique et cas $\\Delta > 0$ ou $\\Delta = 0$ dans $\\mathbb{R}$ ?", "verso": "Équation caractéristique : $ar^2 + br + c = 0$ (discriminant $\\Delta = b^2 - 4ac$).\n• Si $\\Delta > 0$ (2 racines réelles $r_1, r_2$) : $y_H(x) = A e^{r_1 x} + B e^{r_2 x}$\n• Si $\\Delta = 0$ (racine double réelle $r_0$) : $y_H(x) = (A + Bx)e^{r_0 x}$"}, {"chapter": "Analyse — Équations différentielles", "recto": "EDL2 à coefficients constants dans $\\mathbb{R}$ : forme de $y_H$ lorsque $\\Delta < 0$ (racine complexe $r = \\alpha + i\\beta$) ?", "verso": "Si $\\Delta < 0$ et $r = \\alpha + i\\beta$ est une racine complexe ($\\alpha, \\beta \\in \\mathbb{R}$, $\\beta \\neq 0$) :\n$$y_H(x) = e^{\\alpha x}\\big(A\\cos(\\beta x) + B\\sin(\\beta x)\\big) \\quad \\text{avec } A, B \\in \\mathbb{R}$$"}, {"chapter": "Analyse — Équations différentielles", "recto": "EDL2 à coefficients constants avec second membre exponentiel $ay'' + by' + cy = e^{qx}$ : forme de $y_p$ ?", "verso": "Selon que $q$ est racine de l'équation caractéristique $ar^2 + br + c = 0$ :\n• $q$ non racine : $y_p(x) = C e^{qx}$\n• $q$ racine simple : $y_p(x) = Cx e^{qx}$\n• $q$ racine double : $y_p(x) = Cx^2 e^{qx}$"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Comment déterminer les racines carrées d'un complexe $w$ (forme exponentielle et forme algébrique) ?", "verso": "• Forme exponentielle ($w = r e^{i\\theta}$, $r \\ge 0$) :\nLes deux racines carrées sont $\\sqrt{r}e^{i\\theta/2}$ et $-\\sqrt{r}e^{i\\theta/2}$ (soit $+\\sqrt{r}e^{i(\\theta/2 + \\pi)}$).\n\n• Forme algébrique ($z = a + ib$, $a, b \\in \\mathbb{R}$) :\n$$z^2 = w \\iff \\begin{cases} a^2 + b^2 = |w| \\\\ a^2 - b^2 = \\mathrm{Re}(w) \\\\ 2ab = \\mathrm{Im}(w) \\end{cases}$$"}, {"chapter": "Nombres complexes", "recto": "Définition et forme exponentielle de l'exponentielle complexe $e^z$ pour $z \\in \\mathbb{C}$ ?", "verso": "Pour $z = \\mathrm{Re}(z) + i\\,\\mathrm{Im}(z) \\in \\mathbb{C}$ :\n$$e^z = e^{\\mathrm{Re}(z)} e^{i\\,\\mathrm{Im}(z)}$$\nde module $r = e^{\\mathrm{Re}(z)} > 0$ et d'argument $\\theta \\equiv \\mathrm{Im}(z)\\ [2\\pi]$."}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Quand deux vecteurs (ou complexes) $u$ et $v$ sont-ils positivement liés ?", "verso": "$u$ et $v$ sont positivement liés si et seulement si :\n$$u = 0 \\quad \\text{ou} \\quad v = 0 \\quad \\text{ou} \\quad \\exists \\lambda \\in \\mathbb{R}_+^*,\\ u = \\lambda v$$"}, {"chapter": "Ensembles & Applications", "recto": "Chap. 6 — Que désigne la notation $f|_A$ (pour $f : E \\to F$ et $A \\subset E$) ?", "verso": "$f|_A$ est la restriction de $f$ à $A$ : c'est l'application définie sur $A$ à valeurs dans $F$ telle que $\\forall x \\in A,\\ f|_A(x) = f(x)$."}, {"chapter": "Analyse — Dérivation", "recto": "Équation de la tangente à la courbe représentative de $f$ au point d'abscisse $a$ ($f$ dérivable en $a$) ?", "verso": "$$y = f'(a)(x - a) + f(a)$$"}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Formules de télescopage (somme et produit, pour $m \\le n$) ?", "verso": "$$\\sum_{k=m}^{n} (x_{k+1} - x_k) = x_{n+1} - x_m$$\n$$\\prod_{k=m}^{n} \\frac{x_{k+1}}{x_k} = \\frac{x_{n+1}}{x_m} \\quad \\text{(avec les } x_k \\text{ non nuls)}$$"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Racines $n$-ièmes de l'unité $\\mathbb{U}_n$ et somme des racines ?", "verso": "• $\\mathbb{U}_n = \\{ e^{2ik\\pi/n},\\ k \\in \\llbracket 0, n - 1 \\rrbracket \\}$ ($n$ racines distinctes)\n• Pour $n \\ge 2$ : $$\\sum_{k=0}^{n-1} e^{2ik\\pi/n} = 0$$"}, {"chapter": "Analyse — Dérivation", "recto": "Chap. 6 — Définition de la dérivabilité en $a$ et du taux d'accroissement (avec $x \\to a$ ou $h \\to 0$, $h = x - a$) ?", "verso": "$f$ est dérivable en $a$ si le taux d'accroissement admet une limite finie :\n$$f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a} = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$"}, {"chapter": "Analyse — Dérivation", "recto": "Chap. 7 — Soit $f : I \\to J$ bijective : caractérisation de $f^{-1}$ et lien entre les graphes $\\mathcal{C}_f$ et $\\mathcal{C}_{f^{-1}}$ ?", "verso": "• $\\forall y \\in J, \\forall x \\in I : f(x) = y \\iff x = f^{-1}(y)$\n• $(x_0, y_0) \\in \\mathcal{C}_f$ (avec $y_0 = f(x_0)$) $\\iff (y_0, x_0) \\in \\mathcal{C}_{f^{-1}}$ (symétrie par rapport à la droite $y = x$)."}, {"chapter": "Analyse — Dérivation", "recto": "Chap. 7 — Formule de dérivation de la réciproque $(f^{-1})'(y)$ ?", "verso": "Si $f$ est dérivable en $f^{-1}(y)$ et $f'(f^{-1}(y)) \\neq 0$, alors $f^{-1}$ est dérivable en $y$ et :\n$$(f^{-1})'(y) = \\frac{1}{f'(f^{-1}(y))}$$"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Chap. 7 — Logarithme de base $a$ ($a > 0$, $a \\neq 1$) et puissance réelle $x^\\alpha$ ($x > 0$, $\\alpha \\in \\mathbb{R}$) ?", "verso": "• $\\log_a(x) = \\dfrac{\\ln(x)}{\\ln(a)}$ (pour $x > 0$)\n• $x^\\alpha = \\exp(\\alpha \\ln(x)) = e^{\\alpha\\ln(x)}$ (pour $x > 0$, $\\alpha \\in \\mathbb{R}$)"}, {"chapter": "Analyse — Limites & Comparaisons", "recto": "Chap. 7 — Règle des croissances comparées en $+\\infty$ (hiérarchie entre $\\exp$, puissances et $\\ln$) ?", "verso": "En $+\\infty$, l'exponentielle l'emporte sur les puissances, qui l'emportent sur le logarithme (pour tout $\\alpha > 0$) :\n• $\\dfrac{e^x}{x^\\alpha} \\to +\\infty$ (et $x^\\alpha e^{-x} \\to 0$)\n• $\\dfrac{\\ln x}{x^\\alpha} \\to 0$ (et $x^\\alpha \\ln x \\to 0$ en $0^+$)"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Chap. 7 — Intervalles de bijection de $\\sin$, $\\cos$ et $\\tan$ (et ensembles de départ/arrivée de $\\arcsin$, $\\arccos$, $\\arctan$) ?", "verso": "• $\\sin : [-\\pi/2, \\pi/2] \\to [-1, 1]$ (réciproque $\\arcsin : [-1, 1] \\to [-\\pi/2, \\pi/2]$)\n• $\\cos : [0, \\pi] \\to [-1, 1]$ (réciproque $\\arccos : [-1, 1] \\to [0, \\pi]$)\n• $\\tan : ]-\\pi/2, \\pi/2[ \\to \\mathbb{R}$ (réciproque $\\arctan : \\mathbb{R} \\to ]-\\pi/2, \\pi/2[$)"}, {"chapter": "Fonctions usuelles & Trigonométrie", "recto": "Chap. 7 — Dérivées de $\\arcsin$, $\\arccos$, $\\arctan$, $\\tan$, $\\cosh$, $\\sinh$ et $\\tanh$ ?", "verso": "• $\\arcsin'(y) = \\dfrac{1}{\\sqrt{1 - y^2}}$ ($y \\in ]-1, 1[$)\n• $\\arccos'(y) = -\\dfrac{1}{\\sqrt{1 - y^2}}$ ($y \\in ]-1, 1[$)\n• $\\arctan'(y) = \\dfrac{1}{1 + y^2}$ ($y \\in \\mathbb{R}$)\n• $\\tan'(x) = 1 + \\tan^2(x) = \\dfrac{1}{\\cos^2(x)}$ ($x \\notin \\pi/2 + \\pi\\mathbb{Z}$)\n• $\\cosh'(x) = \\sinh(x)$, $\\sinh'(x) = \\cosh(x)$, $\\tanh'(x) = 1 - \\tanh^2(x) = \\dfrac{1}{\\cosh^2(x)}$ ($x \\in \\mathbb{R}$)"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Propriétés algébriques de l'argument (conjugué, produit, quotient, puissance) ?", "verso": "Pour $u, v \\in \\mathbb{C}^*$ et $n \\in \\mathbb{Z}$ (modulo $2\\pi$) :\n• $\\arg(\\bar{u}) \\equiv -\\arg(u)\\ [2\\pi]$\n• $\\arg(uv) \\equiv \\arg(u) + \\arg(v)\\ [2\\pi]$\n• $\\arg(u/v) \\equiv \\arg(u) - \\arg(v)\\ [2\\pi]$\n• $\\arg(u^n) \\equiv n\\arg(u)\\ [2\\pi]$"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Racines $n$-ièmes complexes de $w = r e^{i\\theta}$ ($r > 0$, $n \\in \\mathbb{N}^*$) ?", "verso": "Les $n$ racines $n$-ièmes de $w$ sont données pour $k \\in \\{0, 1, \\dots, n - 1\\}$ par :\n$$z_k = r^{1/n} e^{i(\\theta/n + 2k\\pi/n)} = r^{1/n} e^{i\\theta/n} e^{i\\cdot 2k\\pi/n}$$"}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Géométrie plane avec affixes ($A, B, C$ distincts) : angle $(\\overrightarrow{AB}, \\overrightarrow{AC})$, alignement et orthogonalité ?", "verso": "• $(\\overrightarrow{AB}, \\overrightarrow{AC}) \\equiv \\arg\\!\\left(\\dfrac{z_C - z_A}{z_B - z_A}\\right) [2\\pi]$\n• $A, B, C$ alignés $\\iff (\\overrightarrow{AB}, \\overrightarrow{AC}) \\equiv 0\\ [\\pi] \\iff \\dfrac{z_C - z_A}{z_B - z_A} \\in \\mathbb{R}$\n• $(AB) \\perp (AC) \\iff (\\overrightarrow{AB}, \\overrightarrow{AC}) \\equiv \\pm\\pi/2\\ [\\pi] \\iff \\dfrac{z_C - z_A}{z_B - z_A} \\in i\\mathbb{R}$"}, {"chapter": "Analyse — Limites & Comparaisons", "recto": "Chap. 6 — Caractérisation de la continuité en $a$ (et importance de la limite à gauche / à droite) ?", "verso": "$f$ est continue en $a$ ($a \\in D_f$) $\\iff \\lim_{x \\to a} f(x) = f(a)$.\nIl faut une limite unique : si les limites à gauche et à droite diffèrent (ex. $x \\mapsto \\lfloor x \\rfloor$ en $1$, où $\\lim_{1^-} = 0 \\neq 1 = \\lim_{1^+}$), il n'y a pas continuité."}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Quand une fonction $f : D \\to \\mathbb{R}$ est-elle dite $T$-périodique ?", "verso": "Pour $T \\in \\mathbb{R}^*$ (souvent $T > 0$), avec $D$ stable par translation de $T$ : $\\forall x \\in D,\\ f(x + T) = f(x)$."}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Traduire en langage mathématique : $f$ est majorée, $f$ est minorée (sur $D$).", "verso": "• $f$ est majorée sur $D \\iff \\exists M \\in \\mathbb{R},\\ \\forall x \\in D,\\ f(x) \\le M$\n• $f$ est minorée sur $D \\iff \\exists N \\in \\mathbb{R},\\ \\forall x \\in D,\\ f(x) \\ge N$"}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Signe d'une fonction $f : D \\to \\mathbb{R}$ : majoration/minoration par $0$ et positivité/négativité stricte ?", "verso": "• Minorée par $0 \\iff f \\ge 0$ ($\\forall x \\in D,\\ f(x) \\ge 0$)\n• Majorée par $0 \\iff f \\le 0$ ($\\forall x \\in D,\\ f(x) \\le 0$)\n• $f > 0 \\iff \\forall x \\in D,\\ f(x) > 0$\n• $f < 0 \\iff \\forall x \\in D,\\ f(x) < 0$"}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Caractérisation d'un maximum et d'un minimum global en $a \\in D$ ?", "verso": "• $f$ admet un maximum global en $a \\in D \\iff \\forall x \\in D,\\ f(x) \\le f(a)$\n• $f$ admet un minimum global en $a \\in D \\iff \\forall x \\in D,\\ f(x) \\ge f(a)$"}, {"chapter": "Analyse — Dérivation", "recto": "Méthode générale pour déterminer l'ensemble de dérivabilité $D'_f$ d'une fonction $f$ ?", "verso": "1. Dérivabilité sur les intervalles où les opérations/composées usuelles s'appliquent (ex. pour $\\sqrt{x + 1}$, $x \\mapsto x + 1$ dérivable sur $]-1, 1[$ à valeurs dans $\\mathbb{R}_+^*$, et $\\sqrt{\\cdot}$ dérivable sur $\\mathbb{R}_+^*$). \n2. Étudier à part les points hors de ces domaines via la limite du taux d'accroissement (limite finie $\\iff$ dérivable en ce point)."}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Équation du second degré $az^2 + bz + c = 0$ ($a \\neq 0$) : somme et produit des racines $z_1, z_2$, et équation associée à $(S, P)$ ?", "verso": "• $z_1 + z_2 = -b/a$ et $z_1 z_2 = c/a$ (avec multiplicité)\n• Réciproquement, si $z_1 + z_2 = S$ et $z_1 z_2 = P$, alors $z_1$ et $z_2$ sont racines de :\n$$z^2 - Sz + P = 0$$"}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Qu'est-ce qu'un intervalle non trivial (parfois noté $I^\\circ$) ?", "verso": "Un intervalle non vide et non réduit à un singleton (il ne se réduit pas à un point)."}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Caractérisation : $f$ croissante ($\\nearrow$), décroissante ($\\searrow$), monotone, constante sur $D$ ?", "verso": "• $f$ croissante sur $D \\iff \\forall x_1, x_2 \\in D,\\ x_1 \\le x_2 \\implies f(x_1) \\le f(x_2)$\n• $f$ décroissante sur $D \\iff \\forall x_1, x_2 \\in D,\\ x_1 \\le x_2 \\implies f(x_1) \\ge f(x_2)$\n• $f$ monotone sur $D \\iff f$ croissante ou décroissante sur $D$\n• $f$ constante sur $D \\iff \\exists c \\in \\mathbb{R},\\ \\forall x \\in D,\\ f(x) = c$ (équivalent, si $D \\neq \\emptyset$, à $\\forall x_1, x_2 \\in D,\\ f(x_1) = f(x_2)$)"}, {"chapter": "Analyse — Généralités & Fonctions", "recto": "Chap. 6 — Condition suffisante pour que la composée $g \\circ f$ soit bien définie et continue sur $D$ ?", "verso": "Il suffit que :\n• $f$ soit définie et continue sur $D$ à valeurs dans $D'$,\n• $g$ soit définie et continue sur $D'$,\n• $\\forall x \\in D,\\ f(x) \\in D'$."}, {"chapter": "Nombres complexes", "recto": "Chap. 5 — Partie réelle et partie imaginaire du conjugué $\\bar{z}$ pour $z \\in \\mathbb{C}$ ?", "verso": "• $\\mathrm{Re}(\\bar{z}) = \\mathrm{Re}(z)$\n• $\\mathrm{Im}(\\bar{z}) = -\\mathrm{Im}(z)$"}, {"chapter": "Algèbre — Sommes & Binôme", "recto": "Chap. 3 — Somme géométrique $\\displaystyle\\sum_{k=0}^{n} x^k$ (pour $n \\in \\mathbb{N}$, $x \\in \\mathbb{C}$) ?", "verso": "$$\\sum_{k=0}^{n} x^k = 1 + x + x^2 + \\dots + x^n = \\begin{cases} \\dfrac{1 - x^{n+1}}{1 - x} & \\text{si } x \\neq 1 \\\\[8pt] n + 1 & \\text{si } x = 1 \\end{cases}$$"}];
+
+const ANGLAIS_COLLE5_CARDS = [{"id": "colle5_1", "sub": "Employment (p. 245)", "en": "to employ", "phonetic": "[ɪmˈplɔɪ]", "fr": "employer"}, {"id": "colle5_2", "sub": "Employment (p. 245)", "en": "an employer", "phonetic": "", "fr": "un/e employeur/-euse"}, {"id": "colle5_3", "sub": "Employment (p. 245)", "en": "an employee", "phonetic": "", "fr": "un/e employé/e"}, {"id": "colle5_4", "sub": "Employment (p. 245)", "en": "employment", "phonetic": "", "fr": "l'emploi"}, {"id": "colle5_5", "sub": "Employment (p. 245)", "en": "to hire", "phonetic": "[haɪə]", "fr": "engager qqn"}, {"id": "colle5_6", "sub": "Employment (p. 245)", "en": "to take* sb on", "phonetic": "", "fr": "engager qqn"}, {"id": "colle5_7", "sub": "Employment (p. 245)", "en": "to recruit", "phonetic": "[rɪˈkruːt]", "fr": "recruter qqn"}, {"id": "colle5_8", "sub": "Employment (p. 245)", "en": "sb", "phonetic": "", "fr": "quelqu'un (qqn)"}, {"id": "colle5_9", "sub": "Employment (p. 245)", "en": "a headhunter", "phonetic": "", "fr": "un chasseur de têtes"}, {"id": "colle5_10", "sub": "Employment (p. 245)", "en": "to apply for a job", "phonetic": "[əˈplaɪ]", "fr": "poser sa candidature à un poste"}, {"id": "colle5_11", "sub": "Employment (p. 245)", "en": "an application", "phonetic": "", "fr": "une candidature"}, {"id": "colle5_12", "sub": "Employment (p. 245)", "en": "UK a CV", "phonetic": "[siː ˈviː]", "fr": "un CV (curriculum vitae)"}, {"id": "colle5_13", "sub": "Employment (p. 245)", "en": "US a résumé", "phonetic": "[ˈrezjumeɪ]", "fr": "un CV (curriculum vitae)"}, {"id": "colle5_14", "sub": "Employment (p. 245)", "en": "qualifications", "phonetic": "[ˌkwɒlɪfɪˈkeɪʃnz]", "fr": "les diplômes"}, {"id": "colle5_15", "sub": "Employment (p. 245)", "en": "to appoint sb to a post", "phonetic": "[əˈpɔɪnt]", "fr": "nommer qqn sur un poste"}, {"id": "colle5_16", "sub": "Employment (p. 245)", "en": "a post", "phonetic": "", "fr": "un poste"}, {"id": "colle5_17", "sub": "Employment (p. 245)", "en": "an appointment", "phonetic": "[əˈpɔɪntmənt]", "fr": "un rendez-vous (▲)"}, {"id": "colle5_18", "sub": "Employment (p. 245)", "en": "a position", "phonetic": "", "fr": "un poste / une situation"}, {"id": "colle5_19", "sub": "Employment (p. 245)", "en": "a probationary period", "phonetic": "", "fr": "une période d'essai"}, {"id": "colle5_20", "sub": "Employment (p. 245)", "en": "a trial period", "phonetic": "", "fr": "une période d'essai"}, {"id": "colle5_21", "sub": "Employment (p. 245)", "en": "to promote", "phonetic": "[prəˈməʊt]", "fr": "promouvoir qqn"}, {"id": "colle5_22", "sub": "Employment (p. 245)", "en": "to upgrade sb", "phonetic": "[ʌpˈɡreɪd]", "fr": "promouvoir qqn"}, {"id": "colle5_23", "sub": "Employment (p. 245)", "en": "promotion", "phonetic": "[prəˈməʊʃn]", "fr": "la promotion / l'avancement"}, {"id": "colle5_24", "sub": "Employment (p. 245)", "en": "to demote", "phonetic": "[diːˈməʊt]", "fr": "rétrograder qqn"}, {"id": "colle5_25", "sub": "Employment (p. 245)", "en": "to downgrade sb", "phonetic": "", "fr": "rétrograder qqn"}, {"id": "colle5_26", "sub": "Employment (p. 245)", "en": "wages", "phonetic": "[ˈweɪdʒɪz]", "fr": "des gages / un salaire → un/e salarié/e"}, {"id": "colle5_27", "sub": "Employment (p. 245)", "en": "a wage earner", "phonetic": "", "fr": "un/e salarié/e"}, {"id": "colle5_28", "sub": "Employment (p. 245)", "en": "the pay", "phonetic": "[peɪ]", "fr": "la paie"}, {"id": "colle5_29", "sub": "Employment (p. 245)", "en": "a payslip", "phonetic": "", "fr": "un bulletin de paie"}, {"id": "colle5_30", "sub": "Employment (p. 245)", "en": "the payroll", "phonetic": "[ˈpeɪrəʊl]", "fr": "le registre du personnel"}, {"id": "colle5_31", "sub": "Employment (p. 245)", "en": "payday", "phonetic": "", "fr": "le jour de paie"}, {"id": "colle5_32", "sub": "Employment (p. 245)", "en": "a salary", "phonetic": "[ˈsæləri]", "fr": "un salaire"}, {"id": "colle5_33", "sub": "Employment (p. 245)", "en": "a stipend", "phonetic": "[ˈstaɪpend]", "fr": "des appointements"}, {"id": "colle5_34", "sub": "Employment (p. 245)", "en": "a bonus", "phonetic": "[ˈbəʊnəs]", "fr": "une prime"}, {"id": "colle5_35", "sub": "Employment (p. 245)", "en": "a fee", "phonetic": "[fiː]", "fr": "des honoraires"}, {"id": "colle5_36", "sub": "Employment (p. 245)", "en": "fees", "phonetic": "", "fr": "des honoraires"}, {"id": "colle5_37", "sub": "Employment (p. 245)", "en": "an employment agency", "phonetic": "", "fr": "une agence de placement"}, {"id": "colle5_38", "sub": "Employment (p. 245)", "en": "a recruitment agency", "phonetic": "", "fr": "une agence de recrutement"}, {"id": "colle5_39", "sub": "Employment (p. 245)", "en": "an application form", "phonetic": "", "fr": "un formulaire / dossier de candidature"}, {"id": "colle5_40", "sub": "Employment (p. 245)", "en": "the list of positions available", "phonetic": "", "fr": "la liste des postes vacants"}, {"id": "colle5_41", "sub": "Employment (p. 245)", "en": "He has been appointed sales manager.", "phonetic": "", "fr": "Il a été nommé directeur des ventes."}, {"id": "colle5_42", "sub": "Employment (p. 245)", "en": "He was promoted / upgraded to sales manager.", "phonetic": "", "fr": "Il a été promu directeur des ventes."}, {"id": "colle5_43", "sub": "Employment (p. 245)", "en": "a term contract", "phonetic": "", "fr": "un contrat à durée déterminée (CDD)"}, {"id": "colle5_44", "sub": "Employment (p. 245)", "en": "a rolling / an open-ended contract", "phonetic": "", "fr": "un contrat à durée indéterminée (CDI)"}, {"id": "colle5_45", "sub": "Employment (p. 245)", "en": "to take* sb on probation / on a trial basis", "phonetic": "", "fr": "prendre qqn à l'essai"}, {"id": "colle5_46", "sub": "Employment (p. 245)", "en": "to create job opportunities", "phonetic": "", "fr": "créer des débouchés"}, {"id": "colle5_47", "sub": "Employment (p. 245)", "en": "the labour / job market", "phonetic": "", "fr": "le marché du travail"}, {"id": "colle5_48", "sub": "Employment (p. 245)", "en": "He was fired for professional misconduct.", "phonetic": "", "fr": "Il a été mis à pied pour faute professionnelle."}, {"id": "colle5_49", "sub": "Work (p. 246)", "en": "to work", "phonetic": "[wɜːk]", "fr": "travailler"}, {"id": "colle5_50", "sub": "Work (p. 246)", "en": "a worker", "phonetic": "", "fr": "un/e travailleur/-se / ouvrier/-ère"}, {"id": "colle5_51", "sub": "Work (p. 246)", "en": "UK a labourer", "phonetic": "[ˈleɪbərə]", "fr": "un manœuvre"}, {"id": "colle5_52", "sub": "Work (p. 246)", "en": "US a laborer", "phonetic": "", "fr": "un manœuvre"}, {"id": "colle5_53", "sub": "Work (p. 246)", "en": "a job", "phonetic": "[dʒɒb]", "fr": "un emploi / travail / poste"}, {"id": "colle5_54", "sub": "Work (p. 246)", "en": "a trade", "phonetic": "[treɪd]", "fr": "un métier"}, {"id": "colle5_55", "sub": "Work (p. 246)", "en": "a trainee", "phonetic": "", "fr": "un/e apprenti/e"}, {"id": "colle5_56", "sub": "Work (p. 246)", "en": "an apprentice", "phonetic": "", "fr": "un/e apprenti/e"}, {"id": "colle5_57", "sub": "Work (p. 246)", "en": "apprenticeship", "phonetic": "", "fr": "l'apprentissage"}, {"id": "colle5_58", "sub": "Work (p. 246)", "en": "an occupation", "phonetic": "[ˌɒkjʊˈpeɪʃn]", "fr": "un métier (profession)"}, {"id": "colle5_59", "sub": "Work (p. 246)", "en": "occupational", "phonetic": "", "fr": "professionnel·le"}, {"id": "colle5_60", "sub": "Work (p. 246)", "en": "a profession", "phonetic": "[prəˈfeʃn]", "fr": "une profession libérale"}, {"id": "colle5_61", "sub": "Work (p. 246)", "en": "professional", "phonetic": "", "fr": "professionnel·le (≠ amateur)"}, {"id": "colle5_62", "sub": "Work (p. 246)", "en": "a career", "phonetic": "[kəˈrɪə]", "fr": "une carrière"}, {"id": "colle5_63", "sub": "Work (p. 246)", "en": "a calling", "phonetic": "[ˈkɔːlɪŋ]", "fr": "une vocation"}, {"id": "colle5_64", "sub": "Work (p. 246)", "en": "a task", "phonetic": "[tɑːsk]", "fr": "une tâche"}, {"id": "colle5_65", "sub": "Work (p. 246)", "en": "to moonlight", "phonetic": "[ˈmuːnlaɪt]", "fr": "travailler au noir"}, {"id": "colle5_66", "sub": "Work (p. 246)", "en": "moonlighting", "phonetic": "", "fr": "le travail au noir"}, {"id": "colle5_67", "sub": "Work (p. 246)", "en": "a moonlighter", "phonetic": "", "fr": "un travailleur au noir"}, {"id": "colle5_68", "sub": "Work (p. 246)", "en": "to be* busy", "phonetic": "", "fr": "être occupé"}, {"id": "colle5_69", "sub": "Work (p. 246)", "en": "the boss", "phonetic": "[bɒs]", "fr": "le patron"}, {"id": "colle5_70", "sub": "Work (p. 246)", "en": "a team", "phonetic": "[tiːm]", "fr": "une équipe"}, {"id": "colle5_71", "sub": "Work (p. 246)", "en": "teamwork", "phonetic": "", "fr": "le travail d'équipe"}, {"id": "colle5_72", "sub": "Work (p. 246)", "en": "to clock in / out", "phonetic": "", "fr": "pointer en arrivant / en partant"}, {"id": "colle5_73", "sub": "Work (p. 246)", "en": "to punch in / out", "phonetic": "", "fr": "pointer en arrivant / en partant"}, {"id": "colle5_74", "sub": "Work (p. 246)", "en": "a break", "phonetic": "[breɪk]", "fr": "une pause"}, {"id": "colle5_75", "sub": "Work (p. 246)", "en": "a leave", "phonetic": "[liːv]", "fr": "un congé"}, {"id": "colle5_76", "sub": "Work (p. 246)", "en": "a maternity / sick leave", "phonetic": "", "fr": "un congé de maternité / de maladie"}, {"id": "colle5_77", "sub": "Work (p. 246)", "en": "a luncheon voucher", "phonetic": "[ˈvɔʊtʃə]", "fr": "un ticket-restaurant"}, {"id": "colle5_78", "sub": "Work (p. 246)", "en": "holidays with pay", "phonetic": "", "fr": "les congés payés"}, {"id": "colle5_79", "sub": "Work (p. 246)", "en": "an expense account", "phonetic": "", "fr": "une / des notes de frais"}, {"id": "colle5_80", "sub": "Work (p. 246)", "en": "an industrial injury", "phonetic": "", "fr": "un accident du travail"}, {"id": "colle5_81", "sub": "Work (p. 246)", "en": "a disablement pension", "phonetic": "", "fr": "une pension d'invalidité"}, {"id": "colle5_82", "sub": "Work (p. 246)", "en": "health and safety regulations", "phonetic": "", "fr": "les règles de sécurité"}, {"id": "colle5_83", "sub": "Work (p. 246)", "en": "a factory / labour inspector", "phonetic": "", "fr": "un inspecteur du travail"}, {"id": "colle5_84", "sub": "Work (p. 246)", "en": "parity", "phonetic": "", "fr": "la parité"}, {"id": "colle5_85", "sub": "Word Partners (p. 246)", "en": "seasonal work", "phonetic": "", "fr": "le travail saisonnier"}, {"id": "colle5_86", "sub": "Word Partners (p. 246)", "en": "clerical work", "phonetic": "", "fr": "le travail de bureau"}, {"id": "colle5_87", "sub": "Word Partners (p. 246)", "en": "work-sharing", "phonetic": "", "fr": "le partage du travail"}, {"id": "colle5_88", "sub": "Word Partners (p. 246)", "en": "a work station", "phonetic": "", "fr": "un poste de travail"}, {"id": "colle5_89", "sub": "Word Partners (p. 246)", "en": "UK a working day / week", "phonetic": "", "fr": "une journée de travail / une semaine de travail"}, {"id": "colle5_90", "sub": "Word Partners (p. 246)", "en": "US a work-day / work-week", "phonetic": "", "fr": "une journée de travail / une semaine de travail"}, {"id": "colle5_91", "sub": "Word Partners (p. 246)", "en": "the working population", "phonetic": "", "fr": "la population active"}, {"id": "colle5_92", "sub": "Word Partners (p. 246)", "en": "to concentrate on / to be* engrossed in one's work", "phonetic": "", "fr": "se concentrer sur / être absorbé par son travail"}, {"id": "colle5_93", "sub": "Word Partners (p. 246)", "en": "work experience", "phonetic": "", "fr": "l'expérience professionnelle"}, {"id": "colle5_94", "sub": "Word Partners (p. 246)", "en": "a work contract", "phonetic": "", "fr": "un contrat de travail"}, {"id": "colle5_95", "sub": "Word Partners (p. 246)", "en": "US a service contract", "phonetic": "", "fr": "un contrat de travail"}, {"id": "colle5_96", "sub": "Word Partners (p. 246)", "en": "work (– le travail à forfait)", "phonetic": "", "fr": "travail au forfait"}, {"id": "colle5_97", "sub": "Word Partners (p. 246)", "en": "job (– le travail à la pièce)", "phonetic": "", "fr": "travail à la pièce"}, {"id": "colle5_98", "sub": "Word Partners (p. 246)", "en": "a work permit", "phonetic": "", "fr": "un permis de travail"}, {"id": "colle5_99", "sub": "Word Partners (p. 246)", "en": "the workforce", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_100", "sub": "Word Partners (p. 246)", "en": "manpower", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_101", "sub": "Word Partners (p. 246)", "en": "labour", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_102", "sub": "Word Partners (p. 246)", "en": "US labor", "phonetic": "", "fr": "la main-d'œuvre"}, {"id": "colle5_103", "sub": "Word Partners (p. 246)", "en": "a worker → a semi-skilled / a skilled worker ≠ an unskilled worker", "phonetic": "", "fr": "un ouvrier spécialisé / qualifié ≠ non qualifié"}, {"id": "colle5_104", "sub": "Word Partners (p. 246)", "en": "a temporary worker", "phonetic": "", "fr": "un intérimaire"}, {"id": "colle5_105", "sub": "Word Partners (p. 246)", "en": "a temp", "phonetic": "", "fr": "un intérimaire"}, {"id": "colle5_106", "sub": "Word Partners (p. 246)", "en": "a freelance", "phonetic": "", "fr": "un travailleur indépendant"}, {"id": "colle5_107", "sub": "Word Partners (p. 246)", "en": "a self-employed person", "phonetic": "", "fr": "un travailleur indépendant"}, {"id": "colle5_108", "sub": "Word Partners (p. 246)", "en": "an immigrant worker", "phonetic": "", "fr": "un immigré"}, {"id": "colle5_109", "sub": "Word Partners (p. 246)", "en": "a factory hand", "phonetic": "", "fr": "un/e ouvrier/-ère d'usine"}, {"id": "colle5_110", "sub": "Word Partners (p. 246)", "en": "a manual worker", "phonetic": "", "fr": "un travailleur manuel"}, {"id": "colle5_111", "sub": "Word Partners (p. 246)", "en": "a blue collar", "phonetic": "", "fr": "un col bleu"}, {"id": "colle5_112", "sub": "Word Partners (p. 246)", "en": "white-collar", "phonetic": "", "fr": "un col blanc"}, {"id": "colle5_113", "sub": "Word Partners (p. 246)", "en": "casual labour", "phonetic": "", "fr": "la main-d'œuvre occasionnelle"}, {"id": "colle5_114", "sub": "Word Partners (p. 246)", "en": "shortage ≠ surplus labour", "phonetic": "", "fr": "le manque / le surplus de main-d'œuvre"}, {"id": "colle5_115", "sub": "Word Partners (p. 246)", "en": "a rewarding job / task / work", "phonetic": "", "fr": "un travail / une tâche gratifiant(e)"}, {"id": "colle5_116", "sub": "Word Partners (p. 246)", "en": "an absorbing / engrossing (≠ absorbent/e) work", "phonetic": "", "fr": "un travail absorbant"}, {"id": "colle5_117", "sub": "Word Partners (p. 246)", "en": "a part-time / half-time / full-time job", "phonetic": "", "fr": "un travail à temps partiel / à mi-temps / à plein temps"}, {"id": "colle5_118", "sub": "Word Partners (p. 246)", "en": "odd jobs", "phonetic": "", "fr": "les petits boulots / le bricolage"}, {"id": "colle5_119", "sub": "Word Partners (p. 246)", "en": "to leave* one's job", "phonetic": "", "fr": "quitter son emploi"}, {"id": "colle5_120", "sub": "Word Partners (p. 246)", "en": "job security", "phonetic": "", "fr": "la sécurité de l'emploi"}, {"id": "colle5_121", "sub": "Word Partners (p. 246)", "en": "job satisfaction", "phonetic": "", "fr": "la satisfaction professionnelle"}, {"id": "colle5_122", "sub": "Word Partners (p. 246)", "en": "a job offer", "phonetic": "", "fr": "une offre d'emploi"}, {"id": "colle5_123", "sub": "Word Partners (p. 246)", "en": "a job application", "phonetic": "", "fr": "une candidature pour un emploi"}, {"id": "colle5_124", "sub": "Word Partners (p. 246)", "en": "a job advert(isement)", "phonetic": "", "fr": "une annonce pour un emploi"}, {"id": "colle5_125", "sub": "Word Partners (p. 246)", "en": "a job centre", "phonetic": "", "fr": "une agence pour l'emploi"}, {"id": "colle5_126", "sub": "Word Partners (p. 246)", "en": "an employment office", "phonetic": "", "fr": "une agence pour l'emploi"}, {"id": "colle5_127", "sub": "Word Partners (p. 246)", "en": "a job-creation scheme", "phonetic": "", "fr": "un plan de création d'emplois"}, {"id": "colle5_128", "sub": "Word Partners (p. 246)", "en": "to look for work", "phonetic": "", "fr": "chercher du travail"}, {"id": "colle5_129", "sub": "Word Partners (p. 246)", "en": "to move to a new job / post", "phonetic": "", "fr": "changer d'emploi / de poste"}, {"id": "colle5_130", "sub": "Word Partners (p. 246)", "en": "to change / switch jobs", "phonetic": "", "fr": "changer d'emploi / de poste"}, {"id": "colle5_131", "sub": "Word Partners (p. 246)", "en": "occupational hazards", "phonetic": "", "fr": "les risques du métier"}, {"id": "colle5_132", "sub": "Word Partners (p. 246)", "en": "an occupational disease", "phonetic": "", "fr": "une maladie professionnelle"}, {"id": "colle5_133", "sub": "Word Partners (p. 246)", "en": "to delegate a task to sb", "phonetic": "", "fr": "déléguer une tâche à qqn"}, {"id": "colle5_134", "sub": "Word Partners (p. 246)", "en": "to set* sb a task", "phonetic": "", "fr": "confier une tâche à qqn"}];
+
+const IMPORT_PASS_HASH = "d07164a628596323ebcf8796dee0e5c164620e0922b52483bc805f54416ee73c";
+
+let cards = [];
+let currentCard = null;
+let isFlipped = false;
+let sessionCount = 0;
+let sessionOk = 0;
+let sessionMid = 0;
+let sessionFail = 0;
+let hasSeenVerso = false;
+let freePracticeMode = false;
+let cooldownInterval = null;
+let importUnlocked = false;
+
+let activeMatiere = "maths";
+let angState = loadAnglaisState();
+let angQueue = [];
+let angIdx = 0;
+let angRevealed = false;
+let angSessionOk = 0;
+let angSessionFail = 0;
+
+function renderMathInEl(el) {
+  if (!el || typeof renderMathInElement !== "function") return;
+  try {
+    renderMathInElement(el, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  } catch (e) {}
+}
+
+function uid() {
+  return "c_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+}
+
+function nowMs() {
+  return Date.now();
+}
+
+function addDaysMs(days) {
+  return nowMs() + days * 24 * 60 * 60 * 1000;
+}
+
+function showToast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+function setMatiere(matiere) {
+  activeMatiere = matiere;
+  const isAnglais = matiere === "anglais";
+
+  document.getElementById("btn-matiere-maths").classList.toggle("active", !isAnglais);
+  document.getElementById("btn-matiere-anglais").classList.toggle("active", isAnglais);
+  document.getElementById("anglais-sub-tree").style.display = isAnglais ? "flex" : "none";
+
+  document.getElementById("bc-matiere").textContent = isAnglais
+    ? "Anglais › Colles › Vocabulaire Colle n°5"
+    : "Maths";
+
+  document.getElementById("maths-stats-bar").style.display = isAnglais ? "none" : "grid";
+  document.getElementById("anglais-stats-bar").style.display = isAnglais ? "grid" : "none";
+
+  document.getElementById("maths-workspace").style.display = isAnglais ? "none" : "block";
+  document.getElementById("anglais-workspace").style.display = isAnglais ? "block" : "none";
+
+  if (isAnglais) {
+    renderAnglaisAll();
+  } else {
+    updateStats();
+  }
+}
+
+function switchTab(tab) {
+  if (activeMatiere === "anglais") {
+    setMatiere("maths");
+  }
+  document.querySelectorAll(".nav-item").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  const targetPanel = document.getElementById("panel-" + tab);
+  if (targetPanel) targetPanel.classList.add("active");
+  if (tab === "study") renderStudy();
+  if (tab === "deck") renderDeck();
+  if (tab === "import") updateImportGate();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function loadState() {
+  const savedTheme = localStorage.getItem(THEME_KEY) || "carmine";
+  applyTheme(savedTheme);
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("flashlab_mpsi_cards_v11");
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        cards = parsed;
+        saveCards();
+        return;
+      }
+    }
+  } catch (e) {}
+
+  cards = DEFAULT_CARDS.map((c, idx) => ({
+    id: "init_" + idx,
+    chapter: c.chapter,
+    recto: c.recto,
+    verso: c.verso,
+    box: 0,
+    dueAt: 0
+  }));
+  saveCards();
+}
+
+function saveCards() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_KEY, theme);
+  document.querySelectorAll(".theme-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.setTheme === theme);
+  });
+}
+
+function getChapters() {
+  return [...new Set(cards.map(c => c.chapter))].sort((a, b) => a.localeCompare(b, "fr"));
+}
+
+function refreshChapterSelectors() {
+  const chapters = getChapters();
+  const filter = document.getElementById("chapter-filter");
+  const prev = filter.value;
+  filter.innerHTML = '<option value="ALL">Tous les chapitres (' + cards.length + ' fiches)</option>';
+  chapters.forEach(ch => {
+    const count = cards.filter(c => c.chapter === ch).length;
+    const opt = document.createElement("option");
+    opt.value = ch;
+    opt.textContent = ch + " (" + count + ")";
+    filter.appendChild(opt);
+  });
+  if ([...filter.options].some(o => o.value === prev)) {
+    filter.value = prev;
+  }
+
+  const dl = document.getElementById("chapter-suggestions");
+  dl.innerHTML = "";
+  chapters.forEach(ch => {
+    const opt = document.createElement("option");
+    opt.value = ch;
+    dl.appendChild(opt);
+  });
+}
+
+function updateStats() {
+  const dueCount = cards.filter(c => (c.box || 0) < 5 && (c.dueAt || 0) <= nowMs()).length;
+  const masteredCount = cards.filter(c => (c.box || 0) >= 5).length;
+  document.getElementById("stat-due").textContent = dueCount;
+  document.getElementById("stat-total").textContent = cards.length;
+  document.getElementById("stat-mastered").textContent = masteredCount;
+  document.getElementById("stat-streak").textContent = sessionCount;
+}
+
+function formatDuration(ms) {
+  const totalSec = Math.max(0, Math.floor(ms / 1000));
+  const h = String(Math.floor(totalSec / 3600)).padStart(2, "0");
+  const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2, "0");
+  const s = String(totalSec % 60).padStart(2, "0");
+  return `${h}:${m}:${s}`;
+}
+
+function getCooldownRemaining() {
+  const until = Number(localStorage.getItem(COOLDOWN_KEY) || 0);
+  return Math.max(0, until - nowMs());
+}
+
+function startCooldownTimer() {
+  clearInterval(cooldownInterval);
+  const tick = () => {
+    const rem = getCooldownRemaining();
+    if (rem <= 0) {
+      clearInterval(cooldownInterval);
+      localStorage.removeItem(COOLDOWN_KEY);
+      renderStudy();
+      return;
+    }
+    document.getElementById("cooldown-timer").textContent = formatDuration(rem);
+  };
+  tick();
+  cooldownInterval = setInterval(tick, 1000);
+}
+
+function pickNextCard() {
+  const selectedChapter = document.getElementById("chapter-filter").value;
+  let pool = cards.filter(c => (c.box || 0) < 5 && (selectedChapter === "ALL" || c.chapter === selectedChapter));
+  if (!freePracticeMode) {
+    pool = pool.filter(c => (c.dueAt || 0) <= nowMs());
+  }
+  if (pool.length === 0) return null;
+  pool.sort((a, b) => (a.dueAt || 0) - (b.dueAt || 0));
+  const topSlice = pool.slice(0, Math.min(4, pool.length));
+  return topSlice[Math.floor(Math.random() * topSlice.length)];
+}
+
+function buildSessionSummaryHtml(summary) {
+  if (!summary || summary.total <= 0) return "";
+  const pctOk = Math.round((summary.ok / summary.total) * 100);
+  const pctMid = Math.round((summary.mid / summary.total) * 100);
+  const pctFail = Math.round((summary.fail / summary.total) * 100);
+  return `
+    <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:14px; text-align:left;">
+      <div style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); margin-bottom:10px; text-align:center;">
+        Bilan de la session (${summary.total} carte${summary.total > 1 ? "s" : ""})
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; text-align:center;">
+        <div style="background:rgba(22, 163, 74, 0.14); border:1px solid rgba(22, 163, 74, 0.35); border-radius:12px; padding:10px 6px;">
+          <div style="font-size:18px; font-weight:800; color:#22c55e;">${summary.ok}</div>
+          <div style="font-size:11px; font-weight:700; color:#22c55e;">Bonnes (${pctOk}%)</div>
+        </div>
+        <div style="background:rgba(217, 119, 6, 0.14); border:1px solid rgba(217, 119, 6, 0.35); border-radius:12px; padding:10px 6px;">
+          <div style="font-size:18px; font-weight:800; color:#f59e0b;">${summary.mid}</div>
+          <div style="font-size:11px; font-weight:700; color:#f59e0b;">J'hésite (${pctMid}%)</div>
+        </div>
+        <div style="background:rgba(220, 38, 38, 0.14); border:1px solid rgba(220, 38, 38, 0.35); border-radius:12px; padding:10px 6px;">
+          <div style="font-size:18px; font-weight:800; color:#ef4444;">${summary.fail}</div>
+          <div style="font-size:11px; font-weight:700; color:#ef4444;">Fausses (${pctFail}%)</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderSessionSummaries() {
+  let summary = null;
+  if (sessionCount > 0) {
+    summary = { total: sessionCount, ok: sessionOk, mid: sessionMid, fail: sessionFail };
+  } else {
+    try {
+      const saved = JSON.parse(localStorage.getItem(SESSION_SUMMARY_KEY) || "null");
+      if (saved && saved.total > 0) summary = saved;
+    } catch (e) {}
+  }
+
+  const htmlSummary = buildSessionSummaryHtml(summary);
+  const cdSum = document.getElementById("cooldown-summary");
+  const emSum = document.getElementById("empty-summary");
+  if (htmlSummary) {
+    cdSum.innerHTML = htmlSummary;
+    cdSum.style.display = "block";
+    emSum.innerHTML = htmlSummary;
+    emSum.style.display = "block";
+    renderMathInEl(cdSum);
+    renderMathInEl(emSum);
+  } else {
+    cdSum.style.display = "none";
+    emSum.style.display = "none";
+  }
+}
+
+function renderStudy() {
+  updateStats();
+  const cooldownBox = document.getElementById("cooldown-container");
+  const emptyBox = document.getElementById("empty-due-container");
+  const studyBox = document.getElementById("study-card-container");
+
+  const rem = getCooldownRemaining();
+  if (rem > 0 && !freePracticeMode) {
+    cooldownBox.style.display = "block";
+    emptyBox.style.display = "none";
+    studyBox.style.display = "none";
+    renderSessionSummaries();
+    startCooldownTimer();
+    return;
+  }
+
+  cooldownBox.style.display = "none";
+  currentCard = pickNextCard();
+
+  if (!currentCard) {
+    if (sessionCount > 0) {
+      const summary = { total: sessionCount, ok: sessionOk, mid: sessionMid, fail: sessionFail };
+      localStorage.setItem(SESSION_SUMMARY_KEY, JSON.stringify(summary));
+      if (!freePracticeMode) {
+        localStorage.setItem(COOLDOWN_KEY, String(nowMs() + COOLDOWN_MS));
+        sessionCount = 0;
+        sessionOk = 0;
+        sessionMid = 0;
+        sessionFail = 0;
+        renderStudy();
+        return;
+      }
+    }
+    emptyBox.style.display = "block";
+    studyBox.style.display = "none";
+    renderSessionSummaries();
+    return;
+  }
+
+  emptyBox.style.display = "none";
+  studyBox.style.display = "block";
+  isFlipped = false;
+  hasSeenVerso = false;
+
+  const boxLevel = Math.min(5, currentCard.box || 0);
+  document.getElementById("card-chapter").textContent = currentCard.chapter;
+  document.getElementById("card-box").textContent = boxLevel >= 5 ? "Connue (5/5)" : `Boîte ${boxLevel}/5`;
+
+  const nextDays = LEITNER_INTERVALS_DAYS[Math.min(boxLevel, LEITNER_INTERVALS_DAYS.length - 1)];
+  document.getElementById("next-ok-label").textContent = boxLevel >= 4
+    ? `+1/5 → Connue (5/5)`
+    : `+1/5 (J+${nextDays})`;
+
+  renderCardFace();
+}
+
+function renderCardFace() {
+  if (!currentCard) return;
+  const bodyEl = document.getElementById("card-content");
+  if (!isFlipped) {
+    document.getElementById("card-side-label").textContent = "RECTO • QUESTION";
+    bodyEl.className = "card-body";
+    bodyEl.textContent = currentCard.recto;
+    document.getElementById("card-hint").textContent = hasSeenVerso
+      ? "Appuie sur la carte pour revenir au verso"
+      : "Appuie sur la carte pour afficher le verso";
+  } else {
+    document.getElementById("card-side-label").textContent = "VERSO • RÉPONSE";
+    bodyEl.className = "card-body verso-text";
+    bodyEl.textContent = currentCard.verso;
+    document.getElementById("card-hint").textContent = "Appuie sur la carte pour revoir la question (recto)";
+  }
+
+  renderMathInEl(bodyEl);
+
+  if (!hasSeenVerso) {
+    document.getElementById("reveal-wrap").style.display = "block";
+    document.getElementById("rating-wrap").style.display = "none";
+  } else {
+    document.getElementById("reveal-wrap").style.display = "none";
+    document.getElementById("rating-wrap").style.display = "grid";
+  }
+}
+
+function toggleFlipCard() {
+  if (!currentCard) return;
+  isFlipped = !isFlipped;
+  if (isFlipped) {
+    hasSeenVerso = true;
+  }
+  renderCardFace();
+}
+
+function rateCurrentCard(mode) {
+  if (!currentCard) return;
+  const idx = cards.findIndex(c => c.id === currentCard.id);
+  if (idx === -1) return;
+
+  const card = cards[idx];
+  const curBox = card.box || 0;
+
+  if (mode === "fail") {
+    card.box = 0;
+    card.dueAt = addDaysMs(1);
+    sessionFail += 1;
+    showToast("Raté : 0/5 • À revoir dans J+1");
+  } else if (mode === "mid") {
+    card.box = curBox;
+    card.dueAt = addDaysMs(2);
+    sessionMid += 1;
+    showToast("J'hésite : à revoir dans J+2");
+  } else if (mode === "ok") {
+    const days = LEITNER_INTERVALS_DAYS[Math.min(curBox, LEITNER_INTERVALS_DAYS.length - 1)];
+    card.box = Math.min(5, curBox + 1);
+    sessionOk += 1;
+    if (card.box >= 5) {
+      card.dueAt = Infinity;
+      showToast("+1/5 → Connue (5/5) ! Retirée des révisions.");
+    } else {
+      card.dueAt = addDaysMs(days);
+      showToast(`Réussi : +1/5 (${card.box}/5) • J+${days}`);
+    }
+  }
+
+  sessionCount += 1;
+  saveCards();
+  renderStudy();
+}
+
+let currentDeckFilter = "active";
+
+function renderDeck() {
+  const q = document.getElementById("deck-search").value.trim().toLowerCase();
+  const listEl = document.getElementById("deck-list");
+  const banner = document.getElementById("acquired-banner");
+  banner.style.display = currentDeckFilter === "acquired" ? "block" : "none";
+
+  const filtered = cards.filter(c => {
+    const isAcquired = (c.box || 0) >= 5;
+    if (currentDeckFilter === "active" && isAcquired) return false;
+    if (currentDeckFilter === "acquired" && !isAcquired) return false;
+    return !q ||
+      c.chapter.toLowerCase().includes(q) ||
+      c.recto.toLowerCase().includes(q) ||
+      c.verso.toLowerCase().includes(q);
+  });
+
+  if (filtered.length === 0) {
+    const emptyMsg = currentDeckFilter === "acquired"
+      ? "Aucune carte connue retirée pour le moment."
+      : "Aucune flashcard trouvée.";
+    listEl.innerHTML = `<div class="cooldown-box"><p style="color:var(--text-muted); margin:0;">${emptyMsg}</p></div>`;
+    return;
+  }
+
+  listEl.innerHTML = "";
+  filtered.forEach(c => {
+    const item = document.createElement("div");
+    item.className = "deck-item";
+    const isAcquired = (c.box || 0) >= 5;
+    const statusTxt = isAcquired ? "Connue (retirée)" : `Boîte ${c.box || 0}/5`;
+    const actionBtn = isAcquired
+      ? `<button class="icon-readd" data-reset-id="${c.id}">Remettre</button>`
+      : `<button class="icon-know" data-know-id="${c.id}">Je connais</button>`;
+    item.innerHTML = `
+      <div style="flex:1; min-width:0;">
+        <div style="margin-bottom:5px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="pill">${escapeHtml(c.chapter)}</span>
+          <span class="box-badge">${statusTxt}</span>
+        </div>
+        <div class="deck-item-title">${escapeHtml(c.recto)}</div>
+        <div class="deck-item-sub">${escapeHtml(c.verso)}</div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end;">
+        ${actionBtn}
+        <button class="icon-del" data-del-id="${c.id}">Suppr.</button>
+      </div>
+    `;
+    renderMathInEl(item);
+    listEl.appendChild(item);
+  });
+
+  listEl.querySelectorAll("[data-know-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = cards.find(c => c.id === btn.dataset.knowId);
+      if (card) {
+        card.box = 5;
+        card.dueAt = Infinity;
+        saveCards();
+        updateStats();
+        renderDeck();
+        showToast("Carte marquée connue et retirée des révisions");
+      }
+    });
+  });
+
+  listEl.querySelectorAll("[data-reset-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = cards.find(c => c.id === btn.dataset.resetId);
+      if (card) {
+        card.box = 0;
+        card.dueAt = 0;
+        saveCards();
+        updateStats();
+        renderDeck();
+        showToast("Carte remise dans les révisions");
+      }
+    });
+  });
+
+  listEl.querySelectorAll("[data-del-id]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.delId;
+      cards = cards.filter(c => c.id !== id);
+      saveCards();
+      refreshChapterSelectors();
+      updateStats();
+      renderDeck();
+      showToast("Fiche supprimée");
+    });
+  });
+}
+
+function defaultAnglaisState() {
+  const items = {};
+  for (const c of ANGLAIS_COLLE5_CARDS) {
+    items[c.id] = {
+      status: "NEW",
+      streak: 0,
+      skipQuizzes: 0,
+      priorityNext: false
+    };
+  }
+  return {
+    quizNumber: 1,
+    subFilter: "ALL",
+    items
+  };
+}
+
+function loadAnglaisState() {
+  try {
+    const raw = localStorage.getItem(ANGLAIS_COLLE5_STORAGE);
+    if (!raw) return defaultAnglaisState();
+    const parsed = JSON.parse(raw);
+    const base = defaultAnglaisState();
+    base.quizNumber = parsed.quizNumber || 1;
+    base.subFilter = parsed.subFilter || "ALL";
+    for (const c of ANGLAIS_COLLE5_CARDS) {
+      if (parsed.items && parsed.items[c.id]) {
+        base.items[c.id] = { ...base.items[c.id], ...parsed.items[c.id] };
+      }
+    }
+    return base;
+  } catch (e) {
+    return defaultAnglaisState();
+  }
+}
+
+function saveAnglaisState() {
+  localStorage.setItem(ANGLAIS_COLLE5_STORAGE, JSON.stringify(angState));
+}
+
+function shuffleArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function getAnglaisPool() {
+  if (angState.subFilter === "ALL") return ANGLAIS_COLLE5_CARDS;
+  return ANGLAIS_COLLE5_CARDS.filter(c => c.sub === angState.subFilter);
+}
+
+function buildAnglaisQuiz() {
+  const pool = getAnglaisPool();
+  const failedPriority = [];
+  const dueCards = [];
+  const spacedCards = [];
+
+  for (const c of pool) {
+    const st = angState.items[c.id];
+    if (st.priorityNext || st.status === "FAIL") {
+      failedPriority.push(c);
+    } else if (st.skipQuizzes > 0) {
+      spacedCards.push({ c, skip: st.skipQuizzes });
+    } else {
+      dueCards.push(c);
+    }
+  }
+
+  shuffleArr(failedPriority);
+  shuffleArr(dueCards);
+  spacedCards.sort((a, b) => a.skip - b.skip);
+  const fallbackSpaced = spacedCards.map(x => x.c);
+
+  const batchTarget = Math.min(ANGLAIS_QUIZ_BATCH_SIZE, pool.length);
+  let selected = [...failedPriority];
+  if (selected.length < batchTarget) {
+    selected = selected.concat(dueCards.slice(0, batchTarget - selected.length));
+  }
+  if (selected.length < batchTarget) {
+    selected = selected.concat(fallbackSpaced.slice(0, batchTarget - selected.length));
+  }
+
+  const prioritySet = new Set(failedPriority.map(c => c.id));
+  const head = selected.filter(c => prioritySet.has(c.id));
+  const tail = selected.filter(c => !prioritySet.has(c.id));
+  shuffleArr(tail);
+  return [...head, ...tail];
+}
+
+function startAnglaisQuiz() {
+  angSessionOk = 0;
+  angSessionFail = 0;
+  angIdx = 0;
+  angRevealed = false;
+  angQueue = buildAnglaisQuiz();
+  renderAnglaisAll();
+}
+
+function updateAnglaisStats() {
+  const pool = getAnglaisPool();
+  let failC = 0;
+  let okC = 0;
+  let newC = 0;
+  for (const c of pool) {
+    const st = angState.items[c.id];
+    if (st.priorityNext || st.status === "FAIL") failC++;
+    else if (st.status === "OK") okC++;
+    else newC++;
+  }
+  document.getElementById("ang-stat-quiz").textContent = angState.quizNumber;
+  document.getElementById("ang-stat-fail").textContent = failC;
+  document.getElementById("ang-stat-ok").textContent = okC;
+  document.getElementById("ang-stat-new").textContent = newC;
+}
+
+function renderAnglaisCard() {
+  const stage = document.getElementById("ang-card-stage");
+  const doneBox = document.getElementById("ang-quiz-done");
+  const total = angQueue.length;
+
+  document.getElementById("ang-progress-text").textContent =
+    `Quiz n°${angState.quizNumber} • Carte ${Math.min(angIdx + 1, total)} / ${total}`;
+
+  const pct = total > 0 ? Math.round((angIdx / total) * 100) : 0;
+  document.getElementById("ang-progress-bar").style.width = `${pct}%`;
+
+  const prioCount = angQueue.filter(c => {
+    const st = angState.items[c.id];
+    return st.priorityNext || st.status === "FAIL";
+  }).length;
+
+  document.getElementById("ang-priority-text").textContent =
+    prioCount > 0 ? `${prioCount} ratée(s) en tête (quiz allégé)` : "Session équilibrée";
+
+  if (angIdx >= total) {
+    stage.style.display = "none";
+    doneBox.style.display = "block";
+    document.getElementById("ang-done-title").textContent = `Quiz n°${angState.quizNumber} terminé !`;
+    document.getElementById("ang-done-desc").textContent =
+      `Bilan : ${angSessionOk} réussi(e)(s) (espacées) • ${angSessionFail} raté(e)(s) (en tête du quiz n°${angState.quizNumber + 1}).`;
+    return;
+  }
+
+  stage.style.display = "block";
+  doneBox.style.display = "none";
+
+  const card = angQueue[angIdx];
+  const st = angState.items[card.id];
+
+  document.getElementById("ang-card-sub").textContent = card.sub;
+  if (st.priorityNext || st.status === "FAIL") {
+    document.getElementById("ang-card-state").textContent = "Raté • Priorité quiz suivant";
+  } else if (st.status === "OK") {
+    document.getElementById("ang-card-state").textContent = `Réussi ×${st.streak} • Saute ${st.skipQuizzes} quiz`;
+  } else {
+    document.getElementById("ang-card-state").textContent = "Nouveau";
+  }
+
+  document.getElementById("ang-front-word").textContent = card.en;
+  document.getElementById("ang-phonetic").textContent = card.phonetic || "";
+  document.getElementById("ang-back-word").textContent = card.fr;
+
+  const backBox = document.getElementById("ang-back-box");
+  const revealWrap = document.getElementById("ang-reveal-wrap");
+  const ratingWrap = document.getElementById("ang-rating-wrap");
+  const hint = document.getElementById("ang-card-hint");
+
+  if (angRevealed) {
+    backBox.style.display = "block";
+    revealWrap.style.display = "none";
+    ratingWrap.style.display = "grid";
+    hint.textContent = "Choisis Raté ou Réussi ci-dessous";
+  } else {
+    backBox.style.display = "none";
+    revealWrap.style.display = "block";
+    ratingWrap.style.display = "none";
+    hint.textContent = "Appuie sur la carte pour voir la traduction";
+  }
+}
+
+function toggleAnglaisReveal() {
+  if (angIdx >= angQueue.length) return;
+  angRevealed = !angRevealed;
+  renderAnglaisCard();
+}
+
+function rateAnglaisCard(isSuccess) {
+  if (!angRevealed || angIdx >= angQueue.length) return;
+  const card = angQueue[angIdx];
+  const st = angState.items[card.id];
+
+  if (isSuccess) {
+    st.status = "OK";
+    st.streak += 1;
+    st.priorityNext = false;
+    st.skipQuizzes = st.streak === 1 ? 2 : (st.streak === 2 ? 4 : 7);
+    angSessionOk += 1;
+    showToast(`Réussi : revu dans ${st.skipQuizzes} quiz`);
+  } else {
+    st.status = "FAIL";
+    st.streak = 0;
+    st.skipQuizzes = 0;
+    st.priorityNext = true;
+    angSessionFail += 1;
+    showToast("Raté : placé en priorité au quiz suivant");
+  }
+
+  saveAnglaisState();
+  angIdx += 1;
+  angRevealed = false;
+  renderAnglaisAll();
+}
+
+function finishAnglaisQuizAndNext() {
+  const testedIds = new Set(angQueue.map(c => c.id));
+  for (const c of ANGLAIS_COLLE5_CARDS) {
+    const st = angState.items[c.id];
+    if (!testedIds.has(c.id) && st.skipQuizzes > 0) {
+      st.skipQuizzes = Math.max(0, st.skipQuizzes - 1);
+    }
+  }
+  angState.quizNumber += 1;
+  saveAnglaisState();
+  startAnglaisQuiz();
+}
+
+function renderAnglaisAll() {
+  updateAnglaisStats();
+  renderAnglaisCard();
+}
+
+document.querySelectorAll(".deck-subtab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".deck-subtab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentDeckFilter = btn.dataset.deckFilter;
+    renderDeck();
+  });
+});
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+document.querySelectorAll(".nav-item").forEach(btn => {
+  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+});
+
+document.getElementById("brand-home-link").addEventListener("click", () => {
+  setMatiere("maths");
+  switchTab("home");
+});
+document.getElementById("btn-start-study").addEventListener("click", () => {
+  setMatiere("maths");
+  switchTab("study");
+});
+document.getElementById("btn-go-cards").addEventListener("click", () => {
+  setMatiere("maths");
+  switchTab("deck");
+});
+
+document.getElementById("btn-matiere-maths").addEventListener("click", () => setMatiere("maths"));
+document.getElementById("btn-matiere-anglais").addEventListener("click", () => setMatiere("anglais"));
+document.getElementById("btn-colle-5").addEventListener("click", () => {
+  setMatiere("anglais");
+  startAnglaisQuiz();
+});
+
+document.querySelectorAll(".theme-btn").forEach(btn => {
+  btn.addEventListener("click", () => applyTheme(btn.dataset.setTheme));
+});
+
+document.getElementById("flashcard").addEventListener("click", toggleFlipCard);
+document.getElementById("btn-reveal").addEventListener("click", toggleFlipCard);
+document.querySelectorAll("[data-rate]").forEach(btn => {
+  btn.addEventListener("click", () => rateCurrentCard(btn.dataset.rate));
+});
+document.getElementById("chapter-filter").addEventListener("change", () => {
+  freePracticeMode = false;
+  renderStudy();
+});
+document.getElementById("btn-bypass-cooldown").addEventListener("click", () => {
+  freePracticeMode = true;
+  sessionCount = 0;
+  sessionOk = 0;
+  sessionMid = 0;
+  sessionFail = 0;
+  renderStudy();
+});
+document.getElementById("btn-practice-all").addEventListener("click", () => {
+  freePracticeMode = true;
+  sessionCount = 0;
+  sessionOk = 0;
+  sessionMid = 0;
+  sessionFail = 0;
+  renderStudy();
+});
+
+document.getElementById("deck-search").addEventListener("input", renderDeck);
+
+document.getElementById("btn-add-card").addEventListener("click", () => {
+  const chapter = document.getElementById("add-chapter").value.trim() || "Général";
+  const recto = document.getElementById("add-recto").value.trim();
+  const verso = document.getElementById("add-verso").value.trim();
+  if (!recto || !verso) {
+    showToast("Renseigne le recto et le verso");
+    return;
+  }
+  cards.unshift({
+    id: uid(),
+    chapter,
+    recto,
+    verso,
+    box: 0,
+    dueAt: 0
+  });
+  saveCards();
+  refreshChapterSelectors();
+  updateStats();
+  document.getElementById("add-recto").value = "";
+  document.getElementById("add-verso").value = "";
+  showToast("Fiche ajoutée !");
+});
+
+document.getElementById("btn-import-json").addEventListener("click", () => {
+  if (!importUnlocked) {
+    showToast("Mot de passe requis");
+    return;
+  }
+  const raw = document.getElementById("import-json-text").value.trim();
+  if (!raw) {
+    showToast("Colle un bloc JSON valide");
+    return;
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) throw new Error("Format invalide");
+    let added = 0;
+    parsed.forEach(item => {
+      if (item && item.recto && item.verso) {
+        const exists = cards.some(c => c.recto.trim() === String(item.recto).trim());
+        if (!exists) {
+          cards.push({
+            id: uid(),
+            chapter: String(item.chapter || "MPSI Maths").trim(),
+            recto: String(item.recto).trim(),
+            verso: String(item.verso).trim(),
+            box: Number(item.box || 0),
+            dueAt: Number(item.dueAt || 0)
+          });
+          added++;
+        }
+      }
+    });
+    saveCards();
+    refreshChapterSelectors();
+    updateStats();
+    document.getElementById("import-json-text").value = "";
+    showToast(`${added} nouvelle(s) fiche(s) importée(s) !`);
+  } catch (err) {
+    showToast("Erreur JSON : vérifie la syntaxe");
+  }
+});
+
+document.getElementById("btn-export-json").addEventListener("click", () => {
+  if (!importUnlocked) {
+    showToast("Mot de passe requis");
+    return;
+  }
+  const blob = new Blob([JSON.stringify(cards, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "flash420-mpsi-backup.json";
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Export JSON téléchargé");
+});
+
+document.getElementById("btn-reset-default").addEventListener("click", () => {
+  if (!importUnlocked) {
+    showToast("Mot de passe requis");
+    return;
+  }
+  cards = DEFAULT_CARDS.map((c, idx) => ({
+    id: "init_" + idx,
+    chapter: c.chapter,
+    recto: c.recto,
+    verso: c.verso,
+    box: 0,
+    dueAt: 0
+  }));
+  localStorage.removeItem(COOLDOWN_KEY);
+  saveCards();
+  refreshChapterSelectors();
+  updateStats();
+  renderStudy();
+  showToast("Paquet initial rechargé !");
+});
+
+document.getElementById("ang-sub-filter").value = angState.subFilter;
+document.getElementById("ang-sub-filter").addEventListener("change", (e) => {
+  angState.subFilter = e.target.value;
+  saveAnglaisState();
+  startAnglaisQuiz();
+});
+document.getElementById("ang-flashcard").addEventListener("click", toggleAnglaisReveal);
+document.getElementById("btn-ang-reveal").addEventListener("click", toggleAnglaisReveal);
+document.getElementById("btn-ang-fail").addEventListener("click", () => rateAnglaisCard(false));
+document.getElementById("btn-ang-ok").addEventListener("click", () => rateAnglaisCard(true));
+document.getElementById("btn-ang-new-quiz").addEventListener("click", startAnglaisQuiz);
+document.getElementById("btn-ang-next-quiz").addEventListener("click", finishAnglaisQuizAndNext);
+document.getElementById("btn-ang-reset").addEventListener("click", () => {
+  if (!confirm("Réinitialiser la progression de Vocabulaire Colle n°5 ?")) return;
+  angState = defaultAnglaisState();
+  document.getElementById("ang-sub-filter").value = "ALL";
+  saveAnglaisState();
+  startAnglaisQuiz();
+  showToast("Progression Colle n°5 réinitialisée");
+});
+
+function updateImportGate() {
+  const gate = document.getElementById("import-gate-box");
+  const body = document.getElementById("import-panel-body");
+  const err = document.getElementById("import-pwd-err");
+  if (!gate || !body) return;
+  gate.style.display = importUnlocked ? "none" : "block";
+  body.style.display = importUnlocked ? "block" : "none";
+  if (err && !importUnlocked) err.style.display = "none";
+}
+
+async function verifyImportPassword() {
+  const inp = document.getElementById("import-pwd-input");
+  const err = document.getElementById("import-pwd-err");
+  const raw = inp ? inp.value.trim() : "";
+  const enc = new TextEncoder().encode(raw);
+  const hashBuf = await crypto.subtle.digest("SHA-256", enc);
+  const hex = [...new Uint8Array(hashBuf)].map(b => b.toString(16).padStart(2, "0")).join("");
+  if (hex === IMPORT_PASS_HASH) {
+    importUnlocked = true;
+    if (inp) inp.value = "";
+    if (err) err.style.display = "none";
+    updateImportGate();
+    showToast("Export déverrouillé");
+  } else {
+    if (err) err.style.display = "block";
+    showToast("Mot de passe incorrect");
+  }
+}
+
+document.getElementById("btn-import-unlock")?.addEventListener("click", verifyImportPassword);
+document.getElementById("import-pwd-input")?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") verifyImportPassword();
+});
+document.getElementById("btn-import-lock")?.addEventListener("click", () => {
+  importUnlocked = false;
+  updateImportGate();
+  showToast("Export verrouillé");
+});
+
+loadState();
+refreshChapterSelectors();
+updateStats();
+updateImportGate();
+angQueue = buildAnglaisQuiz();
+
+window.addEventListener("load", () => {
+  renderMathInEl(document.body);
+});
+</script>
+</body>
+</html>
